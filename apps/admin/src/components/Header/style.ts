@@ -6,8 +6,7 @@ export const Header = styled.div`
   width: 1280px;
   left: 0;
   top: 0;
-  /* background-color: #ffff; */
-  background-color: pink;
+  background-color: #ffff;
   display: flex;
   align-items: center;
 `;

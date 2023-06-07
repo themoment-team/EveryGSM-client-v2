@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Footer = styled.div`
-  width: 1280px;
-  height: 60px;
+  width: 80rem;
+  height: 3.75rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,9 +10,9 @@ export const Footer = styled.div`
   bottom: 0;
   background-color: #e3e3e3;
   color: #191919;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 17px;
+  line-height: 1.0625rem;
   letter-spacing: -0.03em;
   text-align: left;
 `;
