@@ -16,7 +16,6 @@ export const ApproveItem = styled.div`
 `;
 
 export const ProjectWrap = styled.div`
-  width: 7.5rem;
   height: 2.875rem;
   display: flex;
   align-items: center;
