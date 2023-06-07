@@ -11,6 +11,9 @@ importers:
       '@emotion/babel-preset-css-prop':
         specifier: ^11.11.0
         version: 11.11.0(@babel/core@7.21.4)
+      '@storybook/react':
+        specifier: ^7.0.6
+        version: 7.0.6(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)
 
   apps/admin:
     dependencies:

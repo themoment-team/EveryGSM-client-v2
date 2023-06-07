@@ -3,11 +3,11 @@ import type { FC } from "react";
 import * as S from "./style";
 
 interface HeaderProps {
-  hasNotification: boolean;
-  name: string;
+  name?: string;
+  userBelong?: "team" | "personal";
 }
 
-const Header: FC<HeaderProps> = ({ hasNotification, name }) => {
+const Header: FC<HeaderProps> = ({ name, userBelong }) => {
   return <S.Header></S.Header>;
 };
 

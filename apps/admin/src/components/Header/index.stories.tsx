@@ -11,15 +11,5 @@ export default {
 type Story = StoryObj<typeof Header>;
 
 export const Primary: Story = {
-  args: {
-    hasNotification: false,
-    name: "정문정",
-  },
-};
-
-export const HasNotification: Story = {
-  args: {
-    ...Primary.args,
-    hasNotification: true,
-  },
+  args: {},
 };
