@@ -1,7 +1,5 @@
 "use client";
-
-import { Button } from "ui";
-
+import { Header } from "../components";
 export default function Home() {
-  return <Button>button</Button>;
+  return <Header userBelong="team" name="더모먼트" />;
 }
