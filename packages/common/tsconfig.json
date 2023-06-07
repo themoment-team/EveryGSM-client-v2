@@ -1,9 +1,5 @@
 {
   "extends": "tsconfig/base.json",
-  "main": "index.ts",
-  "compilerOptions": {
-    "jsx": "preserve"
-  },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
