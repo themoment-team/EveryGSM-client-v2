@@ -1,9 +1,10 @@
 "use client";
-import { Header } from "../components";
+import { Header, Footer, ApproveItem } from "../components";
 export default function Home() {
   return (
     <>
       <Header />
+      <Footer />
     </>
   );
 }

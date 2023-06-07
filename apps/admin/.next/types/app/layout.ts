@@ -1,4 +1,4 @@
-// File: /Users/jeon-yebin/Documents/GitHub/official-gsm-front/apps/admin/src/app/layout.tsx
+// File: /Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const Footer = styled.div`
-  width: 80rem;
+  width: 100%;
   height: 3.75rem;
   display: flex;
   justify-content: center;
