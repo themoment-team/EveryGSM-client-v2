@@ -1,5 +1,10 @@
 "use client";
-import { Header } from "../components";
+import { Header, Footer, ApproveItem } from "../components";
 export default function Home() {
-  return <Header userBelong="team" name="더모먼트" />;
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
 }
