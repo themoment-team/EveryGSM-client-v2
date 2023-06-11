@@ -742,6 +742,32 @@ self.__RSC_MANIFEST={
         "async": false
       }
     },
+    "(app-client)/./src/app/layout.tsx": {
+      "*": {
+        "id": "(sc_client)/./src/app/layout.tsx",
+        "name": "*",
+        "chunks": [
+          "app/layout:static/chunks/app/layout.js"
+        ],
+        "async": false
+      },
+      "": {
+        "id": "(sc_client)/./src/app/layout.tsx",
+        "name": "",
+        "chunks": [
+          "app/layout:static/chunks/app/layout.js"
+        ],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./src/app/layout.tsx",
+        "name": "default",
+        "chunks": [
+          "app/layout:static/chunks/app/layout.js"
+        ],
+        "async": false
+      }
+    },
     "(app-client)/./src/app/page.tsx": {
       "*": {
         "id": "(sc_client)/./src/app/page.tsx",
@@ -936,32 +962,6 @@ self.__RSC_MANIFEST={
         "name": "value",
         "chunks": [
           "app/page:static/chunks/app/page.js"
-        ],
-        "async": false
-      }
-    },
-    "(app-client)/./src/app/layout.tsx": {
-      "*": {
-        "id": "(sc_client)/./src/app/layout.tsx",
-        "name": "*",
-        "chunks": [
-          "app/layout:static/chunks/app/layout.js"
-        ],
-        "async": false
-      },
-      "": {
-        "id": "(sc_client)/./src/app/layout.tsx",
-        "name": "",
-        "chunks": [
-          "app/layout:static/chunks/app/layout.js"
-        ],
-        "async": false
-      },
-      "default": {
-        "id": "(sc_client)/./src/app/layout.tsx",
-        "name": "default",
-        "chunks": [
-          "app/layout:static/chunks/app/layout.js"
         ],
         "async": false
       }
@@ -2666,6 +2666,30 @@ self.__RSC_MANIFEST={
       ],
       "async": false
     },
+    "/Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/layout.tsx": {
+      "id": "(app-client)/./src/app/layout.tsx",
+      "name": "*",
+      "chunks": [
+        "app/layout:static/chunks/app/layout.js"
+      ],
+      "async": false
+    },
+    "/Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/layout.tsx#": {
+      "id": "(app-client)/./src/app/layout.tsx",
+      "name": "",
+      "chunks": [
+        "app/layout:static/chunks/app/layout.js"
+      ],
+      "async": false
+    },
+    "/Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/layout.tsx#default": {
+      "id": "(app-client)/./src/app/layout.tsx",
+      "name": "default",
+      "chunks": [
+        "app/layout:static/chunks/app/layout.js"
+      ],
+      "async": false
+    },
     "/Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/page.tsx": {
       "id": "(app-client)/./src/app/page.tsx",
       "name": "*",
@@ -3023,30 +3047,6 @@ self.__RSC_MANIFEST={
       "name": "value",
       "chunks": [
         "app/page:static/chunks/app/page.js"
-      ],
-      "async": false
-    },
-    "/Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/layout.tsx": {
-      "id": "(app-client)/./src/app/layout.tsx",
-      "name": "*",
-      "chunks": [
-        "app/layout:static/chunks/app/layout.js"
-      ],
-      "async": false
-    },
-    "/Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/layout.tsx#": {
-      "id": "(app-client)/./src/app/layout.tsx",
-      "name": "",
-      "chunks": [
-        "app/layout:static/chunks/app/layout.js"
-      ],
-      "async": false
-    },
-    "/Users/jeon-yebin/Documents/everygsm-client-ver2/apps/admin/src/app/layout.tsx#default": {
-      "id": "(app-client)/./src/app/layout.tsx",
-      "name": "default",
-      "chunks": [
-        "app/layout:static/chunks/app/layout.js"
       ],
       "async": false
     }
