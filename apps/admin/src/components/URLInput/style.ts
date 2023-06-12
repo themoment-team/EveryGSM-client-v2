@@ -4,28 +4,6 @@ export const URLInputBox = styled.div`
   width: 480px;
   height: 79px;
 `;
-export const RemoveIcon = styled.div`
-  cursor: pointer;
-  position: relative;
-  top: 11px;
-`;
-export const InputWrap = styled.div`
-  display: flex;
-  width: 530px;
-  justify-content: space-between;
-`;
-export const AddInput = styled.button`
-  box-sizing: border-box;
-  width: 493px;
-  height: 44px;
-  cursor: pointer;
-  background: #232323;
-  border: 1px solid #3c3c3c;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const Title = styled.div`
   display: flex;
@@ -37,4 +15,29 @@ export const Title = styled.div`
   font-size: 14px;
 
   color: #ffffff;
+`;
+
+export const InputWrap = styled.div`
+  display: flex;
+  width: 530px;
+  justify-content: space-between;
+`;
+
+export const RemoveIcon = styled.div`
+  cursor: pointer;
+  position: relative;
+  top: 11px;
+`;
+
+export const AddInput = styled.button`
+  box-sizing: border-box;
+  width: 493px;
+  height: 44px;
+  cursor: pointer;
+  background: #232323;
+  border: 1px solid #3c3c3c;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

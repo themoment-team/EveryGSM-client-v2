@@ -1,16 +1,12 @@
 "use client";
 import type { FC } from "react";
 import * as S from "./style";
-import Image from "next/image";
 import { useState } from "react";
 import { Input } from "../../components";
-import { css } from "@emotion/react";
 import { PlusIcon, Trashcan } from "../../assets";
-interface URLInputProps {
-  placeholder: string;
-}
+interface URLInputProps {}
 
-const URLInput: FC<URLInputProps> = ({ placeholder }) => {
+const URLInput: FC<URLInputProps> = () => {
   const [inputBox, setInputBox] = useState(0);
   const MAX_INPUTS = 3;
 
