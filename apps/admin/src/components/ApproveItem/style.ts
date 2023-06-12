@@ -38,6 +38,7 @@ export const Title = styled.div`
   font-weight: 700;
   letter-spacing: -0.02em;
   text-align: left;
+  color: #000000;
 `;
 
 export const Creator = styled.div`
