@@ -12,6 +12,7 @@ export const ContentBox = styled.div`
 `;
 export const MainContainer = styled.div`
   width: 100%;
+  height: calc(100% - 4.5rem);
   display: flex;
   justify-content: center;
   align-items: center;

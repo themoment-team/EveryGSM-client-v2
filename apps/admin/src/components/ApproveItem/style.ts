@@ -10,6 +10,7 @@ export const ApproveItem = styled.div`
   border-radius: 0.5rem;
   background-color: #ffff;
   margin-bottom: 12px;
+  cursor: pointer;
   &:hover {
     border: 0.0625rem solid #dddddd;
     transition: ease-in-out 0.3s;
