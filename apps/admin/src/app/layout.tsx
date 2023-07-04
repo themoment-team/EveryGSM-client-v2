@@ -1,6 +1,9 @@
 "use client";
 
 import GlobalStyle from "common/styles/GlobalStyle";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import Providers from "./providers";
 
 export default function RootLayout({
   children,
@@ -20,8 +23,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <GlobalStyle />
-        {children}
+        <Providers>
+          <ReactQueryDevtools />
+          <GlobalStyle />
+          {children}
+        </Providers>
       </body>
     </html>
   );
