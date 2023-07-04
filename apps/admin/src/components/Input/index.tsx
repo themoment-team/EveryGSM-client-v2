@@ -9,7 +9,7 @@ interface InputProps {
 const Input: FC<InputProps> = ({ placeholder }) => {
   return (
     <div>
-      <S.Input placeholder={placeholder}></S.Input>
+      <S.Input placeholder={placeholder} />
     </div>
   );
 };
