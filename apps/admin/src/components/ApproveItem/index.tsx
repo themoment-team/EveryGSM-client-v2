@@ -1,23 +1,46 @@
 import type { FC } from "react";
 import * as S from "./style";
-import Image from "next/image";
+import Image, { ImageLoader } from "next/image"; // ImageLoader를 import
 import * as I from "../../assets";
+import { Contentstype } from "../../interface/Approve";
 
 interface ApproveItemProps {
-  projectName?: string;
-  projectLogoUri?: any;
-  creatorName?: string;
+  post: Contentstype;
 }
 
+const loader: ImageLoader = ({ src }) => {
+  // src 값에 따라 이미지 경로를 처리하는 로직 작성
+  // 유효한 URL로 반환해야 함
+  return "https://pngimg.com/uploads/starbucks/starbucks_PNG3.png";
+};
+
 const ApproveItem: FC<ApproveItemProps> = ({
-  projectName,
-  projectLogoUri,
-  creatorName,
+  post: {
+    projectId,
+    projectName,
+    projectDescription,
+    projectUrl,
+    projectGithubUrl,
+    projectLogoUri,
+    creatorName,
+    creatorDescription,
+    creatorLogoUri,
+    creatorGithubUrl,
+    category,
+    heartCount,
+    createdAt,
+  },
 }) => {
   return (
     <S.ApproveItem>
       <S.ProjectWrap>
-        <Image src={projectLogoUri} alt="logouri" width={46} height={46} />
+        <Image
+          loader={loader} // loader를 Image 컴포넌트에 전달
+          src={projectLogoUri ?? ""}
+          alt="logouri"
+          width={46}
+          height={46}
+        />
         <S.ProjectDescWrap>
           <S.Title>{projectName}</S.Title>
           <S.Creator>{creatorName}</S.Creator>

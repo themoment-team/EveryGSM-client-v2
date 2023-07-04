@@ -2,7 +2,6 @@
 
 import GlobalStyle from "common/styles/GlobalStyle";
 
-import { css } from "@emotion/react";
 export default function RootLayout({
   children,
 }: {
@@ -20,11 +19,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css"
         />
       </head>
-      <body
-        css={css`
-          background-color: "#A7A7A7";
-        `}
-      >
+      <body>
         <GlobalStyle />
         {children}
       </body>

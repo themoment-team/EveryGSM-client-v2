@@ -15,5 +15,8 @@
   "devDependencies": {
     "@emotion/babel-preset-css-prop": "^11.11.0",
     "@storybook/react": "^7.0.6"
+  },
+  "dependencies": {
+    "react-query": "^3.39.3"
   }
 }
