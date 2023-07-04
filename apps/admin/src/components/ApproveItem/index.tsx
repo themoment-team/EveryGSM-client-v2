@@ -31,6 +31,13 @@ const ApproveItem: FC<ApproveItemProps> = ({
     createdAt,
   },
 }) => {
+  const handleApproveClick = () => {
+    const result = confirm("승인하시겠습니까?");
+  };
+
+  const handleRefuseClick = () => {
+    const result = confirm("거절하시겠습니까?");
+  };
   return (
     <S.ApproveItem>
       <S.ProjectWrap>
@@ -47,9 +54,13 @@ const ApproveItem: FC<ApproveItemProps> = ({
         </S.ProjectDescWrap>
       </S.ProjectWrap>
       <S.Approve>
-        <button className="approve">승인</button>
+        <button className="approve" onClick={handleApproveClick}>
+          승인
+        </button>
         <I.VerticalBarIcon />
-        <button className="refuse">거절</button>
+        <button className="refuse" onClick={handleRefuseClick}>
+          거절
+        </button>
       </S.Approve>
     </S.ApproveItem>
   );
