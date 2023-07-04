@@ -17,6 +17,7 @@
     "@storybook/react": "^7.0.6"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.19",
     "react-query": "^3.39.3"
   }
 }
