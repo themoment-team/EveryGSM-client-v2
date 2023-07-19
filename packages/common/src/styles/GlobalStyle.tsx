@@ -17,6 +17,13 @@ export function GlobalStyle() {
             BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
             "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
             "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+
+          ::-webkit-scrollbar {
+            display: none;
+          }
           box-sizing: border-box;
         }
 
