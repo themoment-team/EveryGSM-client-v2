@@ -1,0 +1,25 @@
+import type { Metadata } from 'next';
+
+import { TanStackProvider } from '@/shared/lib';
+import '@/shared/styles/globals.css';
+
+export const metadata: Metadata = {
+  title: 'EveryGSM',
+  description: '광주소프트웨어마이스터고등학교의 모든 프로젝트를 한곳에',
+};
+
+const RootLayout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
+  return (
+    <html lang="ko">
+      <body>
+        <TanStackProvider>{children}</TanStackProvider>
+      </body>
+    </html>
+  );
+};
+
+export default RootLayout;
