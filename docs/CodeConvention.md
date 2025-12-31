@@ -14,6 +14,11 @@ src/
 └── shared/      # 공유 유틸리티, 훅, 스타일
 ```
 
+> 📚 **학습 자료**
+>
+> - [Feature-Sliced Design 공식 문서](https://feature-sliced.design/)
+> - [FSD 한글 번역 문서](https://feature-sliced.design/kr/)
+
 ### 계층별 의존성 규칙
 
 - `app` → `views` → `widgets` → `features` → `entities` → `shared`
@@ -48,6 +53,11 @@ export * from './lib/utils';
 export { default as ExampleList } from './ui/ExampleList';
 export { default as ExampleFilter } from './ui/ExampleFilter';
 ```
+
+> 📚 **학습 자료**
+>
+> - [JavaScript 모듈 시스템 이해하기](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Modules)
+> - [배럴 익스포트 패턴 가이드](https://basarat.gitbook.io/typescript/main-1/barrel)
 
 ### Import 별칭
 
@@ -94,6 +104,11 @@ export enum CategoryEnum {
 }
 ```
 
+> 📚 **학습 자료**
+>
+> - [TypeScript 핸드북 - Interface vs Type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)
+> - [TypeScript 기본 타입 가이드](https://www.typescriptlang.org/ko/docs/handbook/2/everyday-types.html)
+
 ## 📝 Zod 스키마 컨벤션
 
 - 스키마 네이밍: `<이름>Schema` 형태를 사용합니다. (PascalCase 권장)
@@ -107,6 +122,11 @@ export const ExampleFormSchema = z.object({
 
 export type ExampleFormType = z.infer<typeof ExampleFormSchema>;
 ```
+
+> 📚 **학습 자료**
+>
+> - [Zod 공식 문서](https://zod.dev/)
+> - [Zod 한글 가이드](https://github.com/colinhacks/zod/blob/main/packages/docs-v3/README_KO.md)
 
 ## 🧩 컴포넌트 컨벤션
 
@@ -146,12 +166,17 @@ const ExamplePage = ({ data, isLoading }: ExamplePageProps) => {
 export default ExamplePage;
 ```
 
+> 📚 **학습 자료**
+>
+> - [JavaScript 구조 분해 할당 기본](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+> - [React Props 구조 분해 할당 패턴](https://react.dev/learn#sharing-data-between-components)
+
 ## 🎨 스타일링 컨벤션
 
 - **Tailwind CSS**를 사용합니다.
 - `clsx` + `tailwind-merge` 기반의 `cn()` 유틸리티를 사용합니다.
 - 클래스명은 가능한 한 **하나의 문자열**로 관리합니다.
-- 버튼 등 변형이 있는 컴포넌트는 **CVA(class-variance-authority)** 사용을 권장합니다.
+- 버튼 등 다양한 변형이 있는 컴포넌트는 **CVA(class-variance-authority)** 사용을 권장합니다.
 
 ```ts
 // cn() 기본 사용
@@ -163,6 +188,11 @@ className={cn('flex gap-2', isActive && 'bg-primary')}
 // 여러 조건 조합
 className={cn('flex gap-2 items-center', isActive && 'bg-primary', isDisabled && 'opacity-50')}
 ```
+
+> 📚 **학습 자료**
+>
+> - [Tailwind CSS 공식 문서](https://tailwindcss.com/docs/installation/using-vite)
+> - [CVA (class-variance-authority) 문서](https://cva.style/docs)
 
 ## 🔗 API 컨벤션
 
@@ -212,3 +242,8 @@ export const get = async <T>(...args: Parameters<typeof axiosInstance.get>) =>
 export const post = async <T>(...args: Parameters<typeof axiosInstance.post>) =>
   await axiosInstance.post<T, T>(...args);
 ```
+
+> 📚 **학습 자료**
+>
+> - [TanStack Query 공식 문서](https://tanstack.com/query/latest/docs/framework/react/overview)
+> - [TanStack Query 한글 문서](https://react-query.kro.kr/docs/getting-started)
