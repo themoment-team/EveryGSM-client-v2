@@ -37,6 +37,11 @@ src/
 | 스키마 파일      | camelCase   | `schema.ts`                   |
 | 에셋 파일        | PascalCase  | `Logo.tsx`, `EmptyState.tsx`  |
 
+> 📚 **학습 자료**
+>
+> - [JavaScript 네이밍 컨벤션 가이드](https://www.robinwieruch.de/javascript-naming-conventions/)
+> - [camelCase vs PascalCase 설명](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/)
+
 ## 📦 Import/Export 컨벤션
 
 ### 배럴 익스포트(Barrel Export)
