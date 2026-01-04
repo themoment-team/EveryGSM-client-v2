@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import '@/shared/styles/globals.css';
+import { Header } from '@/shared/ui';
 
 export const metadata: Metadata = {
   title: 'EveryGSM',
@@ -17,7 +18,10 @@ const RootLayout = ({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <TanStackProvider>{children}</TanStackProvider>
+        <TanStackProvider>
+          <Header />
+          {children}
+        </TanStackProvider>
       </body>
     </html>
   );
