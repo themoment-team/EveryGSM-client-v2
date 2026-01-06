@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import '@/shared/styles/globals.css';
-import { Header } from '@/shared/ui';
+import { Header } from '@/widgets/header';
 
 export const metadata: Metadata = {
   title: 'EveryGSM',
