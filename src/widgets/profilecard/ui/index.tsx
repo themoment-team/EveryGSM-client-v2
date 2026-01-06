@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { cn } from '@/shared/utils';
 
 const ProfileCard = () => {
@@ -8,7 +10,14 @@ const ProfileCard = () => {
       )}
     >
       <div className={cn('flex gap-4')}>
-        <div></div>
+        <Image
+          src="/images/profilecard/profile-image.png"
+          alt="프로필 이미지"
+          width={56}
+          height={56}
+          className={cn('h-14 w-14 rounded-full')}
+        />
+
         <div className={cn(`flex flex-col gap-2`)}>
           <div className={cn(`flex h-6 items-center text-[1.25rem] font-semibold text-white`)}>
             프로젝트 이름
