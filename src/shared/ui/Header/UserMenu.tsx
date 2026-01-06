@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { ArrowIcon, PersonIcon } from '@/shared/assets';
+import { useOnClickOutside } from '@/shared/hooks';
 import { cn } from '@/shared/utils';
 
 interface UserMenuProps {
@@ -17,6 +18,9 @@ interface UserMenuProps {
 
 const UserMenu = ({ user, onLogout }: UserMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useOnClickOutside(menuRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
 
   const handleLogout = () => {
     setIsOpen(false);
@@ -24,7 +28,7 @@ const UserMenu = ({ user, onLogout }: UserMenuProps) => {
   };
 
   return (
-    <>
+    <div ref={menuRef} className={cn('relative')}>
       <button
         className={cn('flex cursor-pointer items-center gap-2')}
         onClick={() => setIsOpen(!isOpen)}
@@ -35,7 +39,7 @@ const UserMenu = ({ user, onLogout }: UserMenuProps) => {
       {isOpen && (
         <div
           className={cn(
-            'absolute top-9 right-14 flex w-full max-w-60 flex-col items-end gap-2 rounded-xl border border-[#2F2F2F] bg-[rgba(34,34,34,0.5)] p-6 backdrop-blur-[18px]',
+            'absolute top-9 right-0 flex w-full max-w-60 flex-col items-end gap-2 rounded-xl border border-[#2F2F2F] bg-[rgba(34,34,34,0.5)] p-6 backdrop-blur-[18px]',
           )}
         >
           <div className={cn('flex w-full flex-col gap-2')}>
@@ -53,7 +57,7 @@ const UserMenu = ({ user, onLogout }: UserMenuProps) => {
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
