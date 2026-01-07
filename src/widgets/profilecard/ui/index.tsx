@@ -10,7 +10,13 @@ interface ProfileCardProps {
   requestStatus: string;
 }
 
-const ProfileCard = () => {
+const ProfileCard = ({
+  imageSrc,
+  projectName,
+  teamName,
+  date,
+  requestStatus,
+}: ProfileCardProps) => {
   return (
     <div
       className={cn(
@@ -19,7 +25,7 @@ const ProfileCard = () => {
     >
       <div className={cn('flex gap-4')}>
         <Image
-          src="/images/profilecard/profile-image.png"
+          src={imageSrc}
           alt="프로필 이미지"
           width={56}
           height={56}
@@ -28,18 +34,18 @@ const ProfileCard = () => {
 
         <div className={cn(`flex flex-col gap-2`)}>
           <div className={cn(`flex h-6 items-center text-[1.25rem] font-semibold text-white`)}>
-            프로젝트 이름
+            {projectName}
           </div>
           <div className={cn('flex h-4 items-center text-[0.875rem] font-medium text-[#9A9A9A]')}>
-            소속동아리/팀명
+            {teamName}
           </div>
         </div>
       </div>
       <div className={cn('flex items-center gap-4')}>
-        <div className={cn(`flex text-[0.875rem] text-[#9A9A9A]`)}>2026-01-02</div>
+        <div className={cn(`flex text-[0.875rem] text-[#9A9A9A]`)}>{date}</div>
         <div className={cn(`text-[1.25rem] font-semibold`)}>
           <span className={cn(`text-[#FFF]`)}>요청 상태: </span>
-          <span className={cn(`text-[#888]`)}>확인중</span>
+          <span className={cn(`text-[#888]`)}>{requestStatus}</span>
         </div>
       </div>
     </div>
