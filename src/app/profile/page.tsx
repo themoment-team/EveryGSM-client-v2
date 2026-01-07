@@ -10,7 +10,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-[#191919]">
+    <div className="flex flex-col items-center gap-4 bg-[#191919]">
       <ProfileCard {...profileCardProps} requestStatus="확인 중" />
       <ProfileCard {...profileCardProps} requestStatus="거절" />
     </div>
