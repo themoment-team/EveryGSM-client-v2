@@ -2,6 +2,14 @@ import Image from 'next/image';
 
 import { cn } from '@/shared/utils';
 
+interface ProfileCardProps {
+  imageSrc: string;
+  projectName: string;
+  teamName: string;
+  date: string;
+  requestStatus: string;
+}
+
 const ProfileCard = () => {
   return (
     <div
