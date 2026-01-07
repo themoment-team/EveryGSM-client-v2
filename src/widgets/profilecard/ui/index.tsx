@@ -27,9 +27,12 @@ const ProfileCard = () => {
           </div>
         </div>
       </div>
-      <div className={cn('flex gap-4')}>
-        <div></div>
-        <div></div>
+      <div className={cn('flex items-center gap-4')}>
+        <div className={cn(`flex text-[0.875rem] text-[#9A9A9A]`)}>2026-01-02</div>
+        <div className={cn(`text-[1.25rem] font-semibold`)}>
+          <span className={cn(`text-[#FFF]`)}>요청 상태: </span>
+          <span className={cn(`text-[#888]`)}>확인중</span>
+        </div>
       </div>
     </div>
   );
