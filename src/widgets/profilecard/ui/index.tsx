@@ -45,7 +45,9 @@ const ProfileCard = ({
         <div className={cn(`flex text-[0.875rem] text-[#9A9A9A]`)}>{date}</div>
         <div className={cn(`text-[1.25rem] font-semibold`)}>
           <span className={cn(`text-[#FFF]`)}>요청 상태: </span>
-          <span className={cn(`text-[#888]`)}>{requestStatus}</span>
+          <span className={cn(requestStatus === '거절' ? `text-[#FF7C7C]` : `text-[#888]`)}>
+            {requestStatus}
+          </span>
         </div>
       </div>
     </div>
