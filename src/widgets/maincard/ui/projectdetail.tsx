@@ -36,7 +36,7 @@ const MainCardModal = ({
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[100] flex items-center justify-center border border-[#2F2F2F] p-6',
+        'fixed inset-0 z-100 flex items-center justify-center border border-[#2F2F2F] p-6',
       )}
     >
       <div

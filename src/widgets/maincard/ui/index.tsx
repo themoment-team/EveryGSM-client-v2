@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { ArrowIcon, Like } from '@/shared/assets';
 import { cn } from '@/shared/utils';
@@ -33,16 +33,12 @@ const MainCard = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className={cn('flex items-center justify-center p-4')}>
-      <div
-        className={cn(
-          'relative h-82.25 w-70 rounded-xl border border-[#2F2F2F] bg-[#22222280] p-6 backdrop-blur-[18px]',
-        )}
-      >
+    <div className="flex items-center justify-center p-4">
+      <div className="relative h-82.25 w-70 rounded-xl border border-[#2F2F2F] bg-[#22222280] p-6 backdrop-blur-[18px]">
         <div
           onMouseEnter={() => setIsCenterHover(true)}
           onMouseLeave={() => setIsCenterHover(false)}
-          className="absolute top-1/2 left-1/2 z-10 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 z-[1] h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
         <div
@@ -51,25 +47,18 @@ const MainCard = ({
             isCenterHover ? 'opacity-0' : 'opacity-100',
           )}
         >
-          <div className={cn('mb-4 flex items-start justify-between')}>
-            <div
-              className={cn('flex h-14 w-14 items-center justify-center rounded-full bg-green-500')}
-            ></div>
-
-            <div className="relative">
-              <Like />
-            </div>
+          <div className="mb-4 flex items-start justify-between">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-500" />
+            <Like />
           </div>
 
-          <p className={cn('mb-2 text-[1.25rem] font-semibold text-white')}>{projectName}</p>
-          <p className={cn('mb-4 text-[0.875rem] font-medium text-gray-400')}>{teamName}</p>
-          <p
-            className={cn(
-              'mb-4 line-clamp-2 overflow-hidden text-[0.75rem] font-medium text-ellipsis text-gray-400',
-            )}
-          >
+          <p className="mb-2 text-[1.25rem] font-semibold text-white">{projectName}</p>
+          <p className="mb-4 text-[0.875rem] font-medium text-gray-400">{teamName}</p>
+
+          <p className="mb-4 line-clamp-2 overflow-hidden text-[0.75rem] font-medium text-ellipsis text-gray-400">
             {description}
           </p>
+
           <div className="mb-9 flex gap-[0.38rem]">
             {tags?.slice(0, 3).map((tag, i) => (
               <span
@@ -87,18 +76,11 @@ const MainCard = ({
           </div>
 
           <button
+            type="button"
             onClick={() => setIsModalOpen(true)}
-            className={cn('relative z-20 mb-8 ml-auto flex items-center gap-4', 'group')}
+            className="group relative z-20 mb-8 ml-auto flex items-center gap-4"
           >
-            <span
-              className={cn(
-                'absolute -inset-x-2 -inset-y-1',
-                'rounded-xl bg-white/10',
-                'opacity-0 transition-opacity duration-200',
-                'group-hover:opacity-100',
-              )}
-            />
-
+            <span className="absolute -inset-x-2 -inset-y-1 rounded-xl bg-white/10 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
             <span className="relative z-10 text-[0.75rem] font-medium text-white">
               프로젝트 상세 보기
             </span>
@@ -107,24 +89,29 @@ const MainCard = ({
         </div>
 
         <div
+          onMouseEnter={() => setIsCenterHover(true)}
+          onMouseLeave={() => setIsCenterHover(false)}
           className={cn(
-            'absolute inset-0 rounded-xl p-6 transition-opacity duration-300',
-            isCenterHover ? 'opacity-100' : 'opacity-0',
-            isCenterHover ? 'pointer-events-auto' : 'pointer-events-none',
+            'absolute inset-0 z-20 rounded-xl p-6 transition-opacity duration-300',
+            isCenterHover ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
           )}
         >
           <div className="flex h-full flex-col items-center justify-center gap-6">
-            <div
-              className={cn('flex h-14 w-14 items-center justify-center rounded-full bg-green-500')}
-            ></div>
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-500" />
 
-            <button className="flex items-center gap-4 text-[1.25rem] font-semibold text-white">
+            <a
+              href={deployLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 text-[1.25rem] font-semibold text-white"
+            >
               프로젝트 배포 URL 이동
-              <ArrowIcon isLarge={true} />
-            </button>
+              <ArrowIcon isLarge />
+            </a>
           </div>
         </div>
       </div>
+
       <MainCardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
