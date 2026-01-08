@@ -48,7 +48,15 @@ const MainCard = ({
           )}
         >
           <div className="mb-4 flex items-start justify-between">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-500" />
+            <div className="h-14 w-14 overflow-hidden rounded-full bg-[#2F2F2F]">
+              {imageSrc && (
+                <img
+                  src={imageSrc}
+                  alt={`${projectName ?? 'project'} thumbnail`}
+                  className="h-full w-full object-cover"
+                />
+              )}
+            </div>
             <Like />
           </div>
 
@@ -97,7 +105,15 @@ const MainCard = ({
           )}
         >
           <div className="flex h-full flex-col items-center justify-center gap-6">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-green-500" />
+            <div className="h-14 w-14 overflow-hidden rounded-full bg-[#2F2F2F]">
+              {imageSrc && (
+                <img
+                  src={imageSrc}
+                  alt={`${projectName ?? 'project'} thumbnail`}
+                  className="h-full w-full object-cover"
+                />
+              )}
+            </div>
 
             <a
               href={deployLink}
