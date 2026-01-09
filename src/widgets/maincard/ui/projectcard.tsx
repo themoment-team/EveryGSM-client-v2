@@ -1,5 +1,8 @@
 'use client';
+
 import { useState } from 'react';
+
+import Image from 'next/image';
 
 import { ArrowIcon, Like } from '@/shared/assets';
 import { cn } from '@/shared/utils';
@@ -12,6 +15,8 @@ export interface MainCardProps {
   teamName?: string;
   description?: string;
   tags?: string[];
+  isLiked?: boolean;
+  status?: 'active' | 'pending' | 'completed';
   links?: { title: string; url: string }[]; // 깃허브 링크
   deployLink?: string; // 프젝 배포 링크
 }
@@ -22,11 +27,16 @@ const MainCard = ({
   teamName,
   description,
   tags,
+  isLiked = false,
+  status = 'active',
   links = [],
   deployLink = '',
 }: MainCardProps) => {
   const [isCenterHover, setIsCenterHover] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  void isLiked;
+  void status;
 
   return (
     <div className="flex items-center justify-center p-4">
@@ -44,14 +54,17 @@ const MainCard = ({
           )}
         >
           <div className="mb-4 flex items-start justify-between">
-            <div className="h-14 w-14 overflow-hidden rounded-full bg-[#2F2F2F]">
-              {imageSrc && (
-                <img
+            <div className="relative h-14 w-14 overflow-hidden rounded-full bg-[#2F2F2F]">
+              {imageSrc ? (
+                <Image
                   src={imageSrc}
                   alt={`${projectName ?? 'project'} thumbnail`}
-                  className="h-full w-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="56px"
+                  unoptimized
                 />
-              )}
+              ) : null}
             </div>
             <Like />
           </div>
@@ -101,14 +114,17 @@ const MainCard = ({
           )}
         >
           <div className="flex h-full flex-col items-center justify-center gap-6">
-            <div className="h-14 w-14 overflow-hidden rounded-full bg-[#2F2F2F]">
-              {imageSrc && (
-                <img
+            <div className="relative h-14 w-14 overflow-hidden rounded-full bg-[#2F2F2F]">
+              {imageSrc ? (
+                <Image
                   src={imageSrc}
                   alt={`${projectName ?? 'project'} thumbnail`}
-                  className="h-full w-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="56px"
+                  unoptimized
                 />
-              )}
+              ) : null}
             </div>
 
             <a
@@ -134,6 +150,8 @@ const MainCard = ({
         tags={tags}
         links={links}
         deployLink={deployLink}
+        isLiked={isLiked}
+        status={status}
       />
     </div>
   );

@@ -1,5 +1,8 @@
 'use client';
+
 import React from 'react';
+
+import Image from 'next/image';
 
 import { ArrowIcon, Close, Like } from '@/shared/assets';
 import { cn } from '@/shared/utils';
@@ -12,6 +15,8 @@ interface MainCardProps {
   teamName?: string;
   description?: string;
   tags?: string[];
+  isLiked?: boolean;
+  status?: 'active' | 'pending' | 'completed';
   links?: { title: string; url: string }[]; // 깃허브 링크
   deployLink?: string; // 프젝 배포 링크
 }
@@ -22,12 +27,18 @@ const MainCardModal = ({
   teamName,
   description,
   tags,
+  isLiked = false,
+  status = 'active',
   isOpen,
   onClose,
   links = [],
   deployLink = '',
 }: MainCardProps) => {
   if (!isOpen) return null;
+
+  // lint 에러 방지
+  void isLiked;
+  void status;
 
   return (
     <div className={cn('fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-6')}>
@@ -45,14 +56,17 @@ const MainCardModal = ({
         </button>
 
         <div className={cn('mt-8 mb-10')}>
-          <div className={cn('mb-12 h-25 w-25 overflow-hidden rounded-full bg-[#2F2F2F]')}>
-            {imageSrc && (
-              <img
+          <div className={cn('relative mb-12 h-25 w-25 overflow-hidden rounded-full bg-[#2F2F2F]')}>
+            {imageSrc ? (
+              <Image
                 src={imageSrc}
                 alt={`${projectName ?? 'project'} thumbnail`}
-                className={cn('h-full w-full object-cover')}
+                fill
+                className={cn('object-cover')}
+                sizes="100px"
+                unoptimized
               />
-            )}
+            ) : null}
           </div>
 
           <div className={cn('mb-2 flex items-center gap-3')}>
