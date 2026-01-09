@@ -6,7 +6,7 @@ import { cn } from '@/shared/utils';
 
 import MainCardModal from './projectdetail';
 
-interface MainCardProps {
+export interface MainCardProps {
   imageSrc: string;
   projectName?: string;
   teamName?: string;
@@ -38,7 +38,7 @@ const MainCard = ({
         <div
           onMouseEnter={() => setIsCenterHover(true)}
           onMouseLeave={() => setIsCenterHover(false)}
-          className="absolute top-1/2 left-1/2 z-[1] h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 z-1 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
         <div
