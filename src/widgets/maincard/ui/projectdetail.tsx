@@ -34,14 +34,10 @@ const MainCardModal = ({
   if (!isOpen) return null;
 
   return (
-    <div
-      className={cn(
-        'fixed inset-0 z-100 flex items-center justify-center border border-[#2F2F2F] p-6',
-      )}
-    >
+    <div className={cn('fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-6')}>
       <div
         className={cn(
-          'relative h-235.5 w-250 overflow-hidden rounded-2xl bg-[#222222E5] p-6 text-white shadow-2xl',
+          'relative h-235.5 w-250 overflow-hidden rounded-2xl bg-[#222222]/60 p-6 text-white shadow-2xl backdrop-blur-sm',
         )}
       >
         <button
