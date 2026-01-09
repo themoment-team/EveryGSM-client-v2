@@ -90,7 +90,7 @@ const MainCardModal = ({
         <div className={cn('mb-12 flex gap-[0.38rem]')}>
           {tags?.map((tag, index) => (
             <span
-              key={index}
+              key={`${tag}-${index}`}
               className={cn(
                 'flex h-6.5 items-center rounded-[62.5rem] bg-[#4F4F4F] px-2 text-[1rem] whitespace-nowrap text-gray-300',
               )}
