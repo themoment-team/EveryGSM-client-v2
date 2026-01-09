@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Image from 'next/image';
 
@@ -34,10 +34,14 @@ const MainCardModal = ({
   links = [],
   deployLink = '',
 }: MainCardProps) => {
+  const [liked, setLiked] = useState(isLiked);
+
+  const handleLikeToggle = () => {
+    setLiked(!liked);
+  };
   if (!isOpen) return null;
 
   // lint 에러 방지
-  void isLiked;
   void status;
 
   return (
@@ -71,7 +75,7 @@ const MainCardModal = ({
 
           <div className={cn('mb-2 flex items-center gap-3')}>
             <h2 className={cn('text-[2.25rem] font-bold')}>{projectName}</h2>
-            <Like />
+            <Like isLiked={liked} onClick={handleLikeToggle} />
           </div>
 
           <p className={cn('text-[1.25rem] font-medium text-[#DDDDDD]')}>{teamName}</p>

@@ -34,8 +34,12 @@ const MainCard = ({
 }: MainCardProps) => {
   const [isCenterHover, setIsCenterHover] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [liked, setLiked] = useState(isLiked);
 
-  void isLiked;
+  const handleLikeToggle = () => {
+    setLiked(!liked);
+  };
+
   void status;
 
   return (
@@ -66,7 +70,7 @@ const MainCard = ({
                 />
               ) : null}
             </div>
-            <Like />
+            <Like isLiked={liked} onClick={handleLikeToggle} />
           </div>
 
           <p className="mb-2 text-[1.25rem] font-semibold text-white">{projectName}</p>
@@ -150,7 +154,7 @@ const MainCard = ({
         tags={tags}
         links={links}
         deployLink={deployLink}
-        isLiked={isLiked}
+        isLiked={liked}
         status={status}
       />
     </div>
