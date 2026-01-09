@@ -136,8 +136,6 @@ const MainCard = ({
         teamName={teamName}
         description={description}
         tags={tags}
-        isLiked={isLiked}
-        status={status}
         links={links}
         deployLink={deployLink}
       />

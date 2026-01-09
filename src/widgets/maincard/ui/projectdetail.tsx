@@ -12,8 +12,6 @@ interface MainCardProps {
   teamName?: string;
   description?: string;
   tags?: string[];
-  isLiked?: boolean;
-  status?: 'active' | 'pending' | 'completed';
   links?: { title: string; url: string }[]; // 깃허브 링크
   deployLink?: string; // 프젝 배포 링크
 }
@@ -24,8 +22,6 @@ const MainCardModal = ({
   teamName,
   description,
   tags,
-  isLiked = false,
-  status = 'active',
   isOpen,
   onClose,
   links = [],
