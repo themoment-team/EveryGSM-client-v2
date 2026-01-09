@@ -10,6 +10,7 @@ import { cn } from '@/shared/utils';
 import MainCardModal from './projectdetail';
 
 export interface MainCardProps {
+  id: number | string;
   imageSrc: string;
   projectName?: string;
   teamName?: string;
