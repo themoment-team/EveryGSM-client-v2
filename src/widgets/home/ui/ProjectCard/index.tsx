@@ -14,8 +14,7 @@ interface MainCardProps {
 }
 
 const MainCard = ({ data }: MainCardProps) => {
-  const { imageSrc, projectName, teamName, description, tags, isLiked, status, links, deployLink } =
-    data;
+  const { imageSrc, projectName, teamName, description, tags, isLiked, status, deployLink } = data;
 
   const [isCenterHover, setIsCenterHover] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
