@@ -12,8 +12,6 @@ export interface MainCardProps {
   teamName?: string;
   description?: string;
   tags?: string[];
-  isLiked?: boolean;
-  status?: 'active' | 'pending' | 'completed';
   links?: { title: string; url: string }[]; // 깃허브 링크
   deployLink?: string; // 프젝 배포 링크
 }
@@ -26,8 +24,6 @@ const MainCard = ({
   tags,
   links = [],
   deployLink = '',
-  isLiked = false,
-  status = 'active',
 }: MainCardProps) => {
   const [isCenterHover, setIsCenterHover] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
