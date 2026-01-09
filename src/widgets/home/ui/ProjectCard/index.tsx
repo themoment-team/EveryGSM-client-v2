@@ -6,33 +6,17 @@ import Image from 'next/image';
 
 import { ArrowIcon, Like } from '@/shared/assets';
 import { cn } from '@/shared/utils';
-
-import MainCardModal from './projectdetail';
+import type { MainCardModel } from '@/views/home/model/types';
+import MainCardModal from '@/widgets/home/ui/ProjectDetailModal';
 
 interface MainCardProps {
-  id: number | string;
-  imageSrc: string;
-  projectName?: string;
-  teamName?: string;
-  description?: string;
-  tags?: string[];
-  isLiked?: boolean;
-  status?: 'active' | 'pending' | 'completed';
-  links?: { title: string; url: string }[]; // 깃허브 링크
-  deployLink?: string; // 프젝 배포 링크
+  data: MainCardModel;
 }
 
-const MainCard = ({
-  imageSrc,
-  projectName,
-  teamName,
-  description,
-  tags,
-  isLiked = false,
-  status = 'active',
-  links = [],
-  deployLink = '',
-}: MainCardProps) => {
+const MainCard = ({ data }: MainCardProps) => {
+  const { imageSrc, projectName, teamName, description, tags, isLiked, status, links, deployLink } =
+    data;
+
   const [isCenterHover, setIsCenterHover] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [liked, setLiked] = useState(isLiked);
@@ -82,7 +66,7 @@ const MainCard = ({
           </p>
 
           <div className="mb-9 flex gap-[0.38rem]">
-            {tags?.slice(0, 3).map((tag, i) => (
+            {tags.slice(0, 3).map((tag, i) => (
               <span
                 key={i}
                 className="flex h-6.5 items-center rounded-[62.5rem] bg-[#4F4F4F] px-2 text-[0.75rem] whitespace-nowrap text-gray-300"
@@ -90,7 +74,7 @@ const MainCard = ({
                 {tag}
               </span>
             ))}
-            {tags && tags.length > 3 && (
+            {tags.length > 3 && (
               <span className="flex h-6.5 items-center rounded-[62.5rem] bg-[#4F4F4F] px-2 text-[0.75rem] whitespace-nowrap text-gray-300">
                 +{tags.length - 3}
               </span>
@@ -148,15 +132,7 @@ const MainCard = ({
       <MainCardModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        imageSrc={imageSrc}
-        projectName={projectName}
-        teamName={teamName}
-        description={description}
-        tags={tags}
-        links={links}
-        deployLink={deployLink}
-        isLiked={liked}
-        status={status}
+        data={{ ...data, isLiked: liked }}
       />
     </div>
   );

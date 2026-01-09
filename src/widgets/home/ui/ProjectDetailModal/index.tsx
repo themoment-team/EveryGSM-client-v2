@@ -6,43 +6,25 @@ import Image from 'next/image';
 
 import { ArrowIcon, Close, Like } from '@/shared/assets';
 import { cn } from '@/shared/utils';
+import type { MainCardModel } from '@/views/home/model/types';
 
-interface MainCardProps {
+interface MainCardModalProps {
   isOpen: boolean;
   onClose: () => void;
-  imageSrc: string;
-  projectName?: string;
-  teamName?: string;
-  description?: string;
-  tags?: string[];
-  isLiked?: boolean;
-  status?: 'active' | 'pending' | 'completed';
-  links?: { title: string; url: string }[]; // 깃허브 링크
-  deployLink?: string; // 프젝 배포 링크
+  data: MainCardModel;
 }
 
-const MainCardModal = ({
-  imageSrc,
-  projectName,
-  teamName,
-  description,
-  tags,
-  isLiked = false,
-  status = 'active',
-  isOpen,
-  onClose,
-  links = [],
-  deployLink = '',
-}: MainCardProps) => {
-  const [liked, setLiked] = useState(isLiked);
+const MainCardModal = ({ isOpen, onClose, data }: MainCardModalProps) => {
+  const [liked, setLiked] = useState(data.isLiked);
 
   const handleLikeToggle = () => {
     setLiked(!liked);
   };
+
   if (!isOpen) return null;
 
   // lint 에러 방지
-  void status;
+  void data.status;
 
   return (
     <div className={cn('fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-6')}>
@@ -61,10 +43,10 @@ const MainCardModal = ({
 
         <div className={cn('mt-8 mb-10')}>
           <div className={cn('relative mb-12 h-25 w-25 overflow-hidden rounded-full bg-[#2F2F2F]')}>
-            {imageSrc ? (
+            {data.imageSrc ? (
               <Image
-                src={imageSrc}
-                alt={`${projectName ?? 'project'} thumbnail`}
+                src={data.imageSrc}
+                alt={`${data.projectName ?? 'project'} thumbnail`}
                 fill
                 className={cn('object-cover')}
                 sizes="100px"
@@ -74,21 +56,21 @@ const MainCardModal = ({
           </div>
 
           <div className={cn('mb-2 flex items-center gap-3')}>
-            <h2 className={cn('text-[2.25rem] font-bold')}>{projectName}</h2>
+            <h2 className={cn('text-[2.25rem] font-bold')}>{data.projectName}</h2>
             <Like isLiked={liked} onClick={handleLikeToggle} />
           </div>
 
-          <p className={cn('text-[1.25rem] font-medium text-[#DDDDDD]')}>{teamName}</p>
+          <p className={cn('text-[1.25rem] font-medium text-[#DDDDDD]')}>{data.teamName}</p>
         </div>
 
         <p
           className={cn('mb-4 max-w-[90%] text-[1rem] leading-relaxed font-medium text-[#DDDDDD]')}
         >
-          {description}
+          {data.description}
         </p>
 
         <div className={cn('mb-12 flex gap-[0.38rem]')}>
-          {tags?.map((tag, index) => (
+          {data.tags.map((tag, index) => (
             <span
               key={`${tag}-${index}`}
               className={cn(
@@ -101,7 +83,7 @@ const MainCardModal = ({
         </div>
 
         <div className={cn('mb-12 space-y-1')}>
-          {links?.map((link, i) => (
+          {data.links.map((link, i) => (
             <a
               key={i}
               href={link.url}
@@ -118,7 +100,7 @@ const MainCardModal = ({
         </div>
 
         <a
-          href={deployLink}
+          href={data.deployLink}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
