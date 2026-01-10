@@ -28,11 +28,11 @@ const MainCard = ({ data }: MainCardProps) => {
 
   return (
     <div className="flex items-center justify-center p-4">
-      <div className="relative h-82.25 w-70 rounded-xl border border-[#2F2F2F] bg-[#22222280] p-6 backdrop-blur-[18px]">
+      <div className="relative h-80 w-72 rounded-xl border border-[#2F2F2F] bg-[#22222280] p-6 backdrop-blur-lg">
         <div
           onMouseEnter={() => setIsCenterHover(true)}
           onMouseLeave={() => setIsCenterHover(false)}
-          className="absolute top-1/2 left-1/2 z-1 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-1/2 left-1/2 z-10 h-1/2 w-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
         <div
@@ -57,24 +57,22 @@ const MainCard = ({ data }: MainCardProps) => {
             <Like isLiked={liked} onClick={handleLikeToggle} />
           </div>
 
-          <p className="mb-2 text-[1.25rem] font-semibold text-white">{projectName}</p>
-          <p className="mb-4 text-[0.875rem] font-medium text-gray-400">{teamName}</p>
+          <p className="mb-2 text-xl font-semibold text-white">{projectName}</p>
+          <p className="mb-4 text-sm font-medium text-gray-400">{teamName}</p>
 
-          <p className="mb-4 line-clamp-2 overflow-hidden text-[0.75rem] font-medium text-ellipsis text-gray-400">
-            {description}
-          </p>
+          <p className="mb-4 line-clamp-2 text-xs font-medium text-gray-400">{description}</p>
 
-          <div className="mb-9 flex gap-[0.38rem]">
+          <div className="mb-9 flex gap-1.5">
             {tags.slice(0, 3).map((tag, i) => (
               <span
                 key={i}
-                className="flex h-6.5 items-center rounded-[62.5rem] bg-[#4F4F4F] px-2 text-[0.75rem] whitespace-nowrap text-gray-300"
+                className="flex h-6 items-center rounded-full bg-[#4F4F4F] px-2 text-xs text-gray-300"
               >
                 {tag}
               </span>
             ))}
             {tags.length > 3 && (
-              <span className="flex h-6.5 items-center rounded-[62.5rem] bg-[#4F4F4F] px-2 text-[0.75rem] whitespace-nowrap text-gray-300">
+              <span className="flex h-6 items-center rounded-full bg-[#4F4F4F] px-2 text-xs text-gray-300">
                 +{tags.length - 3}
               </span>
             )}
@@ -85,10 +83,8 @@ const MainCard = ({ data }: MainCardProps) => {
             onClick={() => setIsModalOpen(true)}
             className="group relative z-20 mb-8 ml-auto flex items-center gap-4"
           >
-            <span className="absolute -inset-x-2 -inset-y-1 rounded-xl bg-white/10 opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
-            <span className="relative z-10 text-[0.75rem] font-medium text-white">
-              프로젝트 상세 보기
-            </span>
+            <span className="absolute -inset-x-2 -inset-y-1 rounded-xl bg-white/10 opacity-0 transition-opacity group-hover:opacity-100" />
+            <span className="relative z-10 text-xs font-medium text-white">프로젝트 상세 보기</span>
             <ArrowIcon />
           </button>
         </div>
@@ -119,7 +115,7 @@ const MainCard = ({ data }: MainCardProps) => {
               href={deployLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 text-[1.25rem] font-semibold text-white"
+              className="flex items-center gap-4 text-xl font-semibold text-white"
             >
               프로젝트 배포 URL 이동
               <ArrowIcon isLarge />

@@ -27,7 +27,7 @@ const MainCardModal = ({ isOpen, onClose, data }: MainCardModalProps) => {
   void data.status;
 
   return (
-    <div className={cn('fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-6')}>
+    <div className={cn('fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-6')}>
       <div
         className={cn(
           'relative h-235.5 w-250 overflow-hidden rounded-2xl bg-[#222222]/60 p-6 text-white shadow-2xl backdrop-blur-sm',
@@ -42,7 +42,7 @@ const MainCardModal = ({ isOpen, onClose, data }: MainCardModalProps) => {
         </button>
 
         <div className={cn('mt-8 mb-10')}>
-          <div className={cn('relative mb-12 h-25 w-25 overflow-hidden rounded-full bg-[#2F2F2F]')}>
+          <div className={cn('relative mb-12 h-24 w-24 overflow-hidden rounded-full bg-[#2F2F2F]')}>
             {data.imageSrc ? (
               <Image
                 src={data.imageSrc}
@@ -56,11 +56,11 @@ const MainCardModal = ({ isOpen, onClose, data }: MainCardModalProps) => {
           </div>
 
           <div className={cn('mb-2 flex items-center gap-3')}>
-            <h2 className={cn('text-[2.25rem] font-bold')}>{data.projectName}</h2>
+            <h2 className={cn('text-4xl font-bold')}>{data.projectName}</h2>
             <Like isLiked={liked} onClick={handleLikeToggle} />
           </div>
 
-          <p className={cn('text-[1.25rem] font-medium text-[#DDDDDD]')}>{data.teamName}</p>
+          <p className={cn('text-xl font-medium text-[#DDDDDD]')}>{data.teamName}</p>
         </div>
 
         <p
@@ -69,12 +69,12 @@ const MainCardModal = ({ isOpen, onClose, data }: MainCardModalProps) => {
           {data.description}
         </p>
 
-        <div className={cn('mb-12 flex gap-[0.38rem]')}>
+        <div className={cn('mb-12 flex gap-1.5')}>
           {data.tags.map((tag, index) => (
             <span
               key={`${tag}-${index}`}
               className={cn(
-                'flex h-6.5 items-center rounded-[62.5rem] bg-[#4F4F4F] px-2 text-[1rem] whitespace-nowrap text-gray-300',
+                'flex h-6 items-center rounded-full bg-[#4F4F4F] px-2 text-base whitespace-nowrap text-gray-300',
               )}
             >
               {tag}
