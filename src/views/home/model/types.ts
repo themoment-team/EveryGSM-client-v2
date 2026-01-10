@@ -13,5 +13,4 @@ export interface Project {
 
 export interface MainCardModel extends Project {
   isLiked: boolean;
-  status: ProjectStatus;
 }

@@ -14,7 +14,7 @@ interface MainCardProps {
 }
 
 const MainCard = ({ data }: MainCardProps) => {
-  const { imageSrc, projectName, teamName, description, tags, isLiked, status, deployLink } = data;
+  const { imageSrc, projectName, teamName, description, tags, isLiked, deployLink } = data;
 
   const [isCenterHover, setIsCenterHover] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,8 +23,6 @@ const MainCard = ({ data }: MainCardProps) => {
   const handleLikeToggle = () => {
     setLiked(!liked);
   };
-
-  void status;
 
   return (
     <div className="flex items-center justify-center p-4">

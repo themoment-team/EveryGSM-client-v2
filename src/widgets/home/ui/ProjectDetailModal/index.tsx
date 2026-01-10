@@ -23,9 +23,6 @@ const MainCardModal = ({ isOpen, onClose, data }: MainCardModalProps) => {
 
   if (!isOpen) return null;
 
-  // lint 에러 방지
-  void data.status;
-
   return (
     <div className={cn('fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-6')}>
       <div
