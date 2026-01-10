@@ -47,7 +47,6 @@ const MainCardModal = ({ isOpen, onClose, data }: MainCardModalProps) => {
                 fill
                 className={cn('object-cover')}
                 sizes="100px"
-                unoptimized
               />
             ) : null}
           </div>

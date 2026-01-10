@@ -104,7 +104,6 @@ const MainCard = ({ data }: MainCardProps) => {
                   fill
                   className="object-cover"
                   sizes="56px"
-                  unoptimized
                 />
               ) : null}
             </div>
