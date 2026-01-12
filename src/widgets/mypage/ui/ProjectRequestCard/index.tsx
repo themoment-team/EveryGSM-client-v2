@@ -10,7 +10,7 @@ interface ProfileCardProps {
   requestStatus: string;
 }
 
-const ProfileCard = ({
+const ProjectRequestCard = ({
   imageSrc,
   projectName,
   teamName,
@@ -54,4 +54,4 @@ const ProfileCard = ({
   );
 };
 
-export default ProfileCard;
+export default ProjectRequestCard;

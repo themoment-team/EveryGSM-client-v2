@@ -1,4 +1,4 @@
-import { ProfileCard } from '@/widgets/profilecard';
+import { ProfileCard } from '@/widgets/mypage';
 
 const Mypage = () => {
   const image =
