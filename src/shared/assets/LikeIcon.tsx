@@ -1,11 +1,11 @@
 'use client';
 
-interface LikeProps {
+interface LikeIconProps {
   isLiked: boolean;
   onClick: () => void;
 }
 
-const Like = ({ isLiked, onClick }: LikeProps) => (
+const LikeIcon = ({ isLiked, onClick }: LikeIconProps) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -26,4 +26,4 @@ const Like = ({ isLiked, onClick }: LikeProps) => (
   </svg>
 );
 
-export default Like;
+export default LikeIcon;

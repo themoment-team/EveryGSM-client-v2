@@ -1,4 +1,4 @@
-import { ProfileCard } from '@/widgets/mypage';
+import { ProjectRequestCard } from '@/entities/project';
 
 const Mypage = () => {
   const image =
@@ -12,8 +12,20 @@ const Mypage = () => {
 
   return (
     <div className="flex flex-col items-center gap-4 bg-[#191919]">
-      <ProfileCard {...profileCardProps} requestStatus="확인 중" />
-      <ProfileCard {...profileCardProps} requestStatus="거절" />
+      <ProjectRequestCard
+        projectRequest={{
+          id: 1,
+          ...profileCardProps,
+          requestStatus: '대기',
+        }}
+      />
+      <ProjectRequestCard
+        projectRequest={{
+          id: 2,
+          ...profileCardProps,
+          requestStatus: '거절',
+        }}
+      />
     </div>
   );
 };

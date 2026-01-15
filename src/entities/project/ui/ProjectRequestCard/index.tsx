@@ -1,22 +1,18 @@
+'use client';
+
 import Image from 'next/image';
 
 import { cn } from '@/shared/utils';
 
-interface ProfileCardProps {
-  imageSrc: string;
-  projectName: string;
-  teamName: string;
-  date: string;
-  requestStatus: string;
+import { ProjectRequest } from '../../model/types';
+
+interface ProjectRequestCardProps {
+  projectRequest: ProjectRequest;
 }
 
-const ProjectRequestCard = ({
-  imageSrc,
-  projectName,
-  teamName,
-  date,
-  requestStatus,
-}: ProfileCardProps) => {
+const ProjectRequestCard = ({ projectRequest }: ProjectRequestCardProps) => {
+  const { imageSrc, projectName, teamName, date, requestStatus } = projectRequest;
+
   return (
     <div
       className={cn(
