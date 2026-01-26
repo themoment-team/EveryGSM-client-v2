@@ -121,10 +121,14 @@ export const ProjectCard = ({ data, likeButton, modalLikeButton }: ProjectCardPr
       </div>
 
       {isModalOpen && (
-        <div className={cn('fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-6')}>
+        <div
+          className={cn(
+            'absolute top-0 left-0 z-50 flex h-screen w-screen items-center justify-center bg-[rgba(0,0,0,0.20)]',
+          )}
+        >
           <div
             className={cn(
-              'relative h-235.5 w-250 overflow-hidden rounded-2xl bg-[#222222]/60 p-6 text-white shadow-2xl backdrop-blur-sm',
+              'relative w-250 rounded-xl border border-[#2F2F2F] bg-[rgba(34,34,34,0.90)] p-6 backdrop-blur-sm',
             )}
           >
             <button
@@ -153,7 +157,7 @@ export const ProjectCard = ({ data, likeButton, modalLikeButton }: ProjectCardPr
               </div>
 
               <div className={cn('mb-2 flex items-center gap-3')}>
-                <h2 className={cn('text-4xl font-bold')}>{projectName}</h2>
+                <h2 className={cn('text-4xl font-bold text-white')}>{projectName}</h2>
                 {modalLikeButton}
               </div>
 
