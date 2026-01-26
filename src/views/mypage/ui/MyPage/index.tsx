@@ -1,7 +1,7 @@
 import { cn } from '@/shared/utils';
 
-const HomePage = () => {
+const MyPage = () => {
   return <div className={cn('min-h-[calc(100vh-72px)]')}></div>;
 };
 
-export default HomePage;
+export default MyPage;

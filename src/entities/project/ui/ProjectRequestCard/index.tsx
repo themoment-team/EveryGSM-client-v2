@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { cn } from '@/shared/utils';
 
-interface ProfileCardProps {
+interface ProjectRequestCardProps {
   imageSrc: string;
   projectName: string;
   teamName: string;
@@ -10,13 +10,13 @@ interface ProfileCardProps {
   requestStatus: string;
 }
 
-const ProjectRequestCard = ({
+export const ProjectRequestCard = ({
   imageSrc,
   projectName,
   teamName,
   date,
   requestStatus,
-}: ProfileCardProps) => {
+}: ProjectRequestCardProps) => {
   return (
     <div
       className={cn(
@@ -53,5 +53,3 @@ const ProjectRequestCard = ({
     </div>
   );
 };
-
-export default ProjectRequestCard;

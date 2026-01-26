@@ -4,24 +4,22 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
-import { ArrowIcon, Close, Like } from '@/shared/assets';
+import { ArrowIcon, Close } from '@/shared/assets';
 import { cn } from '@/shared/utils';
-import type { MainCardModel } from '@/views/home/model/types';
 
-interface MainCardProps {
+import type { MainCardModel } from '../../model/types';
+
+interface ProjectCardProps {
   data: MainCardModel;
+  likeButton?: React.ReactNode;
+  modalLikeButton?: React.ReactNode;
 }
 
-const MainCard = ({ data }: MainCardProps) => {
-  const { imageSrc, projectName, teamName, description, tags, isLiked, deployLink, links } = data;
+export const ProjectCard = ({ data, likeButton, modalLikeButton }: ProjectCardProps) => {
+  const { imageSrc, projectName, teamName, description, tags, deployLink, links } = data;
 
   const [isCenterHover, setIsCenterHover] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [liked, setLiked] = useState(isLiked);
-
-  const handleLikeToggle = () => {
-    setLiked(!liked);
-  };
 
   return (
     <>
@@ -52,7 +50,7 @@ const MainCard = ({ data }: MainCardProps) => {
                   />
                 ) : null}
               </div>
-              <Like isLiked={liked} onClick={handleLikeToggle} />
+              {likeButton}
             </div>
 
             <p className="mb-2 text-xl font-semibold text-white">{projectName}</p>
@@ -158,7 +156,7 @@ const MainCard = ({ data }: MainCardProps) => {
 
               <div className={cn('mb-2 flex items-center gap-3')}>
                 <h2 className={cn('text-4xl font-bold')}>{projectName}</h2>
-                <Like isLiked={liked} onClick={handleLikeToggle} />
+                {modalLikeButton}
               </div>
 
               <p className={cn('text-xl font-medium text-[#DDDDDD]')}>{teamName}</p>
@@ -221,5 +219,3 @@ const MainCard = ({ data }: MainCardProps) => {
     </>
   );
 };
-
-export default MainCard;

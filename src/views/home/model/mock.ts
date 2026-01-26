@@ -1,4 +1,4 @@
-import type { MainCardModel } from './types';
+import type { MainCardModel } from '@/entities/project';
 
 const baseMainCard: Omit<MainCardModel, 'id' | 'isLiked'> = {
   imageSrc:
