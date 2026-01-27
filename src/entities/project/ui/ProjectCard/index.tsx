@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import Image from 'next/image';
@@ -74,6 +76,7 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
             {description}
           </div>
           <div className={cn('flex h-6.5 flex-wrap gap-x-1.5 overflow-hidden')}>
+            {/* TODO: 태그가 많을 때 +n 표시 */}
             {tags.map((tag) => (
               <span
                 key={tag}
