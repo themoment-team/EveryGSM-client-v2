@@ -1,8 +1,13 @@
-import { ProjectCard, projectMockList } from '@/entities/project';
+'use client';
+
+import { ProjectCard, ProjectDetailModal, projectMockList } from '@/entities/project';
 import { LikeButton } from '@/features/like-project';
+import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
 const HomePage = () => {
+  const { openModal } = useModalStore();
+
   return (
     <div className={cn('flex min-h-[calc(100vh-72px)] gap-x-5 gap-y-4 bg-[#191919] p-4')}>
       {projectMockList.map((project) => (
@@ -10,7 +15,14 @@ const HomePage = () => {
           key={project.id}
           data={project}
           likeButton={<LikeButton isLiked={project.isLiked} projectId={project.id} />}
-          modalLikeButton={<LikeButton isLiked={project.isLiked} projectId={project.id} />}
+          onDetailClick={() =>
+            openModal(
+              <ProjectDetailModal
+                data={project}
+                modalLikeButton={<LikeButton isLiked={project.isLiked} projectId={project.id} />}
+              />,
+            )
+          }
         />
       ))}
     </div>
