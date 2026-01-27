@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import { ArrowIcon, Close } from '@/shared/assets';
+import { ArrowIcon, CloseIcon } from '@/shared/assets';
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
@@ -28,7 +28,7 @@ export const ProjectDetailModal = ({ data, modalLikeButton }: ProjectDetailModal
         onClick={closeModal}
         className={cn('absolute top-6 right-6 text-gray-400 transition-colors hover:text-white')}
       >
-        <Close />
+        <CloseIcon />
       </button>
 
       <div className={cn('mt-8 mb-10')}>

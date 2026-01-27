@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Like } from '@/shared/assets';
+import { LikeIcon } from '@/shared/assets';
 
 interface LikeButtonProps {
   isLiked: boolean;
@@ -19,5 +19,5 @@ export const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
     console.log(`Project ${projectId} liked state: ${!liked}`);
   };
 
-  return <Like isLiked={liked} onClick={handleToggle} />;
+  return <LikeIcon isLiked={liked} onClick={handleToggle} />;
 };
