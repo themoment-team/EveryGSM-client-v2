@@ -1,4 +1,4 @@
-export type ProjectStatus = 'active' | 'pending' | 'completed';
+export type RequestStatus = '승인' | '거절' | '확인 중';
 
 export interface Project {
   id: number;
@@ -13,4 +13,13 @@ export interface Project {
 
 export interface MainCardModel extends Project {
   isLiked: boolean;
+}
+
+export interface ProjectRequest {
+  id: number;
+  imageSrc: string;
+  projectName: string;
+  teamName: string;
+  date: string;
+  requestStatus: RequestStatus;
 }
