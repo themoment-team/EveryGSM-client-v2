@@ -3,7 +3,7 @@
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
-export const ModalContainer = () => {
+const ModalContainer = () => {
   const { isOpen, content, closeModal } = useModalStore();
 
   if (!isOpen || !content) return null;
@@ -24,3 +24,5 @@ export const ModalContainer = () => {
     </div>
   );
 };
+
+export default ModalContainer;
