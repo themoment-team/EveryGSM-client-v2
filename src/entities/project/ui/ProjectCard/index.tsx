@@ -23,7 +23,7 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
   return (
     <div
       className={cn(
-        'relative flex h-82.5 w-full max-w-70 flex-col justify-between rounded-xl border border-[#2F2F2F] bg-[rgba(34,34,34,0.50)] p-6 backdrop-blur-[1.125rem]',
+        'relative flex h-82.5 w-full max-w-70 flex-col justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
       )}
     >
       <div
@@ -45,7 +45,9 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
           href={deployLink}
           target="_blank"
           rel="noopener noreferrer"
-          className={cn('flex items-center gap-x-4 text-xl leading-6 font-semibold text-white')}
+          className={cn(
+            'flex cursor-pointer items-center gap-x-4 text-xl leading-6 font-semibold text-white',
+          )}
         >
           프로젝트 배포 URL 이동
           <ArrowIcon isLarge />
@@ -72,7 +74,7 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
             <h3 className={cn('text-xl leading-6 font-semibold text-white')}>{projectName}</h3>
             <p className={cn('text-sm leading-4.25 font-medium text-[#9A9A9A]')}>{teamName}</p>
           </div>
-          <div className={cn('h-9 text-xs leading-4.5 font-medium text-[#9A9A9A]')}>
+          <div className={cn('line-clamp-2 h-9 text-xs leading-4.5 font-medium text-[#9A9A9A]')}>
             {description}
           </div>
           <div className={cn('flex h-6.5 flex-wrap gap-x-1.5 overflow-hidden')}>
@@ -90,10 +92,16 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
           </div>
         </div>
       </div>
-      <div className={cn('flex justify-end px-3 py-1.5')}>
+      <div
+        className={cn(
+          'flex cursor-pointer justify-end rounded-xl px-3 py-1.5 hover:bg-[rgba(51,51,51,0.5)]',
+        )}
+        onClick={onDetailClick}
+      >
         <button
-          className={cn('flex items-center gap-x-4 text-xs leading-4.5 font-medium text-white')}
-          onClick={onDetailClick}
+          className={cn(
+            'flex cursor-pointer items-center gap-x-4 text-xs leading-4.5 font-medium text-white',
+          )}
         >
           프로젝트 상세 보기
           <ArrowIcon />
