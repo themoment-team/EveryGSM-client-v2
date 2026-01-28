@@ -10,10 +10,17 @@ export const ModalContainer = () => {
 
   return (
     <div
-      className={cn('fixed top-0 right-0 bottom-0 left-0 bg-[rgba(0,0,0,0.20)] backdrop-blur-sm')}
+      className={cn(
+        'fixed inset-0 flex items-center justify-center bg-[rgba(0,0,0,0.20)] px-4 backdrop-blur-sm',
+      )}
       onClick={closeModal}
     >
-      <div onClick={(e) => e.stopPropagation()}>{content}</div>
+      <div
+        className={cn('flex w-full items-center justify-center')}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {content}
+      </div>
     </div>
   );
 };

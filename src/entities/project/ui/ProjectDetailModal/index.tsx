@@ -20,81 +20,68 @@ export const ProjectDetailModal = ({ data, modalLikeButton }: ProjectDetailModal
   return (
     <div
       className={cn(
-        'relative w-250 rounded-xl border border-[#2F2F2F] bg-[rgba(34,34,34,0.90)] p-6 backdrop-blur-sm',
+        'flex w-full max-w-250 flex-col gap-12 rounded-xl bg-[rgba(34,34,34,0.90)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-sm',
       )}
     >
-      <button
-        type="button"
-        onClick={closeModal}
-        className={cn('absolute top-6 right-6 text-gray-400 transition-colors hover:text-white')}
-      >
-        <CloseIcon />
-      </button>
-
-      <div className={cn('mt-8 mb-10')}>
-        <div className={cn('relative mb-12 h-24 w-24 overflow-hidden rounded-full bg-[#2F2F2F]')}>
-          {imageSrc ? (
-            <Image
-              src={imageSrc}
-              alt={`${projectName ?? 'project'} thumbnail`}
-              fill
-              className={cn('object-cover')}
-              sizes="100px"
-            />
-          ) : null}
-        </div>
-
-        <div className={cn('mb-2 flex items-center gap-3')}>
-          <h2 className={cn('text-4xl font-bold text-white')}>{projectName}</h2>
+      <div className={cn('flex items-start justify-between')}>
+        <Image
+          src={imageSrc}
+          alt={projectName}
+          width={100}
+          height={100}
+          className={cn('rounded-full object-cover')}
+        />
+        <button onClick={closeModal} className={cn('cursor-pointer')}>
+          <CloseIcon />
+        </button>
+      </div>
+      <div className={cn('flex flex-col gap-y-2')}>
+        <div className={cn('flex items-center gap-x-6')}>
+          <h3 className={cn('text-4xl leading-10.75 font-bold text-white')}>{projectName}</h3>
           {modalLikeButton}
         </div>
-
-        <p className={cn('text-xl font-medium text-[#DDDDDD]')}>{teamName}</p>
+        <p className={cn('text-xl leading-6 font-medium text-[#DDDDDD]')}>{teamName}</p>
       </div>
-
-      <p className={cn('mb-4 max-w-[90%] text-[1rem] leading-relaxed font-medium text-[#DDDDDD]')}>
-        {description}
-      </p>
-
-      <div className={cn('mb-12 flex gap-1.5')}>
-        {tags.map((tag, index) => (
-          <span
-            key={`${tag}-${index}`}
-            className={cn(
-              'flex h-6 items-center rounded-full bg-[#4F4F4F] px-2 text-base whitespace-nowrap text-gray-300',
-            )}
-          >
-            {tag}
-          </span>
-        ))}
+      <div className={cn('flex flex-col gap-y-4')}>
+        <p className={cn('text-base leading-6 font-medium text-[#DDDDDD]')}>{description}</p>
+        <div className={cn('flex flex-wrap gap-x-2')}>
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              className={cn(
+                'rounded-full bg-[#4F4F4F] px-3 py-1.5 text-base leading-[1.2rem] font-normal text-[#DDDDDD]',
+              )}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
-
-      <div className={cn('mb-12 space-y-1')}>
-        {links.map((link, i) => (
+      <div>
+        {links.map((link) => (
           <a
-            key={i}
+            key={link.url}
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              'group flex items-center justify-between rounded-lg p-4 transition-all hover:bg-[#2A2A2A]',
+              'flex cursor-pointer items-center justify-between rounded-xl px-3 py-1.5 text-base leading-6 font-medium text-white duration-100 hover:bg-[#444444]',
             )}
           >
-            <span className={cn('text-[1rem] text-white')}>{link.title}</span>
+            {link.title}
             <ArrowIcon />
           </a>
         ))}
       </div>
-
       <a
         href={deployLink}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          'group flex items-center justify-between rounded-lg p-4 transition-all hover:bg-[#2A2A2A]',
+          'flex cursor-pointer items-center justify-between rounded-xl px-3 py-1.5 text-base leading-6 font-medium text-white duration-100 hover:bg-[#444444]',
         )}
       >
-        <span className={cn('text-[1rem] font-medium text-white')}>프로젝트 배포 URL 이동</span>
+        배포링크 URL 이동
         <ArrowIcon />
       </a>
     </div>
