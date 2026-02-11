@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 
-import { LikeIcon } from '@/shared/assets';
 import { toggleProjectLike } from '@/entities/project';
+import { LikeIcon } from '@/shared/assets';
 
 interface LikeButtonProps {
   isLiked: boolean;
@@ -11,11 +11,7 @@ interface LikeButtonProps {
   onSuccess: () => void;
 }
 
-export const LikeButton = ({
-  isLiked,
-  projectId,
-  onSuccess,
-}: LikeButtonProps) => {
+export const LikeButton = ({ isLiked, projectId, onSuccess }: LikeButtonProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleToggle = async () => {
@@ -44,10 +40,5 @@ export const LikeButton = ({
     }
   };
 
-  return (
-    <LikeIcon
-      isLiked={isLiked}
-      onClick={handleToggle}
-    />
-  );
+  return <LikeIcon isLiked={isLiked} onClick={handleToggle} />;
 };

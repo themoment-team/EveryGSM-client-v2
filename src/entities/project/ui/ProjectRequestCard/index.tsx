@@ -1,21 +1,14 @@
 import Image from 'next/image';
 
+import type { ProjectApiResponse } from '@/entities/project/model/api.types';
 import { cn } from '@/shared/utils';
-
-import type { ProjectApiResponse } from '@/entities/project/model/api.types'; 
 
 interface ProjectRequestCardProps {
   data: ProjectApiResponse;
 }
 
 export const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
-  const {
-    logo,
-    title,
-    affiliation,
-    createdAt,
-    status,
-  } = data;
+  const { logo, title, affiliation, createdAt, status } = data;
 
   return (
     <div
@@ -32,19 +25,13 @@ export const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
           className={cn('rounded-full object-cover')}
         />
         <div className={cn('flex flex-col gap-y-2')}>
-          <h3 className={cn('text-xl leading-6 font-semibold text-white')}>
-            {title}
-          </h3>
-          <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>
-            {affiliation}
-          </p>
+          <h3 className={cn('text-xl leading-6 font-semibold text-white')}>{title}</h3>
+          <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{affiliation}</p>
         </div>
       </div>
 
       <div className={cn('flex items-center gap-x-4')}>
-        <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>
-          {createdAt}
-        </p>
+        <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{createdAt}</p>
         <p className={cn('text-xl leading-6 font-semibold')}>
           <span className={cn('text-white')}>요청 상태: </span>
           <span className={cn(status === '거절' ? 'text-[#FF7C7C]' : 'text-[#888888]')}>

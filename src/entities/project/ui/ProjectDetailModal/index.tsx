@@ -2,11 +2,10 @@
 
 import Image from 'next/image';
 
+import type { ProjectApiResponse } from '@/entities/project/model/api.types';
 import { ArrowIcon, CloseIcon } from '@/shared/assets';
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
-
-import type { ProjectApiResponse } from '@/entities/project/model/api.types'; 
 
 interface ProjectDetailModalProps {
   data: ProjectApiResponse;
@@ -14,15 +13,7 @@ interface ProjectDetailModalProps {
 }
 
 export const ProjectDetailModal = ({ data, modalLikeButton }: ProjectDetailModalProps) => {
-  const {
-    logo,
-    title,
-    affiliation,
-    description,
-    techStack,
-    prodUrl,
-    repository,
-  } = data;
+  const { logo, title, affiliation, description, techStack, prodUrl, repository } = data;
 
   const { closeModal } = useModalStore();
 
@@ -46,19 +37,13 @@ export const ProjectDetailModal = ({ data, modalLikeButton }: ProjectDetailModal
       </div>
       <div className={cn('flex flex-col gap-y-2')}>
         <div className={cn('flex items-center gap-x-6')}>
-          <h3 className={cn('text-4xl leading-10.75 font-bold text-white')}>
-            {title}
-          </h3>
+          <h3 className={cn('text-4xl leading-10.75 font-bold text-white')}>{title}</h3>
           {modalLikeButton}
         </div>
-        <p className={cn('text-xl leading-6 font-medium text-[#DDDDDD]')}>
-          {affiliation}
-        </p>
+        <p className={cn('text-xl leading-6 font-medium text-[#DDDDDD]')}>{affiliation}</p>
       </div>
       <div className={cn('flex flex-col gap-y-4')}>
-        <p className={cn('text-base leading-6 font-medium text-[#DDDDDD]')}>
-          {description}
-        </p>
+        <p className={cn('text-base leading-6 font-medium text-[#DDDDDD]')}>{description}</p>
         <div className={cn('flex flex-wrap gap-x-2')}>
           {techStack.map((stack) => (
             <span

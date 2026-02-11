@@ -4,10 +4,9 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
+import type { ProjectApiResponse } from '@/entities/project/model/api.types';
 import { ArrowIcon } from '@/shared/assets';
 import { cn } from '@/shared/utils';
-
-import type { ProjectApiResponse } from '@/entities/project/model/api.types'; 
 
 interface ProjectCardProps {
   data: ProjectApiResponse;
@@ -16,14 +15,7 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProps) => {
-  const {
-    logo,
-    title,
-    affiliation,
-    description,
-    techStack,
-    prodUrl,
-  } = data;
+  const { logo, title, affiliation, description, techStack, prodUrl } = data;
 
   const [isCenterHover, setIsCenterHover] = useState(false);
 
@@ -60,7 +52,7 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
           <ArrowIcon isLarge />
         </a>
       </div>
-    
+
       <div>
         <div className={cn('mb-4 flex justify-between')}>
           <Image
@@ -78,12 +70,8 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
           className={cn('flex flex-col gap-y-4')}
         >
           <div className={cn('flex flex-col gap-y-2')}>
-            <h3 className={cn('text-xl leading-6 font-semibold text-white')}>
-              {title}
-            </h3>
-            <p className={cn('text-sm leading-4.25 font-medium text-[#9A9A9A]')}>
-              {affiliation}
-            </p>
+            <h3 className={cn('text-xl leading-6 font-semibold text-white')}>{title}</h3>
+            <p className={cn('text-sm leading-4.25 font-medium text-[#9A9A9A]')}>{affiliation}</p>
           </div>
           <div className={cn('line-clamp-2 h-9 text-xs leading-4.5 font-medium text-[#9A9A9A]')}>
             {description}

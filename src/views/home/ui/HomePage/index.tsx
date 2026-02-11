@@ -1,27 +1,30 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ProjectCard, ProjectDetailModal, getProjects } from '@/entities/project';
+import type { ProjectApiResponse } from '@/entities/project/model/api.types';
 import { LikeButton } from '@/features/like-project';
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
-
-import type { ProjectApiResponse } from '@/entities/project/model/api.types'; 
 
 const HomePage = () => {
   const { openModal } = useModalStore();
 
   const [projects, setProjects] = useState<ProjectApiResponse[]>([]);
 
-  const fetchProjects = useCallback(async () => {
-    const res = await getProjects();
-    setProjects(res.projects);
-  }, []);
+  const fetchProjects = async () => {
+    try {
+      const res = await getProjects();
+      setProjects(res.projects);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     fetchProjects();
-  }, [fetchProjects]);
+  }, []);
 
   return (
     <main className="min-h-[calc(100vh-72px)] bg-[#191919]">
@@ -37,7 +40,7 @@ const HomePage = () => {
         <section className="mb-12">
           <p
             className={cn(
-              'mb-6 font-bold leading-tight text-white',
+              'mb-6 leading-tight font-bold text-white',
               'text-xl',
               'sm:text-2xl',
               'lg:text-[2.25rem]',

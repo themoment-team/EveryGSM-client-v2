@@ -1,2 +1,2 @@
 export { getProjects } from './getProjects';
-export {toggleProjectLike} from './toggleProjectLike';
+export { toggleProjectLike } from './toggleProjectLike';
