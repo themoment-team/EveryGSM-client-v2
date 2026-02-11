@@ -23,7 +23,9 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    fetchProjects();
+    (async () => {
+      await fetchProjects();
+    })();
   }, []);
 
   return (
