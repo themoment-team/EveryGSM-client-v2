@@ -1,12 +1,27 @@
 'use client';
 
-import { ProjectCard, ProjectDetailModal, projectMockList } from '@/entities/project';
+import { useEffect, useState, useCallback } from 'react';
+
+import { ProjectCard, ProjectDetailModal, getProjects } from '@/entities/project';
 import { LikeButton } from '@/features/like-project';
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
+import type { ProjectApiResponse } from '@/entities/project/model/api.types'; 
+
 const HomePage = () => {
   const { openModal } = useModalStore();
+
+  const [projects, setProjects] = useState<ProjectApiResponse[]>([]);
+
+  const fetchProjects = useCallback(async () => {
+    const res = await getProjects();
+    setProjects(res.projects);
+  }, []);
+
+  useEffect(() => {
+    fetchProjects();
+  }, [fetchProjects]);
 
   return (
     <main className="min-h-[calc(100vh-72px)] bg-[#191919]">
@@ -47,23 +62,35 @@ const HomePage = () => {
         </section>
 
         <section
-        className={cn(
-         'grid grid-cols-1 gap-x-5 gap-y-4',
-         'sm:grid-cols-2',
-         'lg:grid-cols-3',
-         'xl:grid-cols-4',
-           )}
+          className={cn(
+            'grid grid-cols-1 gap-x-5 gap-y-4',
+            'sm:grid-cols-2',
+            'lg:grid-cols-3',
+            'xl:grid-cols-4',
+          )}
         >
-          {projectMockList.map((project) => (
+          {projects.map((project) => (
             <ProjectCard
-              key={project.id}
+              key={project.projectId}
               data={project}
-              likeButton={<LikeButton isLiked={project.isLiked} projectId={project.id} />}
+              likeButton={
+                <LikeButton
+                  isLiked={project.liked}
+                  projectId={project.projectId}
+                  onSuccess={fetchProjects}
+                />
+              }
               onDetailClick={() =>
                 openModal(
                   <ProjectDetailModal
                     data={project}
-                modalLikeButton={<LikeButton isLiked={project.isLiked} projectId={project.id} />}
+                    modalLikeButton={
+                      <LikeButton
+                        isLiked={project.liked}
+                        projectId={project.projectId}
+                        onSuccess={fetchProjects}
+                      />
+                    }
                   />,
                 )
               }
