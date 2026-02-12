@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 
 import { toggleProjectLike } from '@/entities/project';
-import { LikeIcon } from '@/shared/assets';
 import type { ProjectApiResponse } from '@/entities/project/model/api.types';
+import { LikeIcon } from '@/shared/assets';
 
 interface LikeButtonProps {
   isLiked: boolean;

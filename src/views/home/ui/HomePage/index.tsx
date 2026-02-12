@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { ProjectCard, ProjectDetailModal, getProjects } from '@/entities/project';
 import type { ProjectApiResponse } from '@/entities/project/model/api.types';
@@ -23,13 +23,12 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     void fetchProjects();
   }, [fetchProjects]);
 
   const handleLikeSuccess = useCallback((updated: ProjectApiResponse) => {
-    setProjects((prev) =>
-      prev.map((p) => (p.projectId === updated.projectId ? updated : p)),
-    );
+    setProjects((prev) => prev.map((p) => (p.projectId === updated.projectId ? updated : p)));
   }, []);
 
   const openProjectModal = useCallback(
