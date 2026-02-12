@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { ProjectCard, ProjectDetailModal, getProjects } from '@/entities/project';
 import type { ProjectApiResponse } from '@/entities/project/model/api.types';
@@ -13,20 +13,45 @@ const HomePage = () => {
 
   const [projects, setProjects] = useState<ProjectApiResponse[]>([]);
 
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       const res = await getProjects();
       setProjects(res.projects);
     } catch (error) {
       console.error(error);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    (async () => {
-      await fetchProjects();
-    })();
+    void fetchProjects();
+  }, [fetchProjects]);
+
+  const handleLikeSuccess = useCallback((updated: ProjectApiResponse) => {
+    setProjects((prev) =>
+      prev.map((p) => (p.projectId === updated.projectId ? updated : p)),
+    );
   }, []);
+
+  const openProjectModal = useCallback(
+    (projectId: number) => {
+      const current = projects.find((p) => p.projectId === projectId);
+      if (!current) return;
+
+      openModal(
+        <ProjectDetailModal
+          data={current}
+          modalLikeButton={
+            <LikeButton
+              isLiked={current.liked}
+              projectId={current.projectId}
+              onSuccess={handleLikeSuccess}
+            />
+          }
+        />,
+      );
+    },
+    [openModal, projects, handleLikeSuccess],
+  );
 
   return (
     <main className="min-h-[calc(100vh-72px)] bg-[#191919]">
@@ -82,23 +107,10 @@ const HomePage = () => {
                 <LikeButton
                   isLiked={project.liked}
                   projectId={project.projectId}
-                  onSuccess={fetchProjects}
+                  onSuccess={handleLikeSuccess}
                 />
               }
-              onDetailClick={() =>
-                openModal(
-                  <ProjectDetailModal
-                    data={project}
-                    modalLikeButton={
-                      <LikeButton
-                        isLiked={project.liked}
-                        projectId={project.projectId}
-                        onSuccess={fetchProjects}
-                      />
-                    }
-                  />,
-                )
-              }
+              onDetailClick={() => openProjectModal(project.projectId)}
             />
           ))}
         </section>
