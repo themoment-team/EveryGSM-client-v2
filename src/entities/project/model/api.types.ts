@@ -13,6 +13,7 @@ export interface ProjectApiResponse {
   }[];
   repository: {
     repoUrl: string;
+    repoName: string;
   }[];
   liked: boolean;
 }
