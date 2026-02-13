@@ -1,1 +1,1 @@
-export * from './likeProject/ui';
+export * from './likeProject';
