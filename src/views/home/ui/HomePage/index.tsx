@@ -1,6 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
+
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { ProjectCard, ProjectDetailModal, getProjects } from '@/entities/project';
 import type { ProjectType } from '@/entities/project/model/types';
@@ -10,26 +12,21 @@ import { cn } from '@/shared/utils';
 
 const HomePage = () => {
   const { openModal } = useModalStore();
+  const queryClient = useQueryClient();
 
-  const [projects, setProjects] = useState<ProjectType[]>([]);
+  const { data: projects = [] } = useQuery({
+    queryKey: ['projects'],
+    queryFn: () => getProjects().then((res) => res.projects),
+  });
 
-  const fetchProjects = useCallback(async () => {
-    try {
-      const res = await getProjects();
-      setProjects(res.projects);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    void fetchProjects();
-  }, [fetchProjects]);
-
-  const handleLikeSuccess = useCallback((updated: ProjectType) => {
-    setProjects((prev) => prev.map((p) => (p.projectId === updated.projectId ? updated : p)));
-  }, []);
+  const handleLikeSuccess = useCallback(
+    (updated: ProjectType) => {
+      queryClient.setQueryData(['projects'], (old: ProjectType[] = []) =>
+        old.map((p) => (p.projectId === updated.projectId ? updated : p)),
+      );
+    },
+    [queryClient],
+  );
 
   const openProjectModal = useCallback(
     (projectId: number) => {
