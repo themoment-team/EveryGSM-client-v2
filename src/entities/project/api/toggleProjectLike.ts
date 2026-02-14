@@ -1,7 +1,7 @@
 import { post } from '@/shared/api/http';
 
-import type { ProjectApiResponse } from '../model/api.types';
+import type { ProjectType } from '../model/types';
 
 export const toggleProjectLike = (projectId: number) => {
-  return post<ProjectApiResponse>(`/v1/projects/like/${projectId}`);
+  return post<ProjectType>(`/v1/projects/like/${projectId}`);
 };

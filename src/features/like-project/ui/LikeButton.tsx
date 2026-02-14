@@ -3,13 +3,13 @@
 import { useEffect, useState } from 'react';
 
 import { toggleProjectLike } from '@/entities/project';
-import type { ProjectApiResponse } from '@/entities/project/model/api.types';
+import type { ProjectType } from '@/entities/project/model/types';
 import { LikeIcon } from '@/shared/assets';
 
 interface LikeButtonProps {
   isLiked: boolean;
   projectId: number;
-  onSuccess: (updated: ProjectApiResponse) => void;
+  onSuccess: (updated: ProjectType) => void;
 }
 
 export const LikeButton = ({ isLiked, projectId, onSuccess }: LikeButtonProps) => {

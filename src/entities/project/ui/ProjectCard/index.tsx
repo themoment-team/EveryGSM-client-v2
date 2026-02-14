@@ -4,12 +4,12 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
-import type { ProjectApiResponse } from '@/entities/project/model/api.types';
+import type { ProjectType } from '@/entities/project/model/types';
 import { ArrowIcon } from '@/shared/assets';
 import { cn } from '@/shared/utils';
 
 interface ProjectCardProps {
-  data: ProjectApiResponse;
+  data: ProjectType;
   likeButton?: React.ReactNode;
   onDetailClick?: () => void;
 }

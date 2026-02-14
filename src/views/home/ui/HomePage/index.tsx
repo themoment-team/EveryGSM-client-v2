@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { ProjectCard, ProjectDetailModal, getProjects } from '@/entities/project';
-import type { ProjectApiResponse } from '@/entities/project/model/api.types';
+import type { ProjectType } from '@/entities/project/model/types';
 import { LikeButton } from '@/features/like-project';
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
@@ -11,7 +11,7 @@ import { cn } from '@/shared/utils';
 const HomePage = () => {
   const { openModal } = useModalStore();
 
-  const [projects, setProjects] = useState<ProjectApiResponse[]>([]);
+  const [projects, setProjects] = useState<ProjectType[]>([]);
 
   const fetchProjects = useCallback(async () => {
     try {
@@ -27,7 +27,7 @@ const HomePage = () => {
     void fetchProjects();
   }, [fetchProjects]);
 
-  const handleLikeSuccess = useCallback((updated: ProjectApiResponse) => {
+  const handleLikeSuccess = useCallback((updated: ProjectType) => {
     setProjects((prev) => prev.map((p) => (p.projectId === updated.projectId ? updated : p)));
   }, []);
 

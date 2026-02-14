@@ -1,7 +1,7 @@
 import { get } from '@/shared/api/http';
 
-import { GetProjectsResponse } from '../model/api.types';
+import { GetProjectsResponseType } from '../model/types';
 
-export const getProjects = async (): Promise<GetProjectsResponse> => {
-  return get<GetProjectsResponse>('/v1/projects');
+export const getProjects = async (): Promise<GetProjectsResponseType> => {
+  return get<GetProjectsResponseType>('/v1/projects');
 };

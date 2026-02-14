@@ -2,13 +2,13 @@
 
 import Image from 'next/image';
 
-import type { ProjectApiResponse } from '@/entities/project/model/api.types';
+import type { ProjectType } from '@/entities/project/model/types';
 import { ArrowIcon, CloseIcon } from '@/shared/assets';
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
 interface ProjectDetailModalProps {
-  data: ProjectApiResponse;
+  data: ProjectType;
   modalLikeButton?: React.ReactNode;
 }
 
