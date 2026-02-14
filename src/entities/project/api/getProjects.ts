@@ -1,5 +1,5 @@
-import { get } from '@/shared/api/http';
 import { API_URLS } from '@/shared/api/apiUrls';
+import { get } from '@/shared/api/http';
 
 import { GetProjectsResponseType } from '../model/types';
 
