@@ -1,5 +1,5 @@
 import { cn } from '@/shared/utils';
-import { LikeProjects, RegisteredProjects } from '@/widgets/mypage';
+import { LikeProjects, RegisteredProjects, RequestedProjects } from '@/widgets/mypage';
 
 const MyPage = () => {
   return (
@@ -10,6 +10,7 @@ const MyPage = () => {
     >
       <LikeProjects />
       <RegisteredProjects />
+      <RequestedProjects />
     </div>
   );
 };
