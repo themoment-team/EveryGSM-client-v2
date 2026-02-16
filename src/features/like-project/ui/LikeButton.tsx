@@ -1,23 +1,50 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useMutation } from '@tanstack/react-query';
+
+import { toggleProjectLike } from '@/entities/project';
+import type { ProjectType } from '@/entities/project/model/types';
 import { LikeIcon } from '@/shared/assets';
 
 interface LikeButtonProps {
   isLiked: boolean;
   projectId: number;
+  onSuccess: (updated: ProjectType) => void;
 }
 
-export const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
-  const [liked, setLiked] = useState(isLiked);
+export const LikeButton = ({ isLiked, projectId, onSuccess }: LikeButtonProps) => {
+  const [localIsLiked, setLocalIsLiked] = useState(isLiked);
+
+  useEffect(() => {
+    setLocalIsLiked(isLiked);
+  }, [isLiked]);
+
+  const mutation = useMutation({
+    mutationFn: () => toggleProjectLike(projectId),
+    onSuccess: (data) => {
+      setLocalIsLiked(data.liked);
+      onSuccess(data);
+    },
+    onError: (error) => {
+      console.error(error);
+      alert('좋아요 처리 중 오류가 발생했습니다.');
+      setLocalIsLiked(isLiked);
+    },
+  });
 
   const handleToggle = () => {
-    // 여기에 나중에 API 호출 로직을 넣을 수 있습니다.
-    // 지금은 사용자 피드백대로 아주 쉬운 로직으로 유지합니다.
-    setLiked(!liked);
-    console.log(`Project ${projectId} liked state: ${!liked}`);
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      alert('로그인을 진행해주세요.');
+      return;
+    }
+
+    if (!mutation.isPending) {
+      mutation.mutate();
+    }
   };
 
-  return <LikeIcon isLiked={liked} onClick={handleToggle} />;
+  return <LikeIcon isLiked={localIsLiked} onClick={handleToggle} />;
 };

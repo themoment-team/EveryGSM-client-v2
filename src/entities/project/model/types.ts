@@ -1,17 +1,17 @@
-export type RequestStatus = '승인' | '거절' | '확인 중';
+export interface LinkType {
+  title: string;
+  url: string;
+}
 
-export interface Project {
+export interface MainCardModel {
   id: number;
   imageSrc: string;
   projectName: string;
   teamName: string;
   description: string;
   tags: string[];
-  links: { title: string; url: string }[];
+  links: LinkType[];
   deployLink: string;
-}
-
-export interface MainCardModel extends Project {
   isLiked: boolean;
 }
 
@@ -21,5 +21,33 @@ export interface ProjectRequest {
   projectName: string;
   teamName: string;
   date: string;
-  requestStatus: RequestStatus;
+  requestStatus: string;
+}
+
+export interface TechStackType {
+  stackName: string;
+}
+
+export interface RepositoryType {
+  repoUrl: string;
+  repoName: string;
+}
+
+export interface ProjectType {
+  projectId: number;
+  logo: string;
+  title: string;
+  affiliation: string;
+  description: string;
+  prodUrl: string;
+  status: string;
+  reason: string;
+  createdAt: string;
+  techStack: TechStackType[];
+  repository: RepositoryType[];
+  liked: boolean;
+}
+
+export interface GetProjectsResponseType {
+  projects: ProjectType[];
 }
