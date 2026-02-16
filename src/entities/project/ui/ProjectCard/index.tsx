@@ -4,26 +4,25 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
+import type { ProjectType } from '@/entities/project/model/types';
 import { ArrowIcon } from '@/shared/assets';
 import { cn } from '@/shared/utils';
 
-import type { MainCardModel } from '../../model/types';
-
 interface ProjectCardProps {
-  data: MainCardModel;
+  data: ProjectType;
   likeButton?: React.ReactNode;
   onDetailClick?: () => void;
 }
 
 export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProps) => {
-  const { imageSrc, projectName, teamName, description, tags, deployLink } = data;
+  const { logo, title, affiliation, description, techStack, prodUrl } = data;
 
   const [isCenterHover, setIsCenterHover] = useState(false);
 
   return (
     <div
       className={cn(
-        'relative flex h-82.5 w-full max-w-70 flex-col justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
+        'relative flex h-82.5 w-full flex-col justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
       )}
     >
       <div
@@ -35,14 +34,14 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
         )}
       >
         <Image
-          src={imageSrc}
-          alt={projectName}
+          src={logo}
+          alt={title}
           width={56}
           height={56}
           className={cn('rounded-full object-cover')}
         />
         <a
-          href={deployLink}
+          href={prodUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -57,8 +56,8 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
       <div>
         <div className={cn('mb-4 flex justify-between')}>
           <Image
-            src={imageSrc}
-            alt={projectName}
+            src={logo}
+            alt={title}
             width={56}
             height={56}
             className={cn('rounded-full object-cover')}
@@ -71,22 +70,21 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
           className={cn('flex flex-col gap-y-4')}
         >
           <div className={cn('flex flex-col gap-y-2')}>
-            <h3 className={cn('text-xl leading-6 font-semibold text-white')}>{projectName}</h3>
-            <p className={cn('text-sm leading-4.25 font-medium text-[#9A9A9A]')}>{teamName}</p>
+            <h3 className={cn('text-xl leading-6 font-semibold text-white')}>{title}</h3>
+            <p className={cn('text-sm leading-4.25 font-medium text-[#9A9A9A]')}>{affiliation}</p>
           </div>
           <div className={cn('line-clamp-2 h-9 text-xs leading-4.5 font-medium text-[#9A9A9A]')}>
             {description}
           </div>
           <div className={cn('flex h-6.5 flex-wrap gap-x-1.5 overflow-hidden')}>
-            {/* TODO: 태그가 많을 때 +n 표시 */}
-            {tags.map((tag) => (
+            {techStack.map((stack) => (
               <span
-                key={tag}
+                key={stack.stackName}
                 className={cn(
                   'rounded-full bg-[#4F4F4F] px-2 py-1.5 text-xs leading-[.9rem] font-medium text-white',
                 )}
               >
-                {tag}
+                {stack.stackName}
               </span>
             ))}
           </div>
