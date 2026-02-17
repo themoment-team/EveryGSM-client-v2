@@ -1,6 +1,6 @@
+import { ProjectType } from '@/entities/project';
+
 export interface GetMyResponse {
-  id: number;
-  name: string;
-  email: string;
-  profileImage: string;
+  liked: ProjectType[];
+  registered: ProjectType[];
 }
