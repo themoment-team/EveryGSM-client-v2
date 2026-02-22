@@ -8,7 +8,7 @@ interface ProjectRequestCardProps {
   data: ProjectRequest;
 }
 
-export const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
+const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
   const { imageSrc, projectName, teamName, date, requestStatus } = data;
 
   return (
@@ -42,3 +42,5 @@ export const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
     </div>
   );
 };
+
+export default ProjectRequestCard;

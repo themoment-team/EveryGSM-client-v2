@@ -14,7 +14,7 @@ interface ProjectCardProps {
   onDetailClick?: () => void;
 }
 
-export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProps) => {
+const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProps) => {
   const { logo, title, affiliation, description, techStack, prodUrl } = data;
 
   const [isCenterHover, setIsCenterHover] = useState(false);
@@ -108,3 +108,5 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
     </div>
   );
 };
+
+export default ProjectCard;
