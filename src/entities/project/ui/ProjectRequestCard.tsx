@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { cn } from '@/shared/utils';
 
-import type { ProjectRequest } from '../../model/types';
+import type { ProjectRequest } from '../model/types';
 
 interface ProjectRequestCardProps {
   data: ProjectRequest;
