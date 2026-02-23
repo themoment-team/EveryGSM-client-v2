@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 
+import { useQueryClient } from '@tanstack/react-query';
+
+import { GetProjectsResponseType } from '@/entities/project';
+import { projectQueryKeys } from '@/shared/api';
 import { LikeIcon } from '@/shared/assets';
 
 import { useToggleProjectLike } from '../model/useToggleProjectLike';
@@ -13,11 +17,23 @@ interface LikeButtonProps {
 
 const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
   const [localIsLiked, setLocalIsLiked] = useState(isLiked);
+  const queryClient = useQueryClient();
   const isLoggedIn = false; // TODO: 인증 기능 개발 후 실제 로그인 상태로 대체
 
   const { mutate: toggleLike } = useToggleProjectLike(projectId, {
     onMutate: () => setLocalIsLiked((prev) => !prev), // 낙관적 업데이트: 좋아요 상태를 즉시 반전
     onError: () => setLocalIsLiked(isLiked), // 에러 발생 시 원래 상태로 롤백
+    onSuccess: (_, currentIsLiked) => {
+      queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getProjects(), (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          projects: old.projects.map((p) =>
+            p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
+          ),
+        };
+      });
+    },
   });
 
   const handleClick = () => {
