@@ -22,13 +22,15 @@ export const getProjects = async (): Promise<GetProjectsResponseType | undefined
     });
 
     if (!response.ok) {
+      console.error(`[getProjects] HTTP 오류: ${response.status} ${response.statusText}`);
       return undefined;
     }
 
     const projectsData = await response.json();
 
     return projectsData;
-  } catch {
+  } catch (error) {
+    console.error('[getProjects] 프로젝트 목록 조회 실패:', error);
     return undefined;
   }
 };
