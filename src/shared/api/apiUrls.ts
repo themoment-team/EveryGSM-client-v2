@@ -5,6 +5,7 @@ export const adminUrl = {
 } as const;
 
 export const projectUrl = {
+  deleteProjectLike: (projectId: number) => `/api/v2/projects/like/${projectId}`,
   getProjects: () => '/api/v2/projects',
   getMyProjects: () => '/api/v2/projects/my',
   getMyRejectedProjects: () => '/api/v2/projects/my/rejected',

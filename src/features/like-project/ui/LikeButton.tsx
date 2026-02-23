@@ -25,7 +25,7 @@ const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
       console.log('로그인이 필요한 기능입니다.'); // TODO: 로그인 모달 열기, 토스트 등 실제 로그인 유도 UI로 대체
       return;
     }
-    toggleLike();
+    toggleLike(localIsLiked);
   };
 
   return <LikeIcon isLiked={localIsLiked} onClick={handleClick} />;

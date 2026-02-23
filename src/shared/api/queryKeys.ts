@@ -5,7 +5,7 @@ export const projectQueryKeys = {
   getMyRejectedProjects: () => ['projects', 'my', 'rejected'] as const,
   getMyPendingProjects: () => ['projects', 'my', 'pending'] as const,
   postProjectRegistration: () => ['projects', 'create'] as const,
-  postProjectLike: (projectId: number) => ['projects', 'like', projectId] as const,
+  toggleProjectLike: (projectId: number) => ['projects', 'like', 'toggle', projectId] as const,
 } as const;
 
 export const adminQueryKeys = {

@@ -2,14 +2,20 @@ import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 
 import { ProjectType } from '@/entities/project';
-import { post, projectQueryKeys, projectUrl } from '@/shared/api';
+import { del, post, projectQueryKeys, projectUrl } from '@/shared/api';
 
 export const useToggleProjectLike = (
   projectId: number,
-  options?: Omit<UseMutationOptions<ProjectType, AxiosError, void>, 'mutationKey' | 'mutationFn'>,
+  options?: Omit<
+    UseMutationOptions<ProjectType, AxiosError, boolean>,
+    'mutationKey' | 'mutationFn'
+  >,
 ) =>
   useMutation({
-    mutationKey: projectQueryKeys.postProjectLike(projectId),
-    mutationFn: () => post<ProjectType>(projectUrl.postProjectLike(projectId)),
+    mutationKey: projectQueryKeys.toggleProjectLike(projectId),
+    mutationFn: (isLiked: boolean) =>
+      isLiked
+        ? del<ProjectType>(projectUrl.deleteProjectLike(projectId))
+        : post<ProjectType>(projectUrl.postProjectLike(projectId)),
     ...options,
   });
