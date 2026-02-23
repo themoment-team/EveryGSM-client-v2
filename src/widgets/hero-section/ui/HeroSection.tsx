@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 const HeroSection = ({ title, description }: HeroSectionProps) => {
   return (
-    <div className={cn('flex flex-col gap-6')}>
+    <div className={cn('mx-auto flex w-full max-w-295 flex-col gap-6')}>
       <h1
         className={cn(
           'text-4xl leading-[2.7rem] font-bold tracking-[-0.045rem] whitespace-pre-line text-white',
