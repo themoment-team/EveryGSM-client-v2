@@ -16,7 +16,7 @@ export const getProjects = async (): Promise<GetProjectsResponseType | undefined
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
+        ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
       },
       cache: 'no-store',
     });
