@@ -1,4 +1,3 @@
-// export * from './api/getProjects';
 export * from './model/mock';
 export * from './model/types';
 export * from './model/useGetProjects';
