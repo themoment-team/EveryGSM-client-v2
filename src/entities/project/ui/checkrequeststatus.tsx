@@ -17,7 +17,8 @@ const CheckRequestStatus = () => {
             setStatus('rejected');
           }}
           className={cn(
-            'flex cursor-pointer items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
+            'flex cursor-pointer items-center rounded-[62.5rem] px-4 py-2 text-base font-medium',
+            status === 'rejected' ? 'bg-[#333333]' : 'text-[#B0B0B0]',
           )}
         >
           요청상태:&nbsp;<span className={cn('text-[#FF7C7C]')}>거절</span>
@@ -27,7 +28,8 @@ const CheckRequestStatus = () => {
             setStatus('pending');
           }}
           className={cn(
-            'flex cursor-pointer items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
+            'flex cursor-pointer items-center rounded-[62.5rem] px-4 py-2 text-base font-medium',
+            status === 'pending' ? 'bg-[#333333]' : 'text-[#B0B0B0]',
           )}
         >
           요청상태:&nbsp;<span>확인 중</span>
