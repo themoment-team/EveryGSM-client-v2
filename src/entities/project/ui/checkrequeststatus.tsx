@@ -1,6 +1,14 @@
+'use client';
+
+import React from 'react';
+
 import { cn } from '@/shared/utils';
 
-const checkRequestStatus = () => {
+import type { CheckRequestStatusType } from '../model/types';
+
+const CheckRequestStatus = () => {
+  const [status, setStatus] = React.useState<CheckRequestStatusType>('pending');
+
   return (
     <div>
       <div className={cn('flex gap-6')}>
@@ -23,4 +31,4 @@ const checkRequestStatus = () => {
   );
 };
 
-export default checkRequestStatus;
+export default CheckRequestStatus;
