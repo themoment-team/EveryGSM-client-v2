@@ -13,6 +13,9 @@ const CheckRequestStatus = () => {
     <div>
       <div className={cn('flex gap-6')}>
         <button
+          onClick={() => {
+            setStatus('rejected');
+          }}
           className={cn(
             'flex cursor-pointer items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
           )}
@@ -20,6 +23,9 @@ const CheckRequestStatus = () => {
           요청상태:&nbsp;<span className={cn('text-[#FF7C7C]')}>거절</span>
         </button>
         <button
+          onClick={() => {
+            setStatus('pending');
+          }}
           className={cn(
             'flex cursor-pointer items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
           )}
