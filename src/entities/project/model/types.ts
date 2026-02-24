@@ -15,15 +15,6 @@ export interface MainCardModel {
   isLiked: boolean;
 }
 
-export interface ProjectRequest {
-  id: number;
-  imageSrc: string;
-  projectName: string;
-  teamName: string;
-  date: string;
-  requestStatus: string;
-}
-
 export interface TechStackType {
   stackName: string;
 }
