@@ -11,6 +11,14 @@ interface ProjectRequestCardProps {
 export const ProjectRequestCard = ({ data, requestStatus }: ProjectRequestCardProps) => {
   const { logo, title, affiliation, createdAt } = data;
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year} - ${month} - ${day}`;
+  };
+
   return (
     <div
       className={cn(
@@ -31,11 +39,11 @@ export const ProjectRequestCard = ({ data, requestStatus }: ProjectRequestCardPr
         </div>
       </div>
       <div className={cn('flex items-center gap-x-4')}>
-        <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{createdAt}</p>
+        <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{formatDate(createdAt)}</p>
         <p className={cn('text-xl leading-6 font-semibold')}>
           <span className={cn('text-white')}>요청 상태: </span>
           <span className={cn(requestStatus === 'rejected' ? 'text-[#FF7C7C]' : 'text-[#888888]')}>
-            {requestStatus}
+            {requestStatus === 'rejected' ? '거절' : '확인 중'}
           </span>
         </p>
       </div>
