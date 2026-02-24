@@ -8,20 +8,20 @@ const RequestedProjects = () => {
           <span className={cn('text-[#FC335A]')}>김유찬</span> 님이 등록 요청한 프로젝트
         </div>
         <div className={cn('flex gap-6')}>
-          <div
+          <button
             className={cn(
-              'flex items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
+              'flex cursor-pointer items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
             )}
           >
             요청상태:&nbsp;<span className={cn('text-[#FF7C7C]')}>거절</span>
-          </div>
-          <div
+          </button>
+          <button
             className={cn(
-              'flex items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
+              'flex cursor-pointer items-center rounded-[62.5rem] bg-[#333333] px-4 py-2 text-base font-medium',
             )}
           >
             요청상태:&nbsp;<span>확인 중</span>
-          </div>
+          </button>
         </div>
       </div>
     </div>
