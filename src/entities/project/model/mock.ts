@@ -1,4 +1,114 @@
-import type { MainCardModel, ProjectRequest } from './types';
+import type { GetProjectsResponseType, MainCardModel, ProjectRequest } from './types';
+
+export const projectsMockData: GetProjectsResponseType = {
+  projects: [
+    {
+      projectId: 1,
+      logo: '/images/example.jpg',
+      title: 'EveryGSM',
+      affiliation: 'The Moment',
+      description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
+      prodUrl: 'https://everygsm.com',
+      status: 'APPROVED',
+      reason: '',
+      createdAt: '2026-01-27T00:00:00',
+      techStack: [
+        { stackName: 'Next.js' },
+        { stackName: 'TypeScript' },
+        { stackName: 'TailwindCSS' },
+      ],
+      repository: [
+        {
+          repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2',
+          repoName: 'EveryGSM-client-v2',
+        },
+      ],
+      liked: false,
+    },
+    {
+      projectId: 2,
+      logo: '/images/example.jpg',
+      title: 'HelloGSM',
+      affiliation: 'The Moment',
+      description: '광주소프트웨어마이스터고등학교 입학 지원 서비스입니다.',
+      prodUrl: 'https://hellogsm.kr',
+      status: 'APPROVED',
+      reason: '',
+      createdAt: '2025-12-01T00:00:00',
+      techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
+      repository: [{ repoUrl: 'https://github.com/themoment-team/hellogsm', repoName: 'hellogsm' }],
+      liked: true,
+    },
+    {
+      projectId: 3,
+      logo: '/images/example.jpg',
+      title: 'GSM-Networking',
+      affiliation: 'Side Project',
+      description: 'GSM 학생들 간의 네트워킹을 위한 플랫폼입니다.',
+      prodUrl: 'https://gsm-networking.com',
+      status: 'APPROVED',
+      reason: '',
+      createdAt: '2025-11-15T00:00:00',
+      techStack: [{ stackName: 'React' }, { stackName: 'TypeScript' }, { stackName: 'Zustand' }],
+      repository: [{ repoUrl: 'https://github.com/gsm-networking', repoName: 'gsm-networking' }],
+      liked: false,
+    },
+    {
+      projectId: 4,
+      logo: '/images/example.jpg',
+      title: 'GSM-Auction',
+      affiliation: 'Side Project',
+      description: 'GSM 학생들을 위한 중고 경매 서비스입니다.',
+      prodUrl: 'https://auction.gsm.hs.kr',
+      status: 'APPROVED',
+      reason: '',
+      createdAt: '2025-10-20T00:00:00',
+      techStack: [
+        { stackName: 'React' },
+        { stackName: 'JavaScript' },
+        { stackName: 'Styled-Components' },
+      ],
+      repository: [{ repoUrl: 'https://github.com/gsm-auction', repoName: 'gsm-auction' }],
+      liked: true,
+    },
+    {
+      projectId: 5,
+      logo: '/images/example.jpg',
+      title: 'GSM-OAuth',
+      affiliation: 'The Moment',
+      description: 'GSM 학생 인증을 위한 OAuth 서비스입니다.',
+      prodUrl: 'https://oauth.themoment.team',
+      status: 'APPROVED',
+      reason: '',
+      createdAt: '2025-09-10T00:00:00',
+      techStack: [{ stackName: 'Spring Boot' }, { stackName: 'Java' }, { stackName: 'MySQL' }],
+      repository: [
+        { repoUrl: 'https://github.com/themoment-team/gsm-oauth', repoName: 'gsm-oauth' },
+      ],
+      liked: false,
+    },
+    {
+      projectId: 6,
+      logo: '/images/example.jpg',
+      title: 'GSM-Attendance',
+      affiliation: 'BestFriends',
+      description: 'GSM 학생 출결 관리 시스템입니다.',
+      prodUrl: 'https://attendance.gsm.hs.kr',
+      status: 'APPROVED',
+      reason: '',
+      createdAt: '2025-08-05T00:00:00',
+      techStack: [
+        { stackName: 'Next.js' },
+        { stackName: 'TypeScript' },
+        { stackName: 'React Query' },
+      ],
+      repository: [
+        { repoUrl: 'https://github.com/BestFriends/gsm-attendance', repoName: 'gsm-attendance' },
+      ],
+      liked: false,
+    },
+  ],
+};
 
 export const projectMockList: MainCardModel[] = [
   {

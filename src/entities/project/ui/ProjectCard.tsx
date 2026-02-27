@@ -14,7 +14,7 @@ interface ProjectCardProps {
   onDetailClick?: () => void;
 }
 
-export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProps) => {
+const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProps) => {
   const { logo, title, affiliation, description, techStack, prodUrl } = data;
 
   const [isCenterHover, setIsCenterHover] = useState(false);
@@ -22,7 +22,7 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
   return (
     <div
       className={cn(
-        'relative flex h-82.5 w-full flex-col justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
+        'relative flex h-82.5 w-full max-w-70 flex-col justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
       )}
     >
       <div
@@ -108,3 +108,5 @@ export const ProjectCard = ({ data, likeButton, onDetailClick }: ProjectCardProp
     </div>
   );
 };
+
+export default ProjectCard;

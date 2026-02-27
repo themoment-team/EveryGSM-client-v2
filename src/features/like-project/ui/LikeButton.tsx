@@ -1,50 +1,50 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { useMutation } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
-import { toggleProjectLike } from '@/entities/project';
-import type { ProjectType } from '@/entities/project/model/types';
+import { GetProjectsResponseType } from '@/entities/project';
+import { projectQueryKeys } from '@/shared/api';
 import { LikeIcon } from '@/shared/assets';
+
+import { useToggleProjectLike } from '../model/useToggleProjectLike';
 
 interface LikeButtonProps {
   isLiked: boolean;
   projectId: number;
-  onSuccess: (updated: ProjectType) => void;
 }
 
-export const LikeButton = ({ isLiked, projectId, onSuccess }: LikeButtonProps) => {
+const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
   const [localIsLiked, setLocalIsLiked] = useState(isLiked);
+  const queryClient = useQueryClient();
+  const isLoggedIn = false; // TODO: 인증 기능 개발 후 실제 로그인 상태로 대체
 
-  useEffect(() => {
-    setLocalIsLiked(isLiked);
-  }, [isLiked]);
-
-  const mutation = useMutation({
-    mutationFn: () => toggleProjectLike(projectId),
-    onSuccess: (data) => {
-      setLocalIsLiked(data.liked);
-      onSuccess(data);
-    },
-    onError: (error) => {
-      console.error(error);
-      alert('좋아요 처리 중 오류가 발생했습니다.');
-      setLocalIsLiked(isLiked);
+  const { mutate: toggleLike } = useToggleProjectLike(projectId, {
+    onMutate: () => setLocalIsLiked((prev) => !prev), // 낙관적 업데이트: 좋아요 상태를 즉시 반전
+    onError: () => setLocalIsLiked(isLiked), // 에러 발생 시 원래 상태로 롤백
+    onSuccess: (_, currentIsLiked) => {
+      queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getProjects(), (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          projects: old.projects.map((p) =>
+            p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
+          ),
+        };
+      });
     },
   });
 
-  const handleToggle = () => {
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
-      alert('로그인을 진행해주세요.');
+  const handleClick = () => {
+    if (!isLoggedIn) {
+      console.log('로그인이 필요한 기능입니다.'); // TODO: 로그인 모달 열기, 토스트 등 실제 로그인 유도 UI로 대체
       return;
     }
-
-    if (!mutation.isPending) {
-      mutation.mutate();
-    }
+    toggleLike(localIsLiked);
   };
 
-  return <LikeIcon isLiked={localIsLiked} onClick={handleToggle} />;
+  return <LikeIcon isLiked={localIsLiked} onClick={handleClick} />;
 };
+
+export default LikeButton;

@@ -12,7 +12,7 @@ interface ProjectDetailModalProps {
   modalLikeButton?: React.ReactNode;
 }
 
-export const ProjectDetailModal = ({ data, modalLikeButton }: ProjectDetailModalProps) => {
+const ProjectDetailModal = ({ data, modalLikeButton }: ProjectDetailModalProps) => {
   const { logo, title, affiliation, description, techStack, prodUrl, repository } = data;
 
   const { closeModal } = useModalStore();
@@ -87,3 +87,5 @@ export const ProjectDetailModal = ({ data, modalLikeButton }: ProjectDetailModal
     </div>
   );
 };
+
+export default ProjectDetailModal;
