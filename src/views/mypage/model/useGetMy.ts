@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { API_URLS, get } from '@/shared/api';
+import { get, projectUrl } from '@/shared/api';
 import { GetMyResponse } from '@/widgets/mypage';
 
 const getMy = () => {
-  return get<GetMyResponse>(API_URLS.projects.my);
+  return get<GetMyResponse>(projectUrl.getMyProjects());
 };
 
 const useGetMy = () => {

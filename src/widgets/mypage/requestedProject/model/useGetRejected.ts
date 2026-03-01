@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { ProjectType } from '@/entities/project';
-import { API_URLS, get } from '@/shared/api';
+import { get, projectUrl } from '@/shared/api';
 
 const getRejected = () => {
-  return get<ProjectType[]>(API_URLS.projects.rejected);
+  return get<ProjectType[]>(projectUrl.getMyRejectedProjects());
 };
 
 const useGetRejected = () => {
