@@ -3,17 +3,11 @@ import Image from 'next/image';
 import type { CheckRequestStatusType, ProjectType } from '@/entities/project/model/types';
 import { cn } from '@/shared/utils';
 
-<<<<<<< HEAD:src/entities/project/ui/ProjectRequestCard/index.tsx
-=======
-import type { ProjectRequest } from '../model/types';
-
->>>>>>> dad6ac815fca909543cb5eb943b443cdcaa1fea5:src/entities/project/ui/ProjectRequestCard.tsx
 interface ProjectRequestCardProps {
   data: ProjectType;
   requestStatus: CheckRequestStatusType;
 }
 
-<<<<<<< HEAD:src/entities/project/ui/ProjectRequestCard/index.tsx
 export const ProjectRequestCard = ({ data, requestStatus }: ProjectRequestCardProps) => {
   const { logo, title, affiliation, createdAt } = data;
 
@@ -24,10 +18,6 @@ export const ProjectRequestCard = ({ data, requestStatus }: ProjectRequestCardPr
     const day = String(date.getDate()).padStart(2, '0');
     return `${year} - ${month} - ${day}`;
   };
-=======
-const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
-  const { imageSrc, projectName, teamName, date, requestStatus } = data;
->>>>>>> dad6ac815fca909543cb5eb943b443cdcaa1fea5:src/entities/project/ui/ProjectRequestCard.tsx
 
   return (
     <div

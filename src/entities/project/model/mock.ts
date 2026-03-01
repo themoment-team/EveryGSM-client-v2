@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-import type { ProjectRequest, ProjectType } from './types';
-=======
-import type { GetProjectsResponseType, MainCardModel, ProjectRequest } from './types';
+import type { GetProjectsResponseType, MainCardModel, ProjectRequest, ProjectType } from './types';
 
 export const projectsMockData: GetProjectsResponseType = {
   projects: [
@@ -112,7 +109,6 @@ export const projectsMockData: GetProjectsResponseType = {
     },
   ],
 };
->>>>>>> dad6ac815fca909543cb5eb943b443cdcaa1fea5
 
 export const projectMockList: ProjectType[] = [
   {
@@ -121,95 +117,55 @@ export const projectMockList: ProjectType[] = [
     title: 'EveryGSM',
     affiliation: 'The Moment',
     description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
-    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
-    repository: [
-      { repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2', repoName: 'Service' },
-    ],
     prodUrl: 'https://everygsm.com',
-    liked: true,
-    status: 'active',
+    status: 'APPROVED',
     reason: '',
-    createdAt: '2026-01-01T00:00:00Z',
+    createdAt: '2026-01-27T00:00:00',
+    techStack: [
+      { stackName: 'Next.js' },
+      { stackName: 'TypeScript' },
+      { stackName: 'TailwindCSS' },
+      { stackName: 'FSD' },
+    ],
+    repository: [
+      {
+        repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2',
+        repoName: 'EveryGSM-client-v2',
+      },
+    ],
+    liked: true,
   },
   {
     projectId: 2,
     logo: '/images/example.jpg',
-    title: 'EveryGSM',
+    title: 'HelloGSM',
     affiliation: 'The Moment',
-    description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
-    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
-    repository: [
-      { repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2', repoName: 'Service' },
-    ],
-    prodUrl: 'https://everygsm.com',
-    liked: true,
-    status: 'active',
+    description: '광주소프트웨어마이스터고등학교 입학 지원 서비스입니다.',
+    prodUrl: 'https://hellogsm.kr',
+    status: 'APPROVED',
     reason: '',
-    createdAt: '2026-01-01T00:00:00Z',
+    createdAt: '2025-12-01T00:00:00',
+    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
+    repository: [{ repoUrl: 'https://github.com/themoment-team/hellogsm', repoName: 'hellogsm' }],
+    liked: false,
   },
   {
     projectId: 3,
     logo: '/images/example.jpg',
-    title: 'EveryGSM',
-    affiliation: 'The Moment',
-    description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
-    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
-    repository: [
-      { repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2', repoName: 'Service' },
-    ],
-    prodUrl: 'https://everygsm.com',
-    liked: true,
-    status: 'active',
+    title: 'GSM-Auction',
+    affiliation: 'Side Project',
+    description: 'GSM 학생들을 위한 경매 서비스입니다.',
+    prodUrl: 'https://auction.gsm',
+    status: 'APPROVED',
     reason: '',
-    createdAt: '2026-01-01T00:00:00Z',
-  },
-  {
-    projectId: 4,
-    logo: '/images/example.jpg',
-    title: 'EveryGSM',
-    affiliation: 'The Moment',
-    description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
-    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
-    repository: [
-      { repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2', repoName: 'Service' },
+    createdAt: '2025-10-20T00:00:00',
+    techStack: [
+      { stackName: 'React' },
+      { stackName: 'JavaScript' },
+      { stackName: 'Styled-Components' },
     ],
-    prodUrl: 'https://everygsm.com',
+    repository: [{ repoUrl: 'https://github.com/gsm-auction', repoName: 'gsm-auction' }],
     liked: true,
-    status: 'active',
-    reason: '',
-    createdAt: '2026-01-01T00:00:00Z',
-  },
-  {
-    projectId: 5,
-    logo: '/images/example.jpg',
-    title: 'EveryGSM',
-    affiliation: 'The Moment',
-    description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
-    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
-    repository: [
-      { repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2', repoName: 'Service' },
-    ],
-    prodUrl: 'https://everygsm.com',
-    liked: true,
-    status: 'active',
-    reason: '',
-    createdAt: '2026-01-01T00:00:00Z',
-  },
-  {
-    projectId: 6,
-    logo: '/images/example.jpg',
-    title: 'EveryGSM',
-    affiliation: 'The Moment',
-    description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
-    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
-    repository: [
-      { repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2', repoName: 'Service' },
-    ],
-    prodUrl: 'https://everygsm.com',
-    liked: true,
-    status: 'active',
-    reason: '',
-    createdAt: '2026-01-01T00:00:00Z',
   },
 ];
 
