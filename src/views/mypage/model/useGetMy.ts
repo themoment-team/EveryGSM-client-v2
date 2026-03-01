@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { get, projectUrl } from '@/shared/api';
+import { get, projectQueryKeys, projectUrl } from '@/shared/api';
 import { GetMyResponse } from '@/widgets/mypage';
 
 const getMy = () => {
@@ -9,7 +9,7 @@ const getMy = () => {
 
 const useGetMy = () => {
   return useQuery<GetMyResponse>({
-    queryKey: ['my'],
+    queryKey: projectQueryKeys.getMyProjects(),
     queryFn: getMy,
   });
 };
