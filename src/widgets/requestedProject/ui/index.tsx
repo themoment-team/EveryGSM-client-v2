@@ -9,7 +9,7 @@ import {
   projectMockList,
 } from '@/entities/project';
 import { cn } from '@/shared/utils';
-import { useGetPending, useGetRejected } from '@/widgets/mypage/requestedProject/model';
+import { useGetPending, useGetRejected } from '@/widgets/requestedProject';
 
 const RequestedProjects = () => {
   const [status, setStatus] = React.useState<CheckRequestStatusType>('pending');
@@ -18,6 +18,7 @@ const RequestedProjects = () => {
   const { data: rejectedData } = useGetRejected();
 
   const data = status === 'pending' ? pendingData : rejectedData;
+  const requestProject = data?.length ? data : projectMockList;
 
   return (
     <div className={cn('flex w-295 flex-col gap-10')}>
@@ -31,7 +32,7 @@ const RequestedProjects = () => {
       </div>
 
       <div className={cn('flex flex-col gap-4')}>
-        {projectMockList?.map((project) => (
+        {requestProject?.map((project) => (
           <ProjectRequestCard key={project.projectId} data={project} requestStatus={status} />
         ))}
       </div>

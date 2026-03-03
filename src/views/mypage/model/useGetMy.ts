@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { get, projectQueryKeys, projectUrl } from '@/shared/api';
-import { GetMyResponse } from '@/widgets/mypage';
+import { GetMyResponse } from '@/widgets/requestedProject';
 
 const getMy = () => {
   return get<GetMyResponse>(projectUrl.getMyProjects());
