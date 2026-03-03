@@ -6,12 +6,16 @@ import {
   CheckRequestStatus,
   CheckRequestStatusType,
   ProjectRequestCard,
+  ProjectRequestcontent,
   projectMockList,
 } from '@/entities/project';
+import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 import { useGetPending, useGetRejected } from '@/widgets/requestedProject';
 
 const RequestedProjects = () => {
+  const { openModal } = useModalStore();
+
   const [status, setStatus] = React.useState<CheckRequestStatusType>('pending');
 
   const { data: pendingData } = useGetPending();
@@ -33,7 +37,14 @@ const RequestedProjects = () => {
 
       <div className={cn('flex flex-col gap-4')}>
         {requestProject?.map((project) => (
-          <ProjectRequestCard key={project.projectId} data={project} requestStatus={status} />
+          <ProjectRequestCard
+            key={project.projectId}
+            data={project}
+            requestStatus={status}
+            onDetailClick={() =>
+              openModal(<ProjectRequestcontent data={project} requestStatus={status} />)
+            }
+          />
         ))}
       </div>
     </div>

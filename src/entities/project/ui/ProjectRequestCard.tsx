@@ -6,9 +6,14 @@ import { cn } from '@/shared/utils';
 interface ProjectRequestCardProps {
   data: ProjectType;
   requestStatus: CheckRequestStatusType;
+  onDetailClick?: () => void;
 }
 
-export const ProjectRequestCard = ({ data, requestStatus }: ProjectRequestCardProps) => {
+export const ProjectRequestCard = ({
+  data,
+  requestStatus,
+  onDetailClick,
+}: ProjectRequestCardProps) => {
   const { logo, title, affiliation, createdAt } = data;
 
   const formatDate = (dateString: string) => {
@@ -20,9 +25,10 @@ export const ProjectRequestCard = ({ data, requestStatus }: ProjectRequestCardPr
   };
 
   return (
-    <div
+    <button
+      onClick={onDetailClick}
       className={cn(
-        'flex w-full max-w-295 justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
+        'flex w-full max-w-295 cursor-pointer justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
       )}
     >
       <div className={cn('flex items-center gap-x-4')}>
@@ -47,7 +53,7 @@ export const ProjectRequestCard = ({ data, requestStatus }: ProjectRequestCardPr
           </span>
         </p>
       </div>
-    </div>
+    </button>
   );
 };
 
