@@ -15,7 +15,19 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
   const { closeRequestModal } = useRequestModalStore();
 
   return (
-    <div className={cn('flex flex-col items-center justify-center gap-4')}>
+    <div className={cn('flex flex-col items-center justify-center gap-4 px-4 py-10')}>
+      {/* 뒤로가기 버튼 - 컨텐츠와 같은 너비 컨테이너 안에 배치 */}
+      <div className={cn('absolute w-full max-w-276')}>
+        <button
+          onClick={closeRequestModal}
+          className={cn(
+            'absolute -top-93 left-0 flex items-center gap-2 text-base leading-[120%] font-medium text-white',
+          )}
+        >
+          <span>&lt;</span> 마이페이지
+        </button>
+      </div>
+
       {requestStatus === 'rejected' && (
         <div
           className={cn(
