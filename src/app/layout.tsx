@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import '@/shared/styles/globals.css';
-import { ModalContainer } from '@/shared/ui';
+import { ModalContainer, RequestModalContainer } from '@/shared/ui';
 import { Header } from '@/widgets/header';
 
 export const metadata: Metadata = {
@@ -23,6 +23,7 @@ const RootLayout = ({
           <Header />
           {children}
           <ModalContainer />
+          <RequestModalContainer />
         </TanStackProvider>
       </body>
     </html>
