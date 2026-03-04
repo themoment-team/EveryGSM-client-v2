@@ -21,7 +21,8 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
         <button
           onClick={closeRequestModal}
           className={cn(
-            'absolute -top-93 left-0 flex items-center gap-2 text-base leading-[120%] font-medium text-white',
+            'absolute left-0 flex items-center gap-2 text-base leading-[120%] font-medium text-white',
+            requestStatus === 'rejected' ? '-top-109' : '-top-93',
           )}
         >
           <span>&lt;</span> 마이페이지
