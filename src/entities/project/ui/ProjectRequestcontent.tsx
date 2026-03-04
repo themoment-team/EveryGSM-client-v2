@@ -75,12 +75,15 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#BBBBBB]')}>프로젝트 제목</div>
+            <div className={cn('text-[#FFF]')}>{data.title}</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#BBBBBB]')}>소속 동아리 또는 팀명</div>
+            <div className={cn('text-[#FFF]')}>{data.affiliation}</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#BBBBBB]')}>프로젝트 설명</div>
+            <div className={cn('text-[#FFF]')}>{data.description}</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#BBBBBB]')}>기술 스택</div>
@@ -90,6 +93,7 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#BBBBBB]')}>프로젝트 배포 URL</div>
+            <div className={cn('text-[#FFF]')}>{data.prodUrl}</div>
           </div>
         </div>
       </div>
