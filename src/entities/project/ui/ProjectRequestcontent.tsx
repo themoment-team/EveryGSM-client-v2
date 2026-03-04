@@ -2,6 +2,7 @@
 import Image from 'next/image';
 
 import type { CheckRequestStatusType, ProjectType } from '@/entities/project/model/types';
+import { ArrowIcon } from '@/shared/assets';
 import { useRequestModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
@@ -102,6 +103,20 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#DDDDDD]')}>깃허브 레포지토리</div>
+            {data.repository.map((repo) => (
+              <a
+                key={repo.repoUrl}
+                href={repo.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  'flex cursor-pointer items-center justify-between rounded-xl px-3 py-1.5 text-base leading-6 font-medium text-white duration-100 hover:bg-[#444444]',
+                )}
+              >
+                {repo.repoName || repo.repoUrl}
+                <ArrowIcon />
+              </a>
+            ))}
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#BBBBBB]')}>프로젝트 배포 URL</div>
