@@ -87,6 +87,18 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#BBBBBB]')}>기술 스택</div>
+            <div className={cn('flex flex-wrap gap-2')}>
+              {data.techStack.map((stack) => (
+                <span
+                  key={stack.stackName}
+                  className={cn(
+                    'rounded-full bg-[#4F4F4F] px-3 py-1.5 text-base leading-[1.2rem] font-normal text-[#DDDDDD]',
+                  )}
+                >
+                  {stack.stackName}
+                </span>
+              ))}
+            </div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
             <div className={cn('text-[#DDDDDD]')}>깃허브 레포지토리</div>
