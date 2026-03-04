@@ -57,13 +57,13 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
             </span>
           </p>
         </div>
-        <div className={cn('flex w-full flex-col gap-9')}>
+        <div
+          className={cn(
+            'flex w-full flex-col gap-9 text-base leading-[120%] font-medium tracking-[-0.02rem]',
+          )}
+        >
           <div className={cn('flex flex-col gap-3')}>
-            <div
-              className={cn('text-base leading-[120%] font-medium tracking-[-0.02rem] text-[#DDD]')}
-            >
-              프로젝트 로고
-            </div>
+            <div className={cn('text-[#DDD]')}>프로젝트 로고</div>
 
             <Image
               src={data.logo}
@@ -74,58 +74,22 @@ const ProjectRequestcontent = ({ data, requestStatus }: ProjectRequestCardProps)
             />
           </div>
           <div className={cn('flex flex-col gap-3')}>
-            <div
-              className={cn(
-                'text-base leading-[120%] font-medium tracking-[-0.02rem] text-[#BBBBBB]',
-              )}
-            >
-              프로젝트 제목
-            </div>
+            <div className={cn('text-[#BBBBBB]')}>프로젝트 제목</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
-            <div
-              className={cn(
-                'text-base leading-[120%] font-medium tracking-[-0.02rem] text-[#BBBBBB]',
-              )}
-            >
-              소속 동아리 또는 팀명
-            </div>
+            <div className={cn('text-[#BBBBBB]')}>소속 동아리 또는 팀명</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
-            <div
-              className={cn(
-                'text-base leading-[120%] font-medium tracking-[-0.02rem] text-[#BBBBBB]',
-              )}
-            >
-              프로젝트 설명
-            </div>
+            <div className={cn('text-[#BBBBBB]')}>프로젝트 설명</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
-            <div
-              className={cn(
-                'text-base leading-[120%] font-medium tracking-[-0.02rem] text-[#BBBBBB]',
-              )}
-            >
-              기술 스택
-            </div>
+            <div className={cn('text-[#BBBBBB]')}>기술 스택</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
-            <div
-              className={cn(
-                'text-base leading-[120%] font-medium tracking-[-0.02rem] text-[#DDDDDD]',
-              )}
-            >
-              깃허브 레포지토리
-            </div>
+            <div className={cn('text-[#DDDDDD]')}>깃허브 레포지토리</div>
           </div>
           <div className={cn('flex flex-col gap-3')}>
-            <div
-              className={cn(
-                'text-base leading-[120%] font-medium tracking-[-0.02rem] text-[#BBBBBB]',
-              )}
-            >
-              프로젝트 배포 URL
-            </div>
+            <div className={cn('text-[#BBBBBB]')}>프로젝트 배포 URL</div>
           </div>
         </div>
       </div>
