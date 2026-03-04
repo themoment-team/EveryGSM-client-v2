@@ -9,12 +9,12 @@ import {
   ProjectRequestcontent,
   projectMockList,
 } from '@/entities/project';
-import { useModalStore } from '@/shared/stores';
+import { useRequestModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 import { useGetPending, useGetRejected } from '@/widgets/requestedProject';
 
 const RequestedProjects = () => {
-  const { openModal } = useModalStore();
+  const { openRequestModal } = useRequestModalStore();
 
   const [status, setStatus] = React.useState<CheckRequestStatusType>('pending');
 
@@ -42,7 +42,7 @@ const RequestedProjects = () => {
             data={project}
             requestStatus={status}
             onDetailClick={() =>
-              openModal(<ProjectRequestcontent data={project} requestStatus={status} />)
+              openRequestModal(<ProjectRequestcontent data={project} requestStatus={status} />)
             }
           />
         ))}
