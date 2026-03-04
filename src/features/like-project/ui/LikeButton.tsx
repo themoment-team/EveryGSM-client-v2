@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 import { GetProjectsResponseType } from '@/entities/project';
 import { projectQueryKeys } from '@/shared/api';
@@ -13,12 +14,12 @@ import { useToggleProjectLike } from '../model/useToggleProjectLike';
 interface LikeButtonProps {
   isLiked: boolean;
   projectId: number;
+  isLoggedIn: boolean;
 }
 
-const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
+const LikeButton = ({ isLiked, projectId, isLoggedIn }: LikeButtonProps) => {
   const [localIsLiked, setLocalIsLiked] = useState(isLiked);
   const queryClient = useQueryClient();
-  const isLoggedIn = false; // TODO: 인증 기능 개발 후 실제 로그인 상태로 대체
 
   const { mutate: toggleLike } = useToggleProjectLike(projectId, {
     onMutate: () => setLocalIsLiked((prev) => !prev), // 낙관적 업데이트: 좋아요 상태를 즉시 반전
@@ -37,12 +38,12 @@ const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
   });
 
   const handleClick = () => {
-    if (!isLoggedIn) {
-      console.log('로그인이 필요한 기능입니다.'); // TODO: 로그인 모달 열기, 토스트 등 실제 로그인 유도 UI로 대체
-      return;
-    }
-    toggleLike(localIsLiked);
-  };
+  if (!isLoggedIn) {
+    toast('로그인이 필요한 기능입니다');
+    return;
+  }
+  toggleLike(localIsLiked);
+};
 
   return <LikeIcon isLiked={localIsLiked} onClick={handleClick} />;
 };

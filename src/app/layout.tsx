@@ -5,6 +5,7 @@ import { pretendard } from '@/shared/styles';
 import '@/shared/styles/globals.css';
 import { ModalContainer } from '@/shared/ui';
 import { Header } from '@/widgets/header';
+import AppToaster from '@/shared/ui/AppToaster';
 
 export const metadata: Metadata = {
   title: 'EveryGSM',
@@ -23,6 +24,7 @@ const RootLayout = ({
           <Header />
           {children}
           <ModalContainer />
+          <AppToaster />
         </TanStackProvider>
       </body>
     </html>
