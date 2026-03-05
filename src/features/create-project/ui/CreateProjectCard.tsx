@@ -1,9 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { PlusIcon } from '@/shared/assets';
 
+import { PlusIcon } from '@/shared/assets';
 import { cn } from '@/shared/utils';
+
 import { PROJECT_CREATE_ROUTE } from '../model/routes';
 
 interface CreateProjectCardProps {

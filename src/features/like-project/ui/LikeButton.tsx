@@ -38,12 +38,12 @@ const LikeButton = ({ isLiked, projectId, isLoggedIn }: LikeButtonProps) => {
   });
 
   const handleClick = () => {
-  if (!isLoggedIn) {
-    toast('로그인이 필요한 기능입니다');
-    return;
-  }
-  toggleLike(localIsLiked);
-};
+    if (!isLoggedIn) {
+      toast('로그인이 필요한 기능입니다');
+      return;
+    }
+    toggleLike(localIsLiked);
+  };
 
   return <LikeIcon isLiked={localIsLiked} onClick={handleClick} />;
 };

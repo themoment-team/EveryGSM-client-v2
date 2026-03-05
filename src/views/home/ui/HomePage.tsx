@@ -1,17 +1,17 @@
 import { cookies } from 'next/headers';
 
 import { getProjects } from '@/entities/project/index.server';
+import { COOKIE_KEYS } from '@/shared/constants';
 import { cn } from '@/shared/utils';
 import { HeroSection } from '@/widgets/hero-section';
 import { ProjectList } from '@/widgets/project-list';
-import { COOKIE_KEYS } from '@/shared/constants';
 
 const HomePage = async () => {
   const initialProjectsData = await getProjects();
 
-   const cookieStore = await cookies();
-   const accessToken = cookieStore.get(COOKIE_KEYS.ACCESS_TOKEN)?.value;
-   const isLoggedIn = Boolean(accessToken);
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get(COOKIE_KEYS.ACCESS_TOKEN)?.value;
+  const isLoggedIn = Boolean(accessToken);
 
   return (
     <main className="min-h-[calc(100vh-72px)] bg-[#191919]">

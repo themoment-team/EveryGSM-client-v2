@@ -4,8 +4,8 @@ import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import '@/shared/styles/globals.css';
 import { ModalContainer } from '@/shared/ui';
-import { Header } from '@/widgets/header';
 import AppToaster from '@/shared/ui/AppToaster';
+import { Header } from '@/widgets/header';
 
 export const metadata: Metadata = {
   title: 'EveryGSM',

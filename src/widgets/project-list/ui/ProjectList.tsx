@@ -22,7 +22,9 @@ const ProjectList = ({ initialProjectsData, isLoggedIn }: ProjectListProps) => {
 
   const { data: projectsData } = useGetProjects({ initialData: initialProjectsData });
 
-  const projects = projectsData?.projects?.length ? projectsData.projects : projectsMockData.projects;
+  const projects = projectsData?.projects?.length
+    ? projectsData.projects
+    : projectsMockData.projects;
 
   return (
     <div className={cn('mx-auto flex max-w-295 flex-wrap gap-x-5 gap-y-4')}>
