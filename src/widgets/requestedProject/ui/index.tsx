@@ -5,9 +5,9 @@ import React from 'react';
 import {
   CheckRequestStatus,
   CheckRequestStatusType,
+  projectMockList,
   ProjectRequestCard,
   ProjectRequestcontent,
-  projectMockList,
 } from '@/entities/project';
 import { useRequestModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
