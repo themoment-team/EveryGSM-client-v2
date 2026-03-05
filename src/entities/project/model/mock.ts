@@ -1,4 +1,4 @@
-import type { GetProjectsResponseType, MainCardModel, ProjectRequest, ProjectType } from './types';
+import type { GetProjectsResponseType, ProjectRequest, ProjectType } from './types';
 
 export const projectsMockData: GetProjectsResponseType = {
   projects: [
