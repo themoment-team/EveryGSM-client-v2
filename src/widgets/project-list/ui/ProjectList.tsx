@@ -15,9 +15,10 @@ import { cn } from '@/shared/utils';
 interface ProjectListProps {
   initialProjectsData?: GetProjectsResponseType;
   isLoggedIn: boolean;
+  variant?: 'main' | 'mypage';
 }
 
-const ProjectList = ({ initialProjectsData, isLoggedIn }: ProjectListProps) => {
+const ProjectList = ({ initialProjectsData, isLoggedIn, variant = 'main' }: ProjectListProps) => {
   const { openModal } = useModalStore();
 
   const { data: projectsData } = useGetProjects({ initialData: initialProjectsData });
@@ -28,7 +29,7 @@ const ProjectList = ({ initialProjectsData, isLoggedIn }: ProjectListProps) => {
 
   return (
     <div className={cn('mx-auto flex max-w-295 flex-wrap gap-x-5 gap-y-4')}>
-      {isLoggedIn && <CreateProjectCard />}
+      {variant === 'main' && isLoggedIn && <CreateProjectCard />}
 
       {projects.map((project) => (
         <ProjectCard
