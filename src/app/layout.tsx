@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
-import '@/shared/styles/globals.css';
 import { ModalContainer, RequestModalContainer } from '@/shared/ui';
 import { Header } from '@/widgets/header';
 
