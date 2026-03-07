@@ -24,11 +24,6 @@ const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
     onMutate: () => setLocalIsLiked((prev) => !prev), // 낙관적 업데이트: 좋아요 상태를 즉시 반전
     onError: () => setLocalIsLiked(isLiked), // 에러 발생 시 원래 상태로 롤백
     onSuccess: (_, currentIsLiked) => {
-      queryClient.invalidateQueries({
-        queryKey: projectQueryKeys.getMyProjects(),
-        refetchType: 'active',
-      });
-
       queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getProjects(), (old) => {
         if (!old) return old;
         return {
@@ -37,6 +32,34 @@ const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
             p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
           ),
         };
+      });
+
+      // 마이 프로젝트 캐시 업데이트
+      queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getMyProjects(), (old) => {
+        if (!old) return old;
+
+        // 좋아요 취소 → 프로젝트 제거
+        if (currentIsLiked) {
+          return {
+            ...old,
+            projects: old.projects.filter((p) => p.projectId !== projectId),
+          };
+        }
+
+        // 좋아요 추가 → 프로젝트 추가 (전체 목록에서 찾아서)
+        const allProjects = queryClient.getQueryData<GetProjectsResponseType>(
+          projectQueryKeys.getProjects(),
+        );
+        const projectToAdd = allProjects?.projects.find((p) => p.projectId === projectId);
+
+        if (projectToAdd) {
+          return {
+            ...old,
+            projects: [{ ...projectToAdd, liked: true }, ...old.projects],
+          };
+        }
+
+        return old;
       });
     },
   });
