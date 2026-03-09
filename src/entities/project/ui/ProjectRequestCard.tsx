@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import type { CheckRequestStatusType, ProjectType } from '@/entities/project/model/types';
 import { cn } from '@/shared/utils';
+import { formatDate } from '@/shared/utils';
 
 interface ProjectRequestCardProps {
   data: ProjectType;
@@ -15,14 +16,6 @@ export const ProjectRequestCard = ({
   onDetailClick,
 }: ProjectRequestCardProps) => {
   const { logo, title, affiliation, createdAt } = data;
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year} - ${month} - ${day}`;
-  };
 
   return (
     <button
