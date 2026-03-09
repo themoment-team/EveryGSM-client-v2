@@ -1,13 +1,18 @@
 'use client';
 
+import { GetMyResponseType } from '@/entities/project';
 import { cn } from '@/shared/utils';
 import { ProjectList } from '@/widgets/project-list';
 import { RequestedProjects } from '@/widgets/requestedProject';
 
 import { useGetMy } from '../model';
 
-const MyPage = () => {
-  const { data } = useGetMy();
+interface MyPageProps {
+  initialMyData?: GetMyResponseType;
+}
+
+const MyPage = ({ initialMyData }: MyPageProps) => {
+  const { data } = useGetMy(initialMyData);
   return (
     <div
       className={cn(
