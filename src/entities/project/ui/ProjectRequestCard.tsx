@@ -2,14 +2,16 @@ import Image from 'next/image';
 
 import { cn } from '@/shared/utils';
 
-import type { ProjectRequest } from '../model/types';
+import type { ProjectType } from '../model/types';
 
 interface ProjectRequestCardProps {
-  data: ProjectRequest;
+  data: ProjectType;
 }
 
 const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
-  const { imageSrc, projectName, teamName, date, requestStatus } = data;
+  const { logo, title, affiliation, createdAt, status } = data;
+  const requestStatus = status === 'REJECTED' ? '거절' : '확인 중';
+  const formattedDate = createdAt.split('T')[0];
 
   return (
     <div
@@ -19,19 +21,19 @@ const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
     >
       <div className={cn('flex items-center gap-x-4')}>
         <Image
-          src={imageSrc}
+          src={logo}
           alt="프로젝트 이미지"
           width={56}
           height={56}
           className={cn('rounded-full object-cover')}
         />
         <div className={cn('flex flex-col gap-y-2')}>
-          <h3 className={cn('text-xl leading-6 font-semibold text-white')}>{projectName}</h3>
-          <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{teamName}</p>
+          <h3 className={cn('text-xl leading-6 font-semibold text-white')}>{title}</h3>
+          <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{affiliation}</p>
         </div>
       </div>
       <div className={cn('flex items-center gap-x-4')}>
-        <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{date}</p>
+        <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{formattedDate}</p>
         <p className={cn('text-xl leading-6 font-semibold')}>
           <span className={cn('text-white')}>요청 상태: </span>
           <span className={cn(requestStatus === '거절' ? 'text-[#FF7C7C]' : 'text-[#888888]')}>

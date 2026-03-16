@@ -1,5 +1,7 @@
 import { ApiResponse } from '@/shared/types/base';
 
+export type StatusType = 'PENDING' | 'APPROVED' | 'REJECTED' | 'INACTIVE';
+
 export interface TechStackType {
   stackName: string;
 }
@@ -16,7 +18,7 @@ export interface ProjectType {
   affiliation: string;
   description: string;
   prodUrl: string;
-  status: string;
+  status: StatusType;
   reason: string;
   createdAt: string;
   techStack: TechStackType[];

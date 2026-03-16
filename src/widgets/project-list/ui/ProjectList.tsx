@@ -13,7 +13,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   const { openModal } = useModalStore();
 
   return (
-    <div className={cn('mx-auto flex max-w-295 flex-wrap gap-x-5 gap-y-4')}>
+    <div className={cn('mx-auto flex w-full max-w-295 flex-wrap gap-x-5 gap-y-4')}>
       {projects.map((project) => (
         <ProjectCard
           key={project.projectId}
