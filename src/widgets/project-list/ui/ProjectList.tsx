@@ -1,10 +1,10 @@
 'use client';
 
 import {
-  GetProjectsResponseType,
   ProjectCard,
   ProjectDetailModal,
-  projectsMockData,
+  ProjectsListResponseType,
+  ProjectType,
   useGetProjects,
 } from '@/entities/project';
 import { LikeButton } from '@/features/like-project';
@@ -12,7 +12,7 @@ import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
 interface ProjectListProps {
-  initialProjectsData?: GetProjectsResponseType;
+  initialProjectsData?: ProjectsListResponseType;
 }
 
 const ProjectList = ({ initialProjectsData }: ProjectListProps) => {
@@ -20,9 +20,7 @@ const ProjectList = ({ initialProjectsData }: ProjectListProps) => {
 
   const { data: projectsData } = useGetProjects({ initialData: initialProjectsData });
 
-  const projects = projectsData?.projects?.length
-    ? projectsData.projects
-    : projectsMockData.projects;
+  const projects: ProjectType[] = projectsData?.data.projects || [];
 
   return (
     <div className={cn('mx-auto flex max-w-295 flex-wrap gap-x-5 gap-y-4')}>
