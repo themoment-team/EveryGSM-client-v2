@@ -33,34 +33,6 @@ const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
           ),
         };
       });
-
-      // 마이 프로젝트 캐시 업데이트
-      queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getMyProjects(), (old) => {
-        if (!old) return old;
-
-        // 좋아요 취소 → 프로젝트 제거
-        if (currentIsLiked) {
-          return {
-            ...old,
-            projects: old.projects.filter((p) => p.projectId !== projectId),
-          };
-        }
-
-        // 좋아요 추가 → 프로젝트 추가 (전체 목록에서 찾아서)
-        const allProjects = queryClient.getQueryData<GetProjectsResponseType>(
-          projectQueryKeys.getProjects(),
-        );
-        const projectToAdd = allProjects?.projects.find((p) => p.projectId === projectId);
-
-        if (projectToAdd) {
-          return {
-            ...old,
-            projects: [{ ...projectToAdd, liked: true }, ...old.projects],
-          };
-        }
-
-        return old;
-      });
     },
   });
 
