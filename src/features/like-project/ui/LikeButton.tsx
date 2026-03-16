@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
-import { GetProjectsResponseType } from '@/entities/project';
+import { ProjectsListResponseType } from '@/entities/project';
 import { projectQueryKeys } from '@/shared/api';
 import { LikeIcon } from '@/shared/assets';
 
@@ -24,13 +24,16 @@ const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
     onMutate: () => setLocalIsLiked((prev) => !prev), // 낙관적 업데이트: 좋아요 상태를 즉시 반전
     onError: () => setLocalIsLiked(isLiked), // 에러 발생 시 원래 상태로 롤백
     onSuccess: (_, currentIsLiked) => {
-      queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getProjects(), (old) => {
+      queryClient.setQueryData<ProjectsListResponseType>(projectQueryKeys.getProjects(), (old) => {
         if (!old) return old;
         return {
           ...old,
-          projects: old.projects.map((p) =>
-            p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
-          ),
+          data: {
+            ...old.data,
+            projects: old.data.projects.map((p) =>
+              p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
+            ),
+          },
         };
       });
     },

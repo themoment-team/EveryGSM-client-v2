@@ -3,9 +3,9 @@ import { cookies } from 'next/headers';
 import { projectUrl } from '@/shared/api';
 import { COOKIE_KEYS } from '@/shared/constants';
 
-import { GetProjectsResponseType } from '../model/types';
+import { ProjectsListResponseType } from '../model/types';
 
-export const getProjects = async (): Promise<GetProjectsResponseType | undefined> => {
+export const getProjects = async (): Promise<ProjectsListResponseType | undefined> => {
   try {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get(COOKIE_KEYS.ACCESS_TOKEN)?.value;

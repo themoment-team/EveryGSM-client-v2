@@ -1,4 +1,3 @@
-export * from './model/mock';
 export * from './model/types';
 export * from './model/useGetProjects';
 export { default as ProjectCard } from './ui/ProjectCard';
