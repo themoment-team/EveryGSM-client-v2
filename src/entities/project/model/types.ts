@@ -29,3 +29,10 @@ export interface ProjectsListType {
 }
 
 export type ProjectsListResponseType = ApiResponse<ProjectsListType>;
+
+export interface MyProjectsType {
+  liked: ProjectType[];
+  registered: ProjectType[];
+}
+
+export type MyProjectsListResponseType = ApiResponse<MyProjectsType>;

@@ -1,26 +1,16 @@
 'use client';
 
-import {
-  ProjectCard,
-  ProjectDetailModal,
-  ProjectsListResponseType,
-  ProjectType,
-  useGetProjects,
-} from '@/entities/project';
+import { ProjectCard, ProjectDetailModal, ProjectType } from '@/entities/project';
 import { LikeButton } from '@/features/like-project';
 import { useModalStore } from '@/shared/stores';
 import { cn } from '@/shared/utils';
 
 interface ProjectListProps {
-  initialProjectsData?: ProjectsListResponseType;
+  projects: ProjectType[];
 }
 
-const ProjectList = ({ initialProjectsData }: ProjectListProps) => {
+const ProjectList = ({ projects }: ProjectListProps) => {
   const { openModal } = useModalStore();
-
-  const { data: projectsData } = useGetProjects({ initialData: initialProjectsData });
-
-  const projects: ProjectType[] = projectsData?.data.projects || [];
 
   return (
     <div className={cn('mx-auto flex max-w-295 flex-wrap gap-x-5 gap-y-4')}>

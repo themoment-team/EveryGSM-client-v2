@@ -1,4 +1,5 @@
 export * from './model/types';
+export * from './model/useGetMyProject';
 export * from './model/useGetProjects';
 export { default as ProjectCard } from './ui/ProjectCard';
 export { default as ProjectDetailModal } from './ui/ProjectDetailModal';
