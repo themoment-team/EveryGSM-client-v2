@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { cn } from '@/shared/utils';
 
+import { getProjectRequestStatusMeta } from '../model/requestStatus';
 import type { ProjectType } from '../model/types';
 
 interface ProjectRequestCardProps {
@@ -11,7 +12,7 @@ interface ProjectRequestCardProps {
 
 const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
   const { logo, title, affiliation, createdAt, status, projectId } = data;
-  const requestStatus = status === 'REJECTED' ? '거절' : '확인 중';
+  const requestStatusMeta = getProjectRequestStatusMeta(status);
   const formattedDate = createdAt.split('T')[0];
 
   return (
@@ -38,8 +39,8 @@ const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
         <p className={cn('text-sm leading-4.25 text-[#9A9A9A]')}>{formattedDate}</p>
         <p className={cn('text-xl leading-6 font-semibold')}>
           <span className={cn('text-white')}>요청 상태: </span>
-          <span className={cn(requestStatus === '거절' ? 'text-[#FF7C7C]' : 'text-[#888888]')}>
-            {requestStatus}
+          <span className={cn(requestStatusMeta.textColorClassName)}>
+            {requestStatusMeta.label}
           </span>
         </p>
       </div>

@@ -1,3 +1,4 @@
+export * from './model/requestStatus';
 export * from './model/types';
 export * from './model/useGetMyPendingProjects';
 export * from './model/useGetMyProject';
