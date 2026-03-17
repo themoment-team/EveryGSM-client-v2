@@ -1,12 +1,22 @@
 import Link from 'next/link';
 
+import { ProjectResponseType, useGetMyProject } from '@/entities/project';
 import { ArrowIcon } from '@/shared/assets';
 import { cn } from '@/shared/utils';
-import { myPendingProjectsMockData } from '@/views/mypage';
 import { ProjectRequestDetailContent } from '@/widgets/project-request-detail';
 
-const ProjectRequestDetailPage = () => {
-  const project = myPendingProjectsMockData.data.projects[0];
+interface ProjectRequestDetailPageProps {
+  initialProjectData?: ProjectResponseType;
+}
+
+const ProjectRequestDetailPage = ({ initialProjectData }: ProjectRequestDetailPageProps) => {
+  const projectId = initialProjectData?.data.projectId;
+  const { data: myProjectData } = useGetMyProject(projectId, {
+    initialData: initialProjectData,
+  });
+  const project = myProjectData?.data;
+
+  if (!project) return null;
 
   return (
     <main className={cn('min-h-[calc(100vh-72px)] bg-[#191919] p-4')}>

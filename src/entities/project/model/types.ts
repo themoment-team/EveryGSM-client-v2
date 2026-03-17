@@ -26,6 +26,8 @@ export interface ProjectType {
   liked: boolean;
 }
 
+export type ProjectResponseType = ApiResponse<ProjectType>;
+
 export interface ProjectsListType {
   projects: ProjectType[];
 }
