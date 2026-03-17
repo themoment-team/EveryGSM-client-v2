@@ -1,4 +1,4 @@
-import { ApiResponse } from '@/shared/types/base';
+import { ApiResponse } from '@/shared/types';
 
 export type StatusType = 'PENDING' | 'APPROVED' | 'REJECTED' | 'INACTIVE';
 
