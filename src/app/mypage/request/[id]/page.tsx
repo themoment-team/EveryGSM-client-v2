@@ -1,4 +1,4 @@
-import { ProjectRequestDetailPage } from '@/views/request-detail';
+import { ProjectRequestDetailPage } from '@/views/project-request-detail';
 
 const ProjectRequestDetail = () => {
   return <ProjectRequestDetailPage />;
