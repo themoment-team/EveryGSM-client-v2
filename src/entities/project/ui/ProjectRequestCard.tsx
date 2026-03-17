@@ -13,7 +13,7 @@ interface ProjectRequestCardProps {
 const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
   const { logo, title, affiliation, createdAt, status, projectId } = data;
   const requestStatusMeta = getProjectRequestStatusMeta(status);
-  const formattedDate = createdAt.split('T')[0];
+  const formattedDate = new Date(createdAt).toISOString().substring(0, 10);
 
   return (
     <Link
