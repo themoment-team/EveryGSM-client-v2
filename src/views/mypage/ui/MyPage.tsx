@@ -46,8 +46,8 @@ const MyPage = ({
   const requestProjects = selectedRequestStatus === 'REJECTED' ? rejectedProjects : pendingProjects;
 
   return (
-    <div className={cn('flex min-h-[calc(100vh-72px)] flex-col gap-y-4 bg-[#191919] p-4')}>
-      <main className={cn('flex flex-col gap-y-16 pt-10 pb-40')}>
+    <main className={cn('flex min-h-[calc(100vh-72px)] flex-col gap-y-4 bg-[#191919] p-4')}>
+      <div className={cn('flex flex-col gap-y-16 pt-10 pb-40')}>
         <div className={cn('flex flex-col gap-y-10')}>
           <HeroSection
             title={
@@ -86,8 +86,8 @@ const MyPage = ({
           </div>
           <ProjectRequestList projects={requestProjects} />
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 };
 

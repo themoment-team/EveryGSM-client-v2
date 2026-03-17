@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { cn } from '@/shared/utils';
 
@@ -9,12 +10,13 @@ interface ProjectRequestCardProps {
 }
 
 const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
-  const { logo, title, affiliation, createdAt, status } = data;
+  const { logo, title, affiliation, createdAt, status, projectId } = data;
   const requestStatus = status === 'REJECTED' ? '거절' : '확인 중';
   const formattedDate = createdAt.split('T')[0];
 
   return (
-    <div
+    <Link
+      href={`/mypage/request/${projectId}`}
       className={cn(
         'flex w-full max-w-295 justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
       )}
@@ -41,7 +43,7 @@ const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
           </span>
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 
