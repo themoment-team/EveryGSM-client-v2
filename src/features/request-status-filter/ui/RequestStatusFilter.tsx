@@ -20,7 +20,7 @@ const RequestStatusFilter = ({ selectedStatus, onChange }: RequestStatusFilterPr
           isRejectedSelected ? 'bg-[#2B2B2B] text-[#FFFFFF]' : 'text-[#B0B0B0]',
         )}
       >
-        요청상태: <span className={cn('text-[#FF7C7C]')}>거절</span>
+        요청 상태: <span className={cn('text-[#FF7C7C]')}>거절</span>
       </button>
       <button
         type="button"
@@ -30,7 +30,7 @@ const RequestStatusFilter = ({ selectedStatus, onChange }: RequestStatusFilterPr
           !isRejectedSelected ? 'bg-[#2B2B2B] text-[#FFFFFF]' : 'text-[#B0B0B0]',
         )}
       >
-        요청상태: 확인 중
+        요청 상태: 확인 중
       </button>
     </div>
   );
