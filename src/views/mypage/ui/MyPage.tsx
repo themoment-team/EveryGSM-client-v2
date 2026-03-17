@@ -27,7 +27,7 @@ const MyPage = ({
   initialMyRejectedProjectsData,
 }: MyPageProps) => {
   const [selectedRequestStatus, setSelectedRequestStatus] =
-    useState<RequestStatusFilterType>('REJECTED');
+    useState<RequestStatusFilterType>('PENDING');
 
   const { data: myProjectsData } = useGetMyProjects({
     initialData: initialMyProjectsData,
@@ -43,7 +43,7 @@ const MyPage = ({
   const registeredProjects = myProjectsData?.data.registered ?? [];
   const pendingProjects = myPendingProjectsData?.data.projects ?? [];
   const rejectedProjects = myRejectedProjectsData?.data.projects ?? [];
-  const requestProjects = selectedRequestStatus === 'REJECTED' ? rejectedProjects : pendingProjects;
+  const requestProjects = selectedRequestStatus === 'PENDING' ? pendingProjects : rejectedProjects;
 
   return (
     <main className={cn('flex min-h-[calc(100vh-72px)] flex-col gap-y-4 bg-[#191919] p-4')}>
