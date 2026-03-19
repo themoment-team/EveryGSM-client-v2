@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { useAuthSession } from '@/entities/auth';
 import {
   MyProjectsListResponseType,
   ProjectsListResponseType,
@@ -26,8 +27,10 @@ const MyPage = ({
   initialMyPendingProjectsData,
   initialMyRejectedProjectsData,
 }: MyPageProps) => {
+  const { user } = useAuthSession();
   const [selectedRequestStatus, setSelectedRequestStatus] =
     useState<RequestStatusFilterType>('PENDING');
+  const displayName = user?.name ?? '사용자';
 
   const { data: myProjectsData } = useGetMyProjects({
     initialData: initialMyProjectsData,
@@ -52,7 +55,7 @@ const MyPage = ({
           <HeroSection
             title={
               <>
-                <span className={cn('text-[#FC335A]')}>김유찬</span> 님이 좋아요한 프로젝트
+                <span className={cn('text-[#FC335A]')}>{displayName}</span> 님이 좋아요한 프로젝트
               </>
             }
           />
@@ -63,7 +66,7 @@ const MyPage = ({
           <HeroSection
             title={
               <>
-                <span className={cn('text-[#FC335A]')}>김유찬</span> 님이 등록한 프로젝트
+                <span className={cn('text-[#FC335A]')}>{displayName}</span> 님이 등록한 프로젝트
               </>
             }
           />
@@ -75,7 +78,8 @@ const MyPage = ({
             <HeroSection
               title={
                 <>
-                  <span className={cn('text-[#FC335A]')}>김유찬</span> 님이 등록 요청한 프로젝트
+                  <span className={cn('text-[#FC335A]')}>{displayName}</span> 님이 등록 요청한
+                  프로젝트
                 </>
               }
             />

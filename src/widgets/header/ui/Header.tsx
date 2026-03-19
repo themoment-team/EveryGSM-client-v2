@@ -3,35 +3,77 @@
 import { useRef, useState } from 'react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import { useAuthSession } from '@/entities/auth';
 import { ArrowIcon, Logo, PersonIcon } from '@/shared/assets';
+import { COOKIE_KEYS, OAUTH_SESSION_KEYS } from '@/shared/constants';
 import { useOnClickOutside } from '@/shared/hooks';
-import { cn } from '@/shared/utils';
+import {
+  cn,
+  createAuthorizeUrl,
+  deleteCookie,
+  generateCodeChallenge,
+  generateCodeVerifier,
+} from '@/shared/utils';
 
 import { NAV_LINKS } from '../model/navigation';
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
+  const { isAuthenticated, user } = useAuthSession();
 
-  const role = 'client';
+  const role = user?.role === 'ADMIN' ? 'admin' : 'client';
   const links = NAV_LINKS[role];
 
-  const mockUser = {
-    name: '홍길동',
-    grade: 1,
-    class: 1,
-    number: 20,
-  };
+  const displayName = user?.name ?? '사용자';
+  const studentSummary =
+    user?.grade && user?.classNum && user?.number
+      ? `${user.grade}학년 ${user.classNum}반 ${user.number}번`
+      : '학생 정보 없음';
 
   useOnClickOutside(menuRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
 
+  const handleLogin = async () => {
+    try {
+      setIsLoginLoading(true);
+
+      const clientId = process.env.NEXT_PUBLIC_DATAGSM_OAUTH_CLIENT_ID;
+      const redirectUri = process.env.NEXT_PUBLIC_DATAGSM_OAUTH_REDIRECT_URI;
+
+      if (!clientId || !redirectUri) {
+        throw new Error('OAuth 환경 변수가 설정되지 않았습니다.');
+      }
+
+      const state = crypto.randomUUID();
+      const codeVerifier = generateCodeVerifier();
+      const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+      sessionStorage.setItem(OAUTH_SESSION_KEYS.STATE, state);
+      sessionStorage.setItem(OAUTH_SESSION_KEYS.CODE_VERIFIER, codeVerifier);
+
+      const authorizeUrl = createAuthorizeUrl({
+        clientId,
+        redirectUri,
+        state,
+        codeChallenge,
+      });
+
+      window.location.href = authorizeUrl;
+    } catch (error) {
+      setIsLoginLoading(false);
+      console.error('OAuth 로그인 시작 실패:', error);
+    }
+  };
+
   const handleLogout = () => {
     setIsOpen(false);
-    setIsLogin(false);
+    deleteCookie(COOKIE_KEYS.ACCESS_TOKEN);
+    router.replace('/');
   };
 
   return (
@@ -39,14 +81,15 @@ const Header = () => {
       <Link href="/">
         <Logo />
       </Link>
-      {!isLogin ? (
+      {!isAuthenticated ? (
         <button
           className={cn(
             'flex h-9 w-18.25 cursor-pointer items-center justify-center rounded-[1.125rem] border border-[#FC335A] text-base font-semibold text-[#FC335A]',
           )}
-          onClick={() => setIsLogin(true)}
+          onClick={() => void handleLogin()}
+          disabled={isLoginLoading}
         >
-          로그인
+          {isLoginLoading ? '이동 중...' : '로그인'}
         </button>
       ) : (
         <div className={cn('flex items-center gap-14')}>
@@ -69,7 +112,7 @@ const Header = () => {
               className={cn('flex cursor-pointer items-center gap-2')}
               onClick={() => setIsOpen(!isOpen)}
             >
-              <span className={cn('text-base font-semibold text-[#FC335A]')}>{mockUser.name}</span>
+              <span className={cn('text-base font-semibold text-[#FC335A]')}>{displayName}</span>
               <PersonIcon />
             </button>
             {isOpen && (
@@ -80,10 +123,10 @@ const Header = () => {
               >
                 <div className={cn('flex w-full flex-col gap-2')}>
                   <span className={cn('text-2xl/tight font-semibold text-white')}>
-                    {mockUser.name}
+                    {displayName}
                   </span>
                   <span className={cn('text-sm/none font-medium text-[#9A9A9A]')}>
-                    {mockUser.grade}학년 {mockUser.class}반 {mockUser.number}번
+                    {studentSummary}
                   </span>
                 </div>
                 <button
