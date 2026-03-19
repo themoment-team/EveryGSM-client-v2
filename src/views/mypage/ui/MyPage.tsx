@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { useAuthSession } from '@/entities/auth';
+import { useGetUserInfo } from '@/entities/auth';
 import {
   MyProjectsListResponseType,
   ProjectsListResponseType,
@@ -27,11 +27,11 @@ const MyPage = ({
   initialMyPendingProjectsData,
   initialMyRejectedProjectsData,
 }: MyPageProps) => {
-  const { user } = useAuthSession();
   const [selectedRequestStatus, setSelectedRequestStatus] =
     useState<RequestStatusFilterType>('PENDING');
-  const displayName = user?.name ?? '사용자';
 
+  const { data: userInfo } = useGetUserInfo();
+  const displayName = userInfo?.data.student?.name;
   const { data: myProjectsData } = useGetMyProjects({
     initialData: initialMyProjectsData,
   });

@@ -20,6 +20,7 @@ const CallbackPage = () => {
       try {
         const authCode = searchParams.get('code');
         const callbackState = searchParams.get('state');
+        const redirectUri = `${window.location.origin}/callback`;
 
         if (!authCode) {
           throw new Error('인가 코드가 누락되었습니다.');
@@ -38,8 +39,8 @@ const CallbackPage = () => {
         sessionStorage.removeItem(OAUTH_SESSION_KEYS.STATE);
         sessionStorage.removeItem(OAUTH_SESSION_KEYS.CODE_VERIFIER);
 
-        const signInResponse = await signIn({ authCode, codeVerifier });
-        setCookie(COOKIE_KEYS.ACCESS_TOKEN, signInResponse.data.accessToken);
+        const { data: signInData } = await signIn({ authCode, redirectUri });
+        setCookie(COOKIE_KEYS.ACCESS_TOKEN, signInData.accessToken);
 
         router.replace('/');
       } catch (error) {
@@ -57,9 +58,7 @@ const CallbackPage = () => {
   }, [router, searchParams, signIn]);
 
   return (
-    <main
-      className={cn('flex min-h-[calc(100vh-72px)] items-center justify-center bg-[#191919] p-4')}
-    >
+    <main className={cn('flex min-h-screen items-center justify-center bg-[#191919] p-4')}>
       <div
         className={cn(
           'flex w-full max-w-120 flex-col items-center gap-y-4 rounded-xl border border-[#2F2F2F] bg-[rgba(34,34,34,0.5)] p-8 text-center backdrop-blur-[18px]',
