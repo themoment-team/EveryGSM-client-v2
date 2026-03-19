@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { useAuthSession } from '@/entities/auth';
+import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import { ArrowIcon, Logo, PersonIcon } from '@/shared/assets';
 import { COOKIE_KEYS, OAUTH_SESSION_KEYS } from '@/shared/constants';
 import { useOnClickOutside } from '@/shared/hooks';
@@ -15,25 +15,35 @@ import {
   deleteCookie,
   generateCodeChallenge,
   generateCodeVerifier,
+  getCookie,
 } from '@/shared/utils';
 
 import { NAV_LINKS } from '../model/navigation';
 
-const Header = () => {
+interface HeaderProps {
+  initialUserInfoData: UserInfoResponseType | undefined;
+}
+
+const Header = ({ initialUserInfoData }: HeaderProps) => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated, user } = useAuthSession();
+  const isLoggedIn = Boolean(getCookie(COOKIE_KEYS.ACCESS_TOKEN));
+  const { data: userInfoResponse } = useGetUserInfo({
+    initialData: initialUserInfoData,
+    enabled: isLoggedIn,
+  });
+  const userInfo = userInfoResponse?.data;
 
-  const role = user?.role === 'ADMIN' ? 'admin' : 'client';
+  const role = userInfo?.role === 'ADMIN' ? 'admin' : 'client';
   const links = NAV_LINKS[role];
 
-  const displayName = user?.name ?? '사용자';
+  const displayName = userInfo?.student?.name ?? '사용자';
   const studentSummary =
-    user?.grade && user?.classNum && user?.number
-      ? `${user.grade}학년 ${user.classNum}반 ${user.number}번`
+    userInfo?.student?.grade && userInfo?.student?.classNum && userInfo?.student?.number
+      ? `${userInfo.student.grade}학년 ${userInfo.student.classNum}반 ${userInfo.student.number}번`
       : '학생 정보 없음';
 
   useOnClickOutside(menuRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
@@ -43,9 +53,9 @@ const Header = () => {
       setIsLoginLoading(true);
 
       const clientId = process.env.NEXT_PUBLIC_DATAGSM_OAUTH_CLIENT_ID;
-      const redirectUri = process.env.NEXT_PUBLIC_DATAGSM_OAUTH_REDIRECT_URI;
+      const redirectUri = `${window.location.origin}/callback`;
 
-      if (!clientId || !redirectUri) {
+      if (!clientId) {
         throw new Error('OAuth 환경 변수가 설정되지 않았습니다.');
       }
 
@@ -76,12 +86,17 @@ const Header = () => {
     router.replace('/');
   };
 
+  const EXCLUDED_ROUTES = ['/callback'];
+  if (EXCLUDED_ROUTES.includes(pathname)) {
+    return null;
+  }
+
   return (
     <header className={cn('sticky flex h-18 items-center justify-between bg-[#191919] px-10')}>
       <Link href="/">
         <Logo />
       </Link>
-      {!isAuthenticated ? (
+      {!isLoggedIn ? (
         <button
           className={cn(
             'flex h-9 w-18.25 cursor-pointer items-center justify-center rounded-[1.125rem] border border-[#FC335A] text-base font-semibold text-[#FC335A]',

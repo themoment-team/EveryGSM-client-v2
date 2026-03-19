@@ -2,7 +2,7 @@ import { ApiResponse } from '@/shared/types';
 
 export interface OAuthSignInReqType {
   authCode: string;
-  codeVerifier?: string;
+  redirectUri: string;
 }
 
 export interface OAuthSignInType {
@@ -11,23 +11,50 @@ export interface OAuthSignInType {
 
 export type OAuthSignInResponseType = ApiResponse<OAuthSignInType>;
 
-export interface JwtPayloadType {
-  userId?: number;
-  email?: string;
-  name?: string;
-  grade?: number;
-  classNum?: number;
-  number?: number;
-  role?: string;
-  exp?: number;
+export type AccountRoleType = 'ROOT' | 'ADMIN' | 'USER';
+
+export type ClubType = 'MAJOR_CLUB' | 'AUTONOMOUS_CLUB';
+
+export type StudentSexType = 'MAN' | 'WOMAN';
+
+export type StudentMajorType = 'SW_DEVELOPMENT' | 'SMART_IOT' | 'AI';
+
+export type StudentRoleType =
+  | 'STUDENT_COUNCIL'
+  | 'DORMITORY_MANAGER'
+  | 'GENERAL_STUDENT'
+  | 'GRADUATE'
+  | 'WITHDRAWN';
+
+export interface UserInfoClubType {
+  id: number;
+  name: string;
+  type: ClubType;
 }
 
-export interface AuthUserType {
-  userId?: number;
-  email?: string;
-  name?: string;
+export interface UserInfoStudentType {
+  id: number;
+  name: string;
+  sex: StudentSexType;
+  email: string;
+  role: StudentRoleType;
   grade?: number;
   classNum?: number;
   number?: number;
-  role?: string;
+  studentNumber?: number;
+  major?: StudentMajorType;
+  dormitoryFloor?: number;
+  dormitoryRoom?: number;
+  majorClub?: UserInfoClubType;
+  autonomousClub?: UserInfoClubType;
 }
+
+export interface UserInfoType {
+  id: number;
+  email: string;
+  role: AccountRoleType;
+  isStudent: boolean;
+  student?: UserInfoStudentType | null;
+}
+
+export type UserInfoResponseType = ApiResponse<UserInfoType>;

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { Toaster } from 'sonner';
 
+import { getUserInfo } from '@/entities/auth/index.server';
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import { ModalContainer } from '@/shared/ui';
@@ -12,17 +14,20 @@ export const metadata: Metadata = {
   description: '광주소프트웨어마이스터고등학교의 모든 프로젝트를 한곳에',
 };
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const [initialUserInfoData] = await Promise.all([getUserInfo()]);
+
   return (
     <html lang="ko">
       <body className={pretendard.className}>
         <TanStackProvider>
-          <Header />
+          <Header initialUserInfoData={initialUserInfoData} />
           {children}
+          <Toaster position="bottom-right" richColors />
           <ModalContainer />
         </TanStackProvider>
       </body>
