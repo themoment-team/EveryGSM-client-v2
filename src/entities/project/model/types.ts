@@ -51,3 +51,10 @@ export interface ProjectType {
 export interface GetProjectsResponseType {
   projects: ProjectType[];
 }
+
+export interface GetMyResponseType {
+  liked: ProjectType[];
+  registered: ProjectType[];
+}
+
+export type CheckRequestStatusType = 'pending' | 'rejected';

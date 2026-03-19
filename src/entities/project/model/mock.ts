@@ -1,4 +1,4 @@
-import type { GetProjectsResponseType, MainCardModel, ProjectRequest } from './types';
+import type { GetProjectsResponseType, ProjectRequest, ProjectType } from './types';
 
 export const projectsMockData: GetProjectsResponseType = {
   projects: [
@@ -110,42 +110,62 @@ export const projectsMockData: GetProjectsResponseType = {
   ],
 };
 
-export const projectMockList: MainCardModel[] = [
+export const projectMockList: ProjectType[] = [
   {
-    id: 1,
-    imageSrc: '/images/example.jpg',
-    projectName: 'EveryGSM',
-    teamName: 'The Moment',
+    projectId: 1,
+    logo: '/images/example.jpg',
+    title: 'EveryGSM',
+    affiliation: 'The Moment',
     description: 'GSM의 모든 프로젝트를 한 눈에 확인할 수 있는 서비스입니다.',
-    tags: ['Next.js', 'TypeScript', 'TailwindCSS', 'FSD'],
-    links: [
-      { title: 'GitHub', url: 'https://github.com/themoment-team/EveryGSM-client-v2' },
-      { title: 'Service', url: 'https://everygsm.com' },
+    prodUrl: 'https://everygsm.com',
+    status: 'APPROVED',
+    reason: '',
+    createdAt: '2026-01-27T00:00:00',
+    techStack: [
+      { stackName: 'Next.js' },
+      { stackName: 'TypeScript' },
+      { stackName: 'TailwindCSS' },
+      { stackName: 'FSD' },
     ],
-    deployLink: 'https://everygsm.com',
-    isLiked: true,
+    repository: [
+      {
+        repoUrl: 'https://github.com/themoment-team/EveryGSM-client-v2',
+        repoName: 'EveryGSM-client-v2',
+      },
+    ],
+    liked: true,
   },
   {
-    id: 2,
-    imageSrc: '/images/example.jpg',
-    projectName: 'HelloGSM',
-    teamName: 'The Moment',
-    description: '광주소프트웨어마이서고등학교 입학 지원 서비스입니다.',
-    tags: ['Next.js', 'TypeScript', 'Emotion'],
-    links: [{ title: 'GitHub', url: 'https://github.com/themoment-team/hellogsm' }],
-    deployLink: 'https://hellogsm.kr',
-    isLiked: false,
+    projectId: 2,
+    logo: '/images/example.jpg',
+    title: 'HelloGSM',
+    affiliation: 'The Moment',
+    description: '광주소프트웨어마이스터고등학교 입학 지원 서비스입니다.',
+    prodUrl: 'https://hellogsm.kr',
+    status: 'APPROVED',
+    reason: '',
+    createdAt: '2025-12-01T00:00:00',
+    techStack: [{ stackName: 'Next.js' }, { stackName: 'TypeScript' }, { stackName: 'Emotion' }],
+    repository: [{ repoUrl: 'https://github.com/themoment-team/hellogsm', repoName: 'hellogsm' }],
+    liked: false,
   },
   {
-    id: 3,
-    imageSrc: '/images/example.jpg',
-    projectName: 'GSM-Auction',
-    teamName: 'Side Project',
+    projectId: 3,
+    logo: '/images/example.jpg',
+    title: 'GSM-Auction',
+    affiliation: 'Side Project',
     description: 'GSM 학생들을 위한 경매 서비스입니다.',
-    tags: ['React', 'JavaScript', 'Styled-Components'],
-    links: [{ title: 'GitHub', url: 'https://github.com' }],
-    deployLink: 'https://auction.gsm',
-    isLiked: true,
+    prodUrl: 'https://auction.gsm',
+    status: 'APPROVED',
+    reason: '',
+    createdAt: '2025-10-20T00:00:00',
+    techStack: [
+      { stackName: 'React' },
+      { stackName: 'JavaScript' },
+      { stackName: 'Styled-Components' },
+    ],
+    repository: [{ repoUrl: 'https://github.com/gsm-auction', repoName: 'gsm-auction' }],
+    liked: true,
   },
 ];
 
