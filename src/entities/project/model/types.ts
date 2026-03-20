@@ -30,7 +30,6 @@ export interface TechStackType {
 
 export interface RepositoryType {
   repoUrl: string;
-  repoName: string;
 }
 
 export interface ProjectType {
