@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import { ArrowIcon, Logo, PersonIcon } from '@/shared/assets';
 import { COOKIE_KEYS, OAUTH_SESSION_KEYS } from '@/shared/constants';
@@ -24,29 +26,33 @@ interface HeaderProps {
   initialUserInfoData: UserInfoResponseType | undefined;
 }
 
+const EXCLUDED_ROUTES = ['/callback'];
+
 const Header = ({ initialUserInfoData }: HeaderProps) => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
+  const queryClient = useQueryClient();
   const isLoggedIn = Boolean(getCookie(COOKIE_KEYS.ACCESS_TOKEN));
-  const { data: userInfoResponse } = useGetUserInfo({
+
+  const { data: userInfoData } = useGetUserInfo({
     initialData: initialUserInfoData,
     enabled: isLoggedIn,
   });
-  const userInfo = userInfoResponse?.data;
-
-  const role = userInfo?.role === 'ADMIN' ? 'admin' : 'client';
-  const links = NAV_LINKS[role];
-
-  const displayName = userInfo?.student?.name ?? '사용자';
-  const studentSummary =
-    userInfo?.student?.grade && userInfo?.student?.classNum && userInfo?.student?.number
-      ? `${userInfo.student.grade}학년 ${userInfo.student.classNum}반 ${userInfo.student.number}번`
-      : '학생 정보 없음';
 
   useOnClickOutside(menuRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
+
+  const userInfo = userInfoData?.data;
+  const student = userInfo?.student;
+  const role = userInfo?.role === 'ADMIN' ? 'admin' : 'client';
+  const links = NAV_LINKS[role];
+  const displayName = student?.name ?? '사용자';
+  const studentSummary =
+    student?.grade && student?.classNum && student?.number
+      ? `${student.grade}학년 ${student.classNum}반 ${student.number}번`
+      : '학생 정보 없음';
 
   const handleLogin = async () => {
     try {
@@ -83,10 +89,14 @@ const Header = ({ initialUserInfoData }: HeaderProps) => {
   const handleLogout = () => {
     setIsOpen(false);
     deleteCookie(COOKIE_KEYS.ACCESS_TOKEN);
+    queryClient.clear();
     router.replace('/');
   };
 
-  const EXCLUDED_ROUTES = ['/callback'];
+  const handleToggleMenu = () => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  };
+
   if (EXCLUDED_ROUTES.includes(pathname)) {
     return null;
   }
@@ -104,7 +114,7 @@ const Header = ({ initialUserInfoData }: HeaderProps) => {
           onClick={() => void handleLogin()}
           disabled={isLoginLoading}
         >
-          {isLoginLoading ? '이동 중...' : '로그인'}
+          로그인
         </button>
       ) : (
         <div className={cn('flex items-center gap-14')}>
@@ -125,7 +135,7 @@ const Header = ({ initialUserInfoData }: HeaderProps) => {
           <div ref={menuRef}>
             <button
               className={cn('flex cursor-pointer items-center gap-2')}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={handleToggleMenu}
             >
               <span className={cn('text-base font-semibold text-[#FC335A]')}>{displayName}</span>
               <PersonIcon />

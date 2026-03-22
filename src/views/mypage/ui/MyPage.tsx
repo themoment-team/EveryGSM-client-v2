@@ -30,8 +30,7 @@ const MyPage = ({
   const [selectedRequestStatus, setSelectedRequestStatus] =
     useState<RequestStatusFilterType>('PENDING');
 
-  const { data: userInfo } = useGetUserInfo();
-  const displayName = userInfo?.data.student?.name;
+  const { data: userInfoData } = useGetUserInfo();
   const { data: myProjectsData } = useGetMyProjects({
     initialData: initialMyProjectsData,
   });
@@ -42,11 +41,14 @@ const MyPage = ({
     initialData: initialMyRejectedProjectsData,
   });
 
+  const displayName = userInfoData?.data.student?.name ?? '사용자';
   const likedProjects = myProjectsData?.data.liked ?? [];
   const registeredProjects = myProjectsData?.data.registered ?? [];
   const pendingProjects = myPendingProjectsData?.data.projects ?? [];
   const rejectedProjects = myRejectedProjectsData?.data.projects ?? [];
-  const requestProjects = selectedRequestStatus === 'PENDING' ? pendingProjects : rejectedProjects;
+
+  const isPendingSelected = selectedRequestStatus === 'PENDING';
+  const requestProjects = isPendingSelected ? pendingProjects : rejectedProjects;
 
   return (
     <main className={cn('flex min-h-[calc(100vh-72px)] flex-col gap-y-4 bg-[#191919] p-4')}>
