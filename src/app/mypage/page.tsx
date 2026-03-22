@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { getUserInfo } from '@/entities/auth/index.server';
 import {
   getMyPendingProjects,
@@ -20,12 +22,14 @@ const Mypage = async () => {
   ]);
 
   return (
-    <MyPage
-      initialUserInfoData={initialUserInfoData}
-      initialMyProjectsData={initialMyProjectsData}
-      initialMyPendingProjectsData={initialMyPendingProjectsData}
-      initialMyRejectedProjectsData={initialMyRejectedProjectsData}
-    />
+    <Suspense fallback={null}>
+      <MyPage
+        initialUserInfoData={initialUserInfoData}
+        initialMyProjectsData={initialMyProjectsData}
+        initialMyPendingProjectsData={initialMyPendingProjectsData}
+        initialMyRejectedProjectsData={initialMyRejectedProjectsData}
+      />
+    </Suspense>
   );
 };
 

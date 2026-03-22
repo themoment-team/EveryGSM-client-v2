@@ -1,6 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
+import { toast } from 'sonner';
 
 import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import {
@@ -31,6 +35,9 @@ const MyPage = ({
 }: MyPageProps) => {
   const [selectedRequestStatus, setSelectedRequestStatus] =
     useState<RequestStatusFilterType>('PENDING');
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
 
   const { data: userInfoData } = useGetUserInfo({
     initialData: initialUserInfoData,
@@ -53,6 +60,24 @@ const MyPage = ({
 
   const isPendingSelected = selectedRequestStatus === 'PENDING';
   const requestProjects = isPendingSelected ? pendingProjects : rejectedProjects;
+
+  useEffect(() => {
+    const errorType = searchParams.get('error');
+
+    if (errorType !== 'forbidden') {
+      return;
+    }
+
+    toast.error('자신의 프로젝트만 조회할 수 있습니다.');
+
+    const nextParams = new URLSearchParams(searchParams.toString());
+    nextParams.delete('error');
+
+    const nextQuery = nextParams.toString();
+    const nextUrl = nextQuery ? `${pathname}?${nextQuery}` : pathname;
+
+    router.replace(nextUrl, { scroll: false });
+  }, [pathname, router, searchParams]);
 
   return (
     <main className={cn('flex min-h-[calc(100vh-72px)] flex-col gap-y-4 bg-[#191919] p-4')}>

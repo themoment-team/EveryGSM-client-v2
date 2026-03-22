@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -8,7 +8,7 @@ import { usePostSignIn } from '@/entities/auth';
 import { COOKIE_KEYS, OAUTH_SESSION_KEYS } from '@/shared/constants';
 import { cn, setCookie } from '@/shared/utils';
 
-const CallbackPage = () => {
+const CallbackContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { mutateAsync: signIn } = usePostSignIn();
@@ -80,6 +80,29 @@ const CallbackPage = () => {
         )}
       </div>
     </main>
+  );
+};
+
+const CallbackFallback = () => {
+  return (
+    <main className={cn('flex min-h-screen items-center justify-center bg-[#191919] p-4')}>
+      <div
+        className={cn(
+          'flex w-full max-w-120 flex-col items-center gap-y-4 rounded-xl border border-[#2F2F2F] bg-[rgba(34,34,34,0.5)] p-8 text-center backdrop-blur-[18px]',
+        )}
+      >
+        <h1 className={cn('text-2xl font-semibold text-white')}>로그인 처리 중</h1>
+        <p className={cn('text-sm font-medium text-[#DDDDDD]')}>잠시만 기다려주세요.</p>
+      </div>
+    </main>
+  );
+};
+
+const CallbackPage = () => {
+  return (
+    <Suspense fallback={<CallbackFallback />}>
+      <CallbackContent />
+    </Suspense>
   );
 };
 
