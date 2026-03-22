@@ -6,17 +6,18 @@ import { cn } from '@/shared/utils';
 import { ProjectRequestDetailContent } from '@/widgets/project-request-detail';
 
 interface ProjectRequestDetailPageProps {
-  initialProjectData?: ProjectResponseType;
+  projectId: number;
+  initialProjectData: ProjectResponseType;
 }
 
-const ProjectRequestDetailPage = ({ initialProjectData }: ProjectRequestDetailPageProps) => {
-  const projectId = initialProjectData?.data.projectId;
+const ProjectRequestDetailPage = ({
+  projectId,
+  initialProjectData,
+}: ProjectRequestDetailPageProps) => {
   const { data: myProjectData } = useGetMyProject(projectId, {
     initialData: initialProjectData,
   });
-  const project = myProjectData?.data;
-
-  if (!project) return null;
+  const project = myProjectData?.data ?? initialProjectData.data;
 
   return (
     <main className={cn('min-h-[calc(100vh-72px)] bg-[#191919] p-4')}>

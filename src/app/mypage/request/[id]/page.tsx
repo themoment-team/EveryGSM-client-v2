@@ -36,7 +36,7 @@ const ProjectRequestDetail = async ({ params }: { params: Promise<{ id: string }
     redirect('/mypage');
   }
 
-  return <ProjectRequestDetailPage initialProjectData={initialProjectData} />;
+  return <ProjectRequestDetailPage projectId={projectId} initialProjectData={initialProjectData} />;
 };
 
 export default ProjectRequestDetail;
