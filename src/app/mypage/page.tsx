@@ -1,3 +1,4 @@
+import { getUserInfo } from '@/entities/auth/index.server';
 import {
   getMyPendingProjects,
   getMyProjects,
@@ -6,11 +7,21 @@ import {
 import { MyPage } from '@/views/mypage';
 
 const Mypage = async () => {
-  const [initialMyProjectsData, initialMyPendingProjectsData, initialMyRejectedProjectsData] =
-    await Promise.all([getMyProjects(), getMyPendingProjects(), getMyRejectedProjects()]);
+  const [
+    initialUserInfoData,
+    initialMyProjectsData,
+    initialMyPendingProjectsData,
+    initialMyRejectedProjectsData,
+  ] = await Promise.all([
+    getUserInfo(),
+    getMyProjects(),
+    getMyPendingProjects(),
+    getMyRejectedProjects(),
+  ]);
 
   return (
     <MyPage
+      initialUserInfoData={initialUserInfoData}
       initialMyProjectsData={initialMyProjectsData}
       initialMyPendingProjectsData={initialMyPendingProjectsData}
       initialMyRejectedProjectsData={initialMyRejectedProjectsData}

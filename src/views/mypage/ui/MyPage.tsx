@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { useGetUserInfo } from '@/entities/auth';
+import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import {
   MyProjectsListResponseType,
   ProjectsListResponseType,
@@ -17,6 +17,7 @@ import { ProjectList } from '@/widgets/project-list';
 import { ProjectRequestList } from '@/widgets/project-request-list';
 
 interface MyPageProps {
+  initialUserInfoData?: UserInfoResponseType;
   initialMyProjectsData?: MyProjectsListResponseType;
   initialMyPendingProjectsData?: ProjectsListResponseType;
   initialMyRejectedProjectsData?: ProjectsListResponseType;
@@ -26,11 +27,14 @@ const MyPage = ({
   initialMyProjectsData,
   initialMyPendingProjectsData,
   initialMyRejectedProjectsData,
+  initialUserInfoData,
 }: MyPageProps) => {
   const [selectedRequestStatus, setSelectedRequestStatus] =
     useState<RequestStatusFilterType>('PENDING');
 
-  const { data: userInfoData } = useGetUserInfo();
+  const { data: userInfoData } = useGetUserInfo({
+    initialData: initialUserInfoData,
+  });
   const { data: myProjectsData } = useGetMyProjects({
     initialData: initialMyProjectsData,
   });
