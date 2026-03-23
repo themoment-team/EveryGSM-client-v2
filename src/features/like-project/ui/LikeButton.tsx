@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
-import { GetProjectsResponseType } from '@/entities/project';
+import { MyProjectsListResponseType, ProjectsListResponseType } from '@/entities/project';
 import { projectQueryKeys } from '@/shared/api';
 import { LikeIcon } from '@/shared/assets';
 
@@ -20,47 +20,62 @@ const LikeButton = ({ isLiked, projectId }: LikeButtonProps) => {
   const queryClient = useQueryClient();
   const isLoggedIn = false; // TODO: 인증 기능 개발 후 실제 로그인 상태로 대체
 
+  const updateProjectsListLike = (
+    old: ProjectsListResponseType | undefined,
+    currentIsLiked: boolean,
+  ) => {
+    if (!old) return old;
+
+    return {
+      ...old,
+      data: {
+        ...old.data,
+        projects: old.data.projects.map((p) =>
+          p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
+        ),
+      },
+    };
+  };
+
+  const updateMyProjectsLike = (
+    old: MyProjectsListResponseType | undefined,
+    currentIsLiked: boolean,
+  ) => {
+    if (!old) return old;
+
+    return {
+      ...old,
+      data: {
+        ...old.data,
+        liked: old.data.liked.map((p) =>
+          p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
+        ),
+        registered: old.data.registered.map((p) =>
+          p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
+        ),
+      },
+    };
+  };
+
   const { mutate: toggleLike } = useToggleProjectLike(projectId, {
     onMutate: () => setLocalIsLiked((prev) => !prev), // 낙관적 업데이트: 좋아요 상태를 즉시 반전
-    onError: () => setLocalIsLiked(isLiked), // 에러 발생 시 원래 상태로 롤백
+    onError: () => setLocalIsLiked((prev) => !prev), // 에러 발생 시 직전 상태로 롤백
     onSuccess: (_, currentIsLiked) => {
-      queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getProjects(), (old) => {
-        if (!old) return old;
-        return {
-          ...old,
-          projects: old.projects.map((p) =>
-            p.projectId === projectId ? { ...p, liked: !currentIsLiked } : p,
-          ),
-        };
-      });
-
-      // 마이 프로젝트 캐시 업데이트
-      queryClient.setQueryData<GetProjectsResponseType>(projectQueryKeys.getMyProjects(), (old) => {
-        if (!old) return old;
-
-        // 좋아요 취소 → 프로젝트 제거
-        if (currentIsLiked) {
-          return {
-            ...old,
-            projects: old.projects.filter((p) => p.projectId !== projectId),
-          };
-        }
-
-        // 좋아요 추가 → 프로젝트 추가 (전체 목록에서 찾아서)
-        const allProjects = queryClient.getQueryData<GetProjectsResponseType>(
-          projectQueryKeys.getProjects(),
-        );
-        const projectToAdd = allProjects?.projects.find((p) => p.projectId === projectId);
-
-        if (projectToAdd) {
-          return {
-            ...old,
-            projects: [{ ...projectToAdd, liked: true }, ...old.projects],
-          };
-        }
-
-        return old;
-      });
+      queryClient.setQueryData<ProjectsListResponseType>(projectQueryKeys.getProjects(), (old) =>
+        updateProjectsListLike(old, currentIsLiked),
+      );
+      queryClient.setQueryData<MyProjectsListResponseType>(
+        projectQueryKeys.getMyProjects(),
+        (old) => updateMyProjectsLike(old, currentIsLiked),
+      );
+      queryClient.setQueryData<ProjectsListResponseType>(
+        projectQueryKeys.getMyPendingProjects(),
+        (old) => updateProjectsListLike(old, currentIsLiked),
+      );
+      queryClient.setQueryData<ProjectsListResponseType>(
+        projectQueryKeys.getMyRejectedProjects(),
+        (old) => updateProjectsListLike(old, currentIsLiked),
+      );
     },
   });
 

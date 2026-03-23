@@ -1,2 +1,5 @@
-export * from './api/getMy';
+export * from './api/getMyPendingProjects';
+export * from './api/getMyProject';
+export * from './api/getMyProjects';
+export * from './api/getMyRejectedProjects';
 export * from './api/getProjects';

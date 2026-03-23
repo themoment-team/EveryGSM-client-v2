@@ -5,12 +5,12 @@ import { minutesToMs } from '@/shared/utils';
 
 import { ProjectsListResponseType } from './types';
 
-export const useGetProjects = (
+export const useGetMyRejectedProjects = (
   options?: Omit<UseQueryOptions<ProjectsListResponseType>, 'queryKey' | 'queryFn'>,
 ) =>
   useQuery({
-    queryKey: projectQueryKeys.getProjects(),
-    queryFn: () => get<ProjectsListResponseType>(projectUrl.getProjects()),
+    queryKey: projectQueryKeys.getMyRejectedProjects(),
+    queryFn: () => get<ProjectsListResponseType>(projectUrl.getMyRejectedProjects()),
     staleTime: minutesToMs(5),
     gcTime: minutesToMs(10),
     ...options,
