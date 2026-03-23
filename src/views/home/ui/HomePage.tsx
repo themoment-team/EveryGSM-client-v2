@@ -1,16 +1,23 @@
 'use client';
 
+import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import { ProjectsListResponseType, useGetProjects } from '@/entities/project';
 import { cn } from '@/shared/utils';
 import { HeroSection } from '@/widgets/hero-section';
 import { ProjectList } from '@/widgets/project-list';
 
 interface HomePageProps {
+  initialUserInfoData?: UserInfoResponseType;
   initialProjectsData?: ProjectsListResponseType;
 }
 
-const HomePage = ({ initialProjectsData }: HomePageProps) => {
+const HomePage = ({ initialUserInfoData, initialProjectsData }: HomePageProps) => {
+  const { data: userInfoData } = useGetUserInfo({
+    initialData: initialUserInfoData,
+  });
   const { data: projectsData } = useGetProjects({ initialData: initialProjectsData });
+
+  const isLoggedIn = Boolean(userInfoData?.data?.id);
   const projects = projectsData?.data.projects ?? [];
 
   return (
@@ -20,7 +27,7 @@ const HomePage = ({ initialProjectsData }: HomePageProps) => {
           title={`GSM의 프로젝트를 한 눈에,\nEveryGSM에서 간편하게 확인해보세요!`}
           description={`EveryGSM은 GSM의 프로젝트들을 한 곳에 모아 트래픽을 집중시키기 위한 서비스로,\n사용자가 GSM의 사이트를 보다 쉽게 방문하기 위해 만들어졌습니다.`}
         />
-        <ProjectList projects={projects} />
+        <ProjectList projects={projects} showRegisterCard={isLoggedIn} />
       </div>
     </main>
   );
