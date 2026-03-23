@@ -2,6 +2,7 @@
 
 import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import { ProjectsListResponseType, useGetProjects } from '@/entities/project';
+import { useHandleErrorQueryToast } from '@/shared/hooks';
 import { cn } from '@/shared/utils';
 import { HeroSection } from '@/widgets/hero-section';
 import { ProjectList } from '@/widgets/project-list';
@@ -19,6 +20,11 @@ const HomePage = ({ initialUserInfoData, initialProjectsData }: HomePageProps) =
 
   const isLoggedIn = Boolean(userInfoData?.data?.id);
   const projects = projectsData?.data.projects ?? [];
+
+  useHandleErrorQueryToast({
+    errorType: 'forbidden-admin',
+    message: '관리자 권한이 필요한 페이지입니다.',
+  });
 
   return (
     <main className="min-h-[calc(100vh-72px)] bg-[#191919]">
