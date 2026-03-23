@@ -6,6 +6,7 @@ import {
   getMyProjects,
   getMyRejectedProjects,
 } from '@/entities/project/index.server';
+import { SuspenseFallback } from '@/shared/ui';
 import { MyPage } from '@/views/mypage';
 
 const Mypage = async () => {
@@ -22,7 +23,7 @@ const Mypage = async () => {
   ]);
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<SuspenseFallback />}>
       <MyPage
         initialUserInfoData={initialUserInfoData}
         initialMyProjectsData={initialMyProjectsData}

@@ -1,5 +1,8 @@
+import { Suspense } from 'react';
+
 import { getUserInfo } from '@/entities/auth/index.server';
 import { getProjects } from '@/entities/project/index.server';
+import { SuspenseFallback } from '@/shared/ui';
 import { HomePage } from '@/views/home';
 
 const Home = async () => {
@@ -9,7 +12,12 @@ const Home = async () => {
   ]);
 
   return (
-    <HomePage initialUserInfoData={initialUserInfoData} initialProjectsData={initialProjectsData} />
+    <Suspense fallback={<SuspenseFallback />}>
+      <HomePage
+        initialUserInfoData={initialUserInfoData}
+        initialProjectsData={initialProjectsData}
+      />
+    </Suspense>
   );
 };
 

@@ -102,7 +102,9 @@ const Header = ({ initialUserInfoData }: HeaderProps) => {
   }
 
   return (
-    <header className={cn('sticky flex h-18 items-center justify-between bg-[#191919] px-10')}>
+    <header
+      className={cn('sticky top-0 z-50 flex h-18 items-center justify-between bg-[#191919] px-10')}
+    >
       <Link href="/">
         <Logo />
       </Link>
