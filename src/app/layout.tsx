@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
-import '@/shared/styles/globals.css';
 import { ModalContainer } from '@/shared/ui';
 import { Header } from '@/widgets/header';
+
+import '@/shared/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'EveryGSM',

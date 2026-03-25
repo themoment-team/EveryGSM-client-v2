@@ -1,28 +1,6 @@
-export interface LinkType {
-  title: string;
-  url: string;
-}
+import { ApiResponse } from '@/shared/types';
 
-export interface MainCardModel {
-  id: number;
-  imageSrc: string;
-  projectName: string;
-  teamName: string;
-  description: string;
-  tags: string[];
-  links: LinkType[];
-  deployLink: string;
-  isLiked: boolean;
-}
-
-export interface ProjectRequest {
-  id: number;
-  imageSrc: string;
-  projectName: string;
-  teamName: string;
-  date: string;
-  requestStatus: string;
-}
+export type StatusType = 'PENDING' | 'APPROVED' | 'REJECTED' | 'INACTIVE';
 
 export interface TechStackType {
   stackName: string;
@@ -39,7 +17,7 @@ export interface ProjectType {
   affiliation: string;
   description: string;
   prodUrl: string;
-  status: string;
+  status: StatusType;
   reason: string;
   createdAt: string;
   techStack: TechStackType[];
@@ -47,6 +25,17 @@ export interface ProjectType {
   liked: boolean;
 }
 
-export interface GetProjectsResponseType {
+export type ProjectResponseType = ApiResponse<ProjectType>;
+
+export interface ProjectsListType {
   projects: ProjectType[];
 }
+
+export type ProjectsListResponseType = ApiResponse<ProjectsListType>;
+
+export interface MyProjectsType {
+  liked: ProjectType[];
+  registered: ProjectType[];
+}
+
+export type MyProjectsListResponseType = ApiResponse<MyProjectsType>;

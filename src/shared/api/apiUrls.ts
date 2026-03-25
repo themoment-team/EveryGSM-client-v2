@@ -1,6 +1,20 @@
-export const API_URLS = {
-  projects: {
-    list: '/v1/projects',
-    like: (projectId: number) => `/v1/projects/like/${projectId}`,
-  },
+export const adminUrl = {
+  getAdminRequests: () => '/api/v2/admin/requests',
+  patchAdminRejectProject: (projectId: number) => `/api/v2/admin/reject/${projectId}`,
+  patchAdminApproveProject: (projectId: number) => `/api/v2/admin/approve/${projectId}`,
+} as const;
+
+export const authUrl = {
+  postSignIn: () => '/api/v2/auth/signin',
+} as const;
+
+export const projectUrl = {
+  deleteProjectLike: (projectId: number) => `/api/v2/projects/like/${projectId}`,
+  getProjects: () => '/api/v2/projects',
+  getMyProjects: () => '/api/v2/projects/my',
+  getMyProject: (id?: number) => `/api/v2/projects/my/${id}`,
+  getMyRejectedProjects: () => '/api/v2/projects/my/rejected',
+  getMyPendingProjects: () => '/api/v2/projects/my/pending',
+  postProjectRegistration: () => '/api/v2/projects/registration',
+  postProjectLike: (projectId: number) => `/api/v2/projects/like/${projectId}`,
 } as const;
