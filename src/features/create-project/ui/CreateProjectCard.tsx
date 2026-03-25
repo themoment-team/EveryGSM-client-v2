@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import { PlusIcon } from '@/shared/assets';
+import { AddProjectIcon } from '@/shared/assets';
 import { cn } from '@/shared/utils';
 
 import { PROJECT_CREATE_ROUTE } from '../model/routes';
@@ -29,7 +29,7 @@ const CreateProjectCard = ({ className }: CreateProjectCardProps) => {
         프로젝트 등록
       </span>
 
-      <PlusIcon className="text-[#9A9A9A] transition-colors duration-150 group-hover:text-white" />
+      <AddProjectIcon className="text-[#9A9A9A] transition-colors duration-150 group-hover:text-white" />
     </button>
   );
 };

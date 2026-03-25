@@ -2,7 +2,7 @@ import type { ComponentPropsWithoutRef } from 'react';
 
 type IconProps = ComponentPropsWithoutRef<'svg'>;
 
-const PersonIcon = (props: IconProps) => (
+const AddProjectIcon = (props: IconProps) => (
   <svg
     width="48"
     height="48"
@@ -18,4 +18,4 @@ const PersonIcon = (props: IconProps) => (
   </svg>
 );
 
-export default PersonIcon;
+export default AddProjectIcon;
