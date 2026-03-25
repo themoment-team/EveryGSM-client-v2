@@ -35,11 +35,11 @@ const Header = ({ initialUserInfoData }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const isLoggedIn = Boolean(getCookie(COOKIE_KEYS.ACCESS_TOKEN));
+  const hasAccessToken = Boolean(getCookie(COOKIE_KEYS.ACCESS_TOKEN));
 
   const { data: userInfoData } = useGetUserInfo({
     initialData: initialUserInfoData,
-    enabled: isLoggedIn,
+    enabled: hasAccessToken,
   });
 
   useOnClickOutside(menuRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
@@ -108,7 +108,7 @@ const Header = ({ initialUserInfoData }: HeaderProps) => {
       <Link href="/">
         <Logo />
       </Link>
-      {!isLoggedIn ? (
+      {!hasAccessToken && !userInfo ? (
         <button
           className={cn(
             'flex h-9 w-18.25 cursor-pointer items-center justify-center rounded-[1.125rem] border border-[#FC335A] text-base font-semibold text-[#FC335A]',

@@ -2,8 +2,9 @@
 
 import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import { ProjectsListResponseType, useGetProjects } from '@/entities/project';
+import { COOKIE_KEYS } from '@/shared/constants';
 import { useHandleErrorQueryToast } from '@/shared/hooks';
-import { cn } from '@/shared/utils';
+import { cn, getCookie } from '@/shared/utils';
 import { HeroSection } from '@/widgets/hero-section';
 import { ProjectList } from '@/widgets/project-list';
 
@@ -13,8 +14,11 @@ interface HomePageProps {
 }
 
 const HomePage = ({ initialUserInfoData, initialProjectsData }: HomePageProps) => {
+  const hasAccessToken = Boolean(getCookie(COOKIE_KEYS.ACCESS_TOKEN));
+
   const { data: userInfoData } = useGetUserInfo({
     initialData: initialUserInfoData,
+    enabled: hasAccessToken,
   });
   const { data: projectsData } = useGetProjects({ initialData: initialProjectsData });
 

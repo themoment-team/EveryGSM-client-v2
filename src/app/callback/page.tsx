@@ -36,10 +36,8 @@ const CallbackContent = () => {
           throw new Error('PKCE 검증 정보가 없습니다. 다시 로그인해주세요.');
         }
 
-        sessionStorage.removeItem(OAUTH_SESSION_KEYS.STATE);
-        sessionStorage.removeItem(OAUTH_SESSION_KEYS.CODE_VERIFIER);
+        const { data: signInData } = await signIn({ authCode, redirectUri, codeVerifier });
 
-        const { data: signInData } = await signIn({ authCode, redirectUri });
         setCookie(COOKIE_KEYS.ACCESS_TOKEN, signInData.accessToken);
 
         router.replace('/');
@@ -51,6 +49,9 @@ const CallbackContent = () => {
         setTimeout(() => {
           router.replace('/');
         }, 3000);
+      } finally {
+        sessionStorage.removeItem(OAUTH_SESSION_KEYS.STATE);
+        sessionStorage.removeItem(OAUTH_SESSION_KEYS.CODE_VERIFIER);
       }
     };
 
