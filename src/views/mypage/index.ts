@@ -1,1 +1,2 @@
-export { default as MyPage } from './ui';
+export * from './model/mock';
+export { default as MyPage } from './ui/MyPage';

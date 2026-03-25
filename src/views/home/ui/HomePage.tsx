@@ -1,17 +1,20 @@
-import { cookies } from 'next/headers';
+'use client';
 
-import { getProjects } from '@/entities/project/index.server';
-import { COOKIE_KEYS } from '@/shared/constants';
+import { ProjectsListResponseType, useGetProjects } from '@/entities/project';
 import { cn } from '@/shared/utils';
 import { HeroSection } from '@/widgets/hero-section';
 import { ProjectList } from '@/widgets/project-list';
 
-const HomePage = async () => {
-  const initialProjectsData = await getProjects();
+interface HomePageProps {
+  initialProjectsData?: ProjectsListResponseType;
+}
 
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get(COOKIE_KEYS.ACCESS_TOKEN)?.value;
-  const isLoggedIn = Boolean(accessToken);
+const HomePage = ({ initialProjectsData }: HomePageProps) => {
+  const { data: projectsData } = useGetProjects({
+    initialData: initialProjectsData,
+  });
+
+  const projects = projectsData?.data.projects ?? [];
 
   return (
     <main className="min-h-[calc(100vh-72px)] bg-[#191919]">
@@ -20,7 +23,7 @@ const HomePage = async () => {
           title={`GSM의 프로젝트를 한 눈에,\nEveryGSM에서 간편하게 확인해보세요!`}
           description={`EveryGSM은 GSM의 프로젝트들을 한 곳에 모아 트래픽을 집중시키기 위한 서비스로,\n사용자가 GSM의 사이트를 보다 쉽게 방문하기 위해 만들어졌습니다.`}
         />
-        <ProjectList initialProjectsData={initialProjectsData} isLoggedIn={isLoggedIn} />
+        <ProjectList projects={projects} />
       </div>
     </main>
   );

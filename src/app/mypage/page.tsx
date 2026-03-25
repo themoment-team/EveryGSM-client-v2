@@ -1,10 +1,21 @@
-import { getMy } from '@/entities/project/index.server';
+import {
+  getMyPendingProjects,
+  getMyProjects,
+  getMyRejectedProjects,
+} from '@/entities/project/index.server';
 import { MyPage } from '@/views/mypage';
 
 const Mypage = async () => {
-  const initialMyData = await getMy();
+  const [initialMyProjectsData, initialMyPendingProjectsData, initialMyRejectedProjectsData] =
+    await Promise.all([getMyProjects(), getMyPendingProjects(), getMyRejectedProjects()]);
 
-  return <MyPage initialMyData={initialMyData} />;
+  return (
+    <MyPage
+      initialMyProjectsData={initialMyProjectsData}
+      initialMyPendingProjectsData={initialMyPendingProjectsData}
+      initialMyRejectedProjectsData={initialMyRejectedProjectsData}
+    />
+  );
 };
 
 export default Mypage;
