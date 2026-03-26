@@ -15,7 +15,7 @@ const NotFound = () => {
       </h1>
       <p
         className={cn(
-          'text-center text-2xl leading-[2.7rem] font-bold tracking-[-0.045rem] text-[#FFF]',
+          'text-center text-4xl leading-[2.7rem] font-bold tracking-[-0.045rem] text-[#FFF]',
         )}
       >
         잘못된 경로입니다
