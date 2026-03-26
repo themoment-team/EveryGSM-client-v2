@@ -28,6 +28,24 @@ interface HeaderProps {
 
 const EXCLUDED_ROUTES = ['/callback'];
 
+const formatStudentSummary = (studentNumber?: string | null): string => {
+  if (!studentNumber) {
+    return '학번 정보 없음';
+  }
+
+  const normalizedStudentNumber = studentNumber.trim();
+
+  if (!/^\d{4}$/.test(normalizedStudentNumber)) {
+    return normalizedStudentNumber;
+  }
+
+  const grade = Number(normalizedStudentNumber[0]);
+  const classNum = Number(normalizedStudentNumber[1]);
+  const number = Number(normalizedStudentNumber.slice(2));
+
+  return `${grade}학년 ${classNum}반 ${number}번`;
+};
+
 const Header = ({ initialUserInfoData }: HeaderProps) => {
   const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -45,14 +63,10 @@ const Header = ({ initialUserInfoData }: HeaderProps) => {
   useOnClickOutside(menuRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
 
   const userInfo = userInfoData?.data;
-  const student = userInfo?.student;
   const role = userInfo?.role === 'ADMIN' ? 'admin' : 'client';
   const links = NAV_LINKS[role];
-  const displayName = student?.name ?? '사용자';
-  const studentSummary =
-    student?.grade && student?.classNum && student?.number
-      ? `${student.grade}학년 ${student.classNum}반 ${student.number}번`
-      : '학생 정보 없음';
+  const displayName = userInfo?.name ?? '사용자';
+  const studentSummary = formatStudentSummary(userInfo?.studentNumber);
 
   const handleLogin = async () => {
     try {

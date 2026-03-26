@@ -20,7 +20,7 @@ const AdminClientGuard = ({ children, initialUserInfoData }: AdminClientGuardPro
   });
 
   const accountRole = userInfoData?.data.role;
-  const isAdminRole = accountRole === 'ROOT' || accountRole === 'ADMIN';
+  const isAdminRole = accountRole === 'ADMIN';
 
   useEffect(() => {
     if (isUserInfoPending || isAdminRole || hasRedirectedRef.current) {

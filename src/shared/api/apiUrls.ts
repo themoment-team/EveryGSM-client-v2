@@ -6,7 +6,7 @@ export const adminUrl = {
 
 export const authUrl = {
   postSignIn: () => '/api/v2/auth/signin',
-  getUserInfo: () => 'https://oauth-userinfo.data.hellogsm.kr/userinfo',
+  getUserInfo: () => '/api/v2/users/me',
 } as const;
 
 export const projectUrl = {

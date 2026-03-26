@@ -46,7 +46,7 @@ const MyPage = ({
     initialData: initialMyRejectedProjectsData,
   });
 
-  const displayName = userInfoData?.data.student?.name ?? '사용자';
+  const displayName = userInfoData?.data.name ?? '사용자';
   const likedProjects = myProjectsData?.data.liked ?? [];
   const registeredProjects = myProjectsData?.data.registered ?? [];
   const pendingProjects = myPendingProjectsData?.data.projects ?? [];
