@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <div
       className={cn(
-        'flex h-screen flex-col items-center justify-center gap-6 overflow-hidden bg-[#191919] px-4 text-center',
+        'flex h-[calc(100vh-72px)] flex-col items-center justify-center gap-6 bg-[#191919]',
       )}
     >
       <h1 className={cn('text-[8rem] font-bold text-[#FC335A]')}>404</h1>
