@@ -12,7 +12,7 @@ interface AdminLayoutProps {
 const AdminLayout = async ({ children }: AdminLayoutProps) => {
   const [initialUserInfoData] = await Promise.all([getUserInfo()]);
   const accountRole = initialUserInfoData?.data.role;
-  const isAdminRole = accountRole === 'ROOT' || accountRole === 'ADMIN';
+  const isAdminRole = accountRole === 'ADMIN';
 
   if (!isAdminRole) {
     redirect('/?error=forbidden-admin');
