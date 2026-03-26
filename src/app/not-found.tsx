@@ -30,7 +30,7 @@ const NotFound = () => {
           'flex items-center gap-4 px-3 py-1.5 text-base leading-6 font-medium text-[#DDD]',
         )}
       >
-        메인페이지로 <ArrowIcon />
+        메인페이지로 <ArrowIcon color="#DDD" />
       </Link>
     </div>
   );
