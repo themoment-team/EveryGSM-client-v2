@@ -26,7 +26,9 @@ const NotFound = () => {
       </p>
       <Link
         href="/"
-        className={cn('flex items-center gap-4 text-base leading-6 font-medium text-[#DDD]')}
+        className={cn(
+          'flex items-center gap-4 px-3 py-1.5 text-base leading-6 font-medium text-[#DDD]',
+        )}
       >
         메인페이지로 <ArrowIcon />
       </Link>
