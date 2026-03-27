@@ -11,6 +11,7 @@ interface ApiFetcherOptions {
   method?: RequestInit['method'];
   cache?: RequestCache;
   headers?: HeadersInit;
+  returnErrorBody?: boolean;
 }
 
 export const apiFetcher = async <T>({
@@ -20,6 +21,7 @@ export const apiFetcher = async <T>({
   method = 'GET',
   cache = 'no-store',
   headers,
+  returnErrorBody = false,
 }: ApiFetcherOptions): Promise<T | undefined> => {
   try {
     const cookieStore = await cookies();
@@ -39,6 +41,15 @@ export const apiFetcher = async <T>({
 
     if (!response.ok) {
       console.error(`[${context}] HTTP 오류: ${response.status} ${response.statusText}`);
+
+      if (returnErrorBody) {
+        try {
+          return (await response.json()) as T;
+        } catch {
+          return undefined;
+        }
+      }
+
       return undefined;
     }
 

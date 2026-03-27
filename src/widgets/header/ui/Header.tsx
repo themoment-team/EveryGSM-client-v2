@@ -3,48 +3,132 @@
 import { useRef, useState } from 'react';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
+import { useQueryClient } from '@tanstack/react-query';
+
+import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import { ArrowIcon, Logo, PersonIcon } from '@/shared/assets';
+import { COOKIE_KEYS, OAUTH_SESSION_KEYS } from '@/shared/constants';
 import { useOnClickOutside } from '@/shared/hooks';
-import { cn } from '@/shared/utils';
+import {
+  cn,
+  createAuthorizeUrl,
+  deleteCookie,
+  generateCodeChallenge,
+  generateCodeVerifier,
+  getCookie,
+} from '@/shared/utils';
 
 import { NAV_LINKS } from '../model/navigation';
 
-const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
+interface HeaderProps {
+  initialUserInfoData: UserInfoResponseType | undefined;
+}
+
+const EXCLUDED_ROUTES = ['/callback'];
+
+const formatStudentSummary = (studentNumber?: string | null): string => {
+  if (!studentNumber) {
+    return '학번 정보 없음';
+  }
+
+  const normalizedStudentNumber = studentNumber.trim();
+
+  if (!/^\d{4}$/.test(normalizedStudentNumber)) {
+    return normalizedStudentNumber;
+  }
+
+  const grade = Number(normalizedStudentNumber[0]);
+  const classNum = Number(normalizedStudentNumber[1]);
+  const number = Number(normalizedStudentNumber.slice(2));
+
+  return `${grade}학년 ${classNum}반 ${number}번`;
+};
+
+const Header = ({ initialUserInfoData }: HeaderProps) => {
+  const [isLoginLoading, setIsLoginLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const hasAccessToken = Boolean(getCookie(COOKIE_KEYS.ACCESS_TOKEN));
 
-  const role = 'client';
-  const links = NAV_LINKS[role];
-
-  const mockUser = {
-    name: '홍길동',
-    grade: 1,
-    class: 1,
-    number: 20,
-  };
+  const { data: userInfoData } = useGetUserInfo({
+    initialData: initialUserInfoData,
+    enabled: hasAccessToken,
+  });
 
   useOnClickOutside(menuRef as React.RefObject<HTMLElement>, () => setIsOpen(false));
 
-  const handleLogout = () => {
-    setIsOpen(false);
-    setIsLogin(false);
+  const userInfo = userInfoData?.data;
+  const role = userInfo?.role === 'ADMIN' ? 'admin' : 'client';
+  const links = NAV_LINKS[role];
+  const displayName = userInfo?.name ?? '사용자';
+  const studentSummary = formatStudentSummary(userInfo?.studentNumber);
+
+  const handleLogin = async () => {
+    try {
+      setIsLoginLoading(true);
+
+      const clientId = process.env.NEXT_PUBLIC_DATAGSM_OAUTH_CLIENT_ID;
+      const redirectUri = `${window.location.origin}/callback`;
+
+      if (!clientId) {
+        throw new Error('OAuth 환경 변수가 설정되지 않았습니다.');
+      }
+
+      const state = crypto.randomUUID();
+      const codeVerifier = generateCodeVerifier();
+      const codeChallenge = await generateCodeChallenge(codeVerifier);
+
+      sessionStorage.setItem(OAUTH_SESSION_KEYS.STATE, state);
+      sessionStorage.setItem(OAUTH_SESSION_KEYS.CODE_VERIFIER, codeVerifier);
+
+      const authorizeUrl = createAuthorizeUrl({
+        clientId,
+        redirectUri,
+        state,
+        codeChallenge,
+      });
+
+      window.location.href = authorizeUrl;
+    } catch (error) {
+      setIsLoginLoading(false);
+      console.error('OAuth 로그인 시작 실패:', error);
+    }
   };
 
+  const handleLogout = () => {
+    setIsOpen(false);
+    deleteCookie(COOKIE_KEYS.ACCESS_TOKEN);
+    queryClient.clear();
+    router.replace('/');
+  };
+
+  const handleToggleMenu = () => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+  };
+
+  if (EXCLUDED_ROUTES.includes(pathname)) {
+    return null;
+  }
+
   return (
-    <header className={cn('sticky flex h-18 items-center justify-between bg-[#191919] px-10')}>
+    <header
+      className={cn('sticky top-0 z-50 flex h-18 items-center justify-between bg-[#191919] px-10')}
+    >
       <Link href="/">
         <Logo />
       </Link>
-      {!isLogin ? (
+      {!hasAccessToken && !userInfo ? (
         <button
           className={cn(
             'flex h-9 w-18.25 cursor-pointer items-center justify-center rounded-[1.125rem] border border-[#FC335A] text-base font-semibold text-[#FC335A]',
           )}
-          onClick={() => setIsLogin(true)}
+          onClick={() => void handleLogin()}
+          disabled={isLoginLoading}
         >
           로그인
         </button>
@@ -67,9 +151,9 @@ const Header = () => {
           <div ref={menuRef}>
             <button
               className={cn('flex cursor-pointer items-center gap-2')}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={handleToggleMenu}
             >
-              <span className={cn('text-base font-semibold text-[#FC335A]')}>{mockUser.name}</span>
+              <span className={cn('text-base font-semibold text-[#FC335A]')}>{displayName}</span>
               <PersonIcon />
             </button>
             {isOpen && (
@@ -80,10 +164,10 @@ const Header = () => {
               >
                 <div className={cn('flex w-full flex-col gap-2')}>
                   <span className={cn('text-2xl/tight font-semibold text-white')}>
-                    {mockUser.name}
+                    {displayName}
                   </span>
                   <span className={cn('text-sm/none font-medium text-[#9A9A9A]')}>
-                    {mockUser.grade}학년 {mockUser.class}반 {mockUser.number}번
+                    {studentSummary}
                   </span>
                 </div>
                 <button
