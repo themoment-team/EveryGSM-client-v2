@@ -6,6 +6,7 @@ export const adminUrl = {
 
 export const authUrl = {
   postSignIn: () => '/api/v2/auth/signin',
+  getUserInfo: () => '/api/v2/users/me',
 } as const;
 
 export const projectUrl = {

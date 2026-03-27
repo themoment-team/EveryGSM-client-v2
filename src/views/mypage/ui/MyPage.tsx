@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 
+import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
 import {
   MyProjectsListResponseType,
   ProjectsListResponseType,
@@ -10,12 +11,14 @@ import {
   useGetMyRejectedProjects,
 } from '@/entities/project';
 import { RequestStatusFilter, RequestStatusFilterType } from '@/features/request-status-filter';
+import { useHandleErrorQueryToast } from '@/shared/hooks';
 import { cn } from '@/shared/utils';
 import { HeroSection } from '@/widgets/hero-section';
 import { ProjectList } from '@/widgets/project-list';
 import { ProjectRequestList } from '@/widgets/project-request-list';
 
 interface MyPageProps {
+  initialUserInfoData?: UserInfoResponseType;
   initialMyProjectsData?: MyProjectsListResponseType;
   initialMyPendingProjectsData?: ProjectsListResponseType;
   initialMyRejectedProjectsData?: ProjectsListResponseType;
@@ -25,10 +28,14 @@ const MyPage = ({
   initialMyProjectsData,
   initialMyPendingProjectsData,
   initialMyRejectedProjectsData,
+  initialUserInfoData,
 }: MyPageProps) => {
   const [selectedRequestStatus, setSelectedRequestStatus] =
     useState<RequestStatusFilterType>('PENDING');
 
+  const { data: userInfoData } = useGetUserInfo({
+    initialData: initialUserInfoData,
+  });
   const { data: myProjectsData } = useGetMyProjects({
     initialData: initialMyProjectsData,
   });
@@ -39,11 +46,19 @@ const MyPage = ({
     initialData: initialMyRejectedProjectsData,
   });
 
+  const displayName = userInfoData?.data.name ?? '사용자';
   const likedProjects = myProjectsData?.data.liked ?? [];
   const registeredProjects = myProjectsData?.data.registered ?? [];
   const pendingProjects = myPendingProjectsData?.data.projects ?? [];
   const rejectedProjects = myRejectedProjectsData?.data.projects ?? [];
-  const requestProjects = selectedRequestStatus === 'PENDING' ? pendingProjects : rejectedProjects;
+
+  const isPendingSelected = selectedRequestStatus === 'PENDING';
+  const requestProjects = isPendingSelected ? pendingProjects : rejectedProjects;
+
+  useHandleErrorQueryToast({
+    errorType: 'forbidden',
+    message: '자신의 프로젝트만 조회할 수 있습니다.',
+  });
 
   return (
     <main className={cn('flex min-h-[calc(100vh-72px)] flex-col gap-y-4 bg-[#191919] p-4')}>
@@ -52,7 +67,7 @@ const MyPage = ({
           <HeroSection
             title={
               <>
-                <span className={cn('text-[#FC335A]')}>김유찬</span> 님이 좋아요한 프로젝트
+                <span className={cn('text-[#FC335A]')}>{displayName}</span> 님이 좋아요한 프로젝트
               </>
             }
           />
@@ -63,7 +78,7 @@ const MyPage = ({
           <HeroSection
             title={
               <>
-                <span className={cn('text-[#FC335A]')}>김유찬</span> 님이 등록한 프로젝트
+                <span className={cn('text-[#FC335A]')}>{displayName}</span> 님이 등록한 프로젝트
               </>
             }
           />
@@ -75,7 +90,8 @@ const MyPage = ({
             <HeroSection
               title={
                 <>
-                  <span className={cn('text-[#FC335A]')}>김유찬</span> 님이 등록 요청한 프로젝트
+                  <span className={cn('text-[#FC335A]')}>{displayName}</span> 님이 등록 요청한
+                  프로젝트
                 </>
               }
             />
