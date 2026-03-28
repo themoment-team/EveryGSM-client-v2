@@ -17,12 +17,13 @@ const AppToaster = () => {
         style: {
           background: '#1b1b1b',
           border: '1px solid #2F2F2F',
-          color: '#ff4d4f',
           fontWeight: 600,
         },
         classNames: {
           toast: cn('relative pr-10'),
-          icon: cn('text-[#ff4d4f]'),
+          success: cn('!text-[#7eff57] [&_[data-sonner-icon]]:text-[#52c41a]'),
+          error: cn('!text-[#ff4d4f] [&_[data-sonner-icon]]:text-[#ff4d4f]'),
+          warning: cn('!text-[#ffd049] [&_[data-sonner-icon]]:text-[#faad14]'),
           closeButton: cn(
             '!left-auto !right-[-4px] !top-2',
             '!bg-transparent !border-none !shadow-none',
