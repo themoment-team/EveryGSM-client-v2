@@ -21,6 +21,7 @@ const AppToaster = () => {
           success: cn('!text-[#7eff57] [&_[data-sonner-icon]]:text-[#52c41a]'),
           error: cn('!text-[#ff4d4f] [&_[data-sonner-icon]]:text-[#ff4d4f]'),
           warning: cn('!text-[#ffd049] [&_[data-sonner-icon]]:text-[#faad14]'),
+          info: cn('!text-[#4dabf7] [&_[data-sonner-icon]]:text-[#339af0]'),
           closeButton: cn(
             '!left-auto !right-[-4px] !top-2',
             '!bg-transparent !border-none !shadow-none',
