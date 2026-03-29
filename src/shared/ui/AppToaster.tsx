@@ -10,8 +10,6 @@ const AppToaster = () => {
       position="top-right"
       style={{ top: '80px' }}
       closeButton
-      expand={false}
-      richColors={false}
       toastOptions={{
         duration: 4500,
         style: {
