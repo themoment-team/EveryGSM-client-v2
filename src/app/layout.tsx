@@ -4,7 +4,7 @@ import { getUserInfo } from '@/entities/auth/index.server';
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import { ModalContainer } from '@/shared/ui';
-import AppToaster from '@/shared/ui/AppToaster';
+import { AppToaster } from '@/shared/ui';
 import { Header } from '@/widgets/header';
 
 import '@/shared/styles/globals.css';
