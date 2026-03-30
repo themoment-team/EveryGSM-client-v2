@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 import { useGetMyInfo, UserInfoResponseType } from '@/entities/auth';
-
 import { ProjectsListResponseType, useGetProjects } from '@/entities/project';
 import { COOKIE_KEYS } from '@/shared/constants';
 import { useHandleErrorQueryToast } from '@/shared/hooks';
