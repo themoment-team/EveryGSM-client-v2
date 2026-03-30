@@ -1,3 +1,3 @@
 export * from './model/types';
-export * from './model/useGetUserInfo';
+export * from './model/useGetMyInfo';
 export * from './model/usePostSignIn';

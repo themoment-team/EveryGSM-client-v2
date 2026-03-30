@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { getUserInfo } from '@/entities/auth/index.server';
+import { getMyInfo } from '@/entities/auth/index.server';
 import {
   getMyPendingProjects,
   getMyProjects,
@@ -16,7 +16,7 @@ const Mypage = async () => {
     initialMyPendingProjectsData,
     initialMyRejectedProjectsData,
   ] = await Promise.all([
-    getUserInfo(),
+    getMyInfo(),
     getMyProjects(),
     getMyPendingProjects(),
     getMyRejectedProjects(),

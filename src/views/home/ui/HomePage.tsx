@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
+import { useGetMyInfo, UserInfoResponseType } from '@/entities/auth';
 import { ProjectsListResponseType, useGetProjects } from '@/entities/project';
 import { COOKIE_KEYS } from '@/shared/constants';
 import { useHandleErrorQueryToast } from '@/shared/hooks';
@@ -16,7 +16,7 @@ interface HomePageProps {
 const HomePage = ({ initialUserInfoData, initialProjectsData }: HomePageProps) => {
   const hasAccessToken = Boolean(getCookie(COOKIE_KEYS.ACCESS_TOKEN));
 
-  const { data: userInfoData } = useGetUserInfo({
+  const { data: userInfoData } = useGetMyInfo({
     initialData: initialUserInfoData,
     enabled: hasAccessToken,
   });

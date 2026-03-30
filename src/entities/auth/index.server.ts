@@ -1,1 +1,1 @@
-export * from './api/getUserInfo';
+export * from './api/getMyInfo';

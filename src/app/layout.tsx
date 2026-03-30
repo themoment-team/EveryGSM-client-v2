@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Toaster } from 'sonner';
 
-import { getUserInfo } from '@/entities/auth/index.server';
+import { getMyInfo } from '@/entities/auth/index.server';
 import { TanStackProvider } from '@/shared/lib';
 import { pretendard } from '@/shared/styles';
 import { ModalContainer } from '@/shared/ui';
@@ -19,7 +19,7 @@ const RootLayout = async ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const [initialUserInfoData] = await Promise.all([getUserInfo()]);
+  const [initialUserInfoData] = await Promise.all([getMyInfo()]);
 
   return (
     <html lang="ko">
