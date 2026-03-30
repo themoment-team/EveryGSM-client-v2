@@ -8,16 +8,20 @@ import type { ProjectType } from '../model/types';
 
 interface ProjectRequestCardProps {
   data: ProjectType;
+  detailPathPrefix?: '/admin/request' | '/mypage/request';
 }
 
-const ProjectRequestCard = ({ data }: ProjectRequestCardProps) => {
+const ProjectRequestCard = ({
+  data,
+  detailPathPrefix = '/mypage/request',
+}: ProjectRequestCardProps) => {
   const { logo, title, affiliation, createdAt, status, projectId } = data;
   const requestStatusMeta = getProjectRequestStatusMeta(status);
   const formattedDate = new Date(createdAt).toISOString().substring(0, 10);
 
   return (
     <Link
-      href={`/mypage/request/${projectId}`}
+      href={`${detailPathPrefix}/${projectId}`}
       className={cn(
         'flex w-full max-w-295 justify-between rounded-xl bg-[rgba(34,34,34,0.50)] p-6 shadow-[inset_0_0_0_1px_#2F2F2F] backdrop-blur-[1.125rem]',
       )}

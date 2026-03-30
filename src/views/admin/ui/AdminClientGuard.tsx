@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { useGetUserInfo, UserInfoResponseType } from '@/entities/auth';
+import { useGetMyInfo, UserInfoResponseType } from '@/entities/auth';
 
 interface AdminClientGuardProps {
   children: ReactNode;
@@ -14,7 +14,7 @@ interface AdminClientGuardProps {
 const AdminClientGuard = ({ children, initialUserInfoData }: AdminClientGuardProps) => {
   const hasRedirectedRef = useRef(false);
   const router = useRouter();
-  const { data: userInfoData, isPending: isUserInfoPending } = useGetUserInfo({
+  const { data: userInfoData, isPending: isUserInfoPending } = useGetMyInfo({
     initialData: initialUserInfoData,
     retry: false,
   });

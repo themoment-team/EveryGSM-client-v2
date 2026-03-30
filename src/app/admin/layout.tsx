@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { redirect } from 'next/navigation';
 
-import { getUserInfo } from '@/entities/auth/index.server';
+import { getMyInfo } from '@/entities/auth/index.server';
 import { AdminClientGuard } from '@/views/admin';
 
 interface AdminLayoutProps {
@@ -10,7 +10,7 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout = async ({ children }: AdminLayoutProps) => {
-  const [initialUserInfoData] = await Promise.all([getUserInfo()]);
+  const [initialUserInfoData] = await Promise.all([getMyInfo()]);
   const accountRole = initialUserInfoData?.data.role;
   const isAdminRole = accountRole === 'ADMIN';
 
