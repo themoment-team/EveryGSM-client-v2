@@ -1,5 +1,6 @@
 export const adminUrl = {
   getAdminRequests: () => '/api/v2/admin/requests',
+  getAdminRequest: (id: number) => `/api/v2/admin/requests/${id}`,
   patchAdminRejectProject: (projectId: number) => `/api/v2/admin/reject/${projectId}`,
   patchAdminApproveProject: (projectId: number) => `/api/v2/admin/approve/${projectId}`,
 } as const;
@@ -7,6 +8,10 @@ export const adminUrl = {
 export const authUrl = {
   postSignIn: () => '/api/v2/auth/signin',
   getUserInfo: () => '/api/v2/users/me',
+} as const;
+
+export const userUrl = {
+  getMyInfo: () => '/api/v2/users/me',
 } as const;
 
 export const projectUrl = {
