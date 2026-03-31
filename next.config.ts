@@ -4,14 +4,16 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
 
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_PROJECT_LOGO_S3_URL || '',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    remotePatterns: process.env.NEXT_PUBLIC_PROJECT_LOGO_S3_URL
+      ? [
+          {
+            protocol: 'https',
+            hostname: process.env.NEXT_PUBLIC_PROJECT_LOGO_S3_URL,
+            port: '',
+            pathname: '/**',
+          },
+        ]
+      : [],
   },
 
   async rewrites() {
